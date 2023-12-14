@@ -8,7 +8,7 @@ This work is licensed under a
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
 
-# ISC report template
+# ISC report template :scroll:
 
 This is a template for students reports for the [ISC degree programme](https://www.hevs.ch/isc) at the School of engineering in Sion.
 
@@ -48,8 +48,17 @@ typst compile report.typ
 
 Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP` plugin which enables direct compilation.
 
+# Future changes
+
+In the future, several things _might_ be updated, such as :
+
+- [ ] Glossary inclusion
+- [ ] Master thesis changes for the template
+- [ ] Themes for code
+- [ ] Other nice things
+
 # Questions and help
 
-If you need any help for installing or running those tools, do not hesitate to get in touch with its maintainer.
+If you need any help for installing or running those tools, do not hesitate to get in touch with its maintainer [pmudry](https://github.com/pmudry).
 
 You can of course also propose changes using PR or raise issues if something is not clear. Have fun writing reports!
