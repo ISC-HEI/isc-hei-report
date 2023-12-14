@@ -1,9 +1,20 @@
-# ISC report template
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+
+This work is licensed under a
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+
+[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
+
+
+# ISC report template
 
 This is a template for students reports for the [ISC degree programme](https://www.hevs.ch/isc) at the School of engineering in Sion.
 
+<p align="center">
 <img src="sample.png" width="35%" height="35%">
+</P>
 
 ## Installing `typst` 
 
@@ -42,12 +53,3 @@ Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP
 If you need any help for installing or running those tools, do not hesitate to get in touch with its maintainer.
 
 You can of course also propose changes using PR or raise issues if something is not clear. Have fun writing reports!
-
-# License
-
-This work is licensed under a
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
-
-[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
-[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svgwww
-
