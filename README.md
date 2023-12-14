@@ -16,7 +16,7 @@ This is a template for students reports for the [ISC degree programme](https://w
 <img src="sample.png" width="35%" height="35%">
 </P>
 
-## Installing `typst` 
+## Install and setup
 
 Using this template requires the `typst` runtime which can be installed following the instructions from <https://github.com/typst/typst>
 
