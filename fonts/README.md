@@ -4,7 +4,7 @@ All the present fonts are licensed under the [SIL Open Font License](https://ope
 
 ## Installing fonts
 
-This report template uses several fonts packaged in this repository. To the install the fonts in a Linux environment, simply type
+This report template uses several fonts packaged in this repository. To the install the fonts in a Linux environment, simply type: 
 
 ```bash
 source install_fonts.sh
