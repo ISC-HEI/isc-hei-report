@@ -1,9 +1,10 @@
-#import "template/isc_report.typ": *
+#import "template/isc_template_report.typ": *
+#import "template/isc_template_shared.typ": *
 
 #show: project.with(
   title: "Rapport de projet ISC",
   course_name: "101.1 Programmation impérative",
-  title_block: "Semestre automne 23\nCours de Prof. P.-A. Mudry",
+  title_block: "Semestre automne 2023\nCours du Prof. P.-A. Mudry",
   sub_title: "Avec un joli sous-titre",
   authors: (
     "P.-A. Mudry",  
@@ -15,6 +16,10 @@
   language: "fr", // Or en if required
   version: "1.0.0",
 )  
+
+//// If using acronyms
+#import "@preview/acrostiche:0.3.0": *
+#include "acronyms.typ"
 
 // Let's get started   
 = Introduction  
@@ -61,6 +66,7 @@ object ImageProcessingApp_Animation extends App {
 	} 
 }
 ```]
+
 
 == Insertion d'images 
 
@@ -114,7 +120,7 @@ $ sum_(n=1)^(infinity) 2^(-n) = 1 "ou encore" integral_(x = 0)^3 x^2 dif x $
 
 == Citer ses sources
 
-Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références comlètes se trouvent dans la bibliographie à la fin de ce document.
+Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références comlètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acroymes comme par exemple [#acr("USB")]
 
 ==  Le filtre de Sobel
 Une autre méthode pour extraire les contours à l'intérieur d'une image est d'utiliser #link("https://fr.wikipedia.org/wiki/Détection_de_contours")[l'algorithme de Sobel] Cette méthode est très similaire à celle de la dérivée, mais un peu plus compliquée et donne de meilleurs résultats. 
@@ -149,6 +155,13 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 
 #pagebreak()
 #set heading(numbering: none)
+
 = Annexes
+// Table of acronyms
+#print-index(title: "Acronymes")
+
+// Table of figures
+#pagebreak()
+#outline(title: "Table des figures", depth: 1, indent: true, target: figure.where(kind: image))
 
 // This is the end

@@ -52,6 +52,7 @@ Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP
 
 In the future, several things _might_ be updated, such as :
 
+- [x] Acronyms inclusion
 - [ ] Glossary inclusion
 - [ ] Master thesis changes for the template
 - [ ] Themes for code
