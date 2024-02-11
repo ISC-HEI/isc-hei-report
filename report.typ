@@ -5,6 +5,9 @@
   title: "Rapport de projet ISC",
   course_name: "101.1 Programmation impérative",
   title_block: "Semestre automne 2023\nCours du Prof. P.-A. Mudry",
+  cover_image: "cover_image_placeholder.png",
+  cover_image_height: 10cm, // Default value = 10cm
+  cover_image_caption: "Cover image caption", // Default value = "Cover image caption"
   sub_title: "Avec un joli sous-titre",
   authors: (
     "P.-A. Mudry",  

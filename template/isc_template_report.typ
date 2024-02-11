@@ -26,6 +26,9 @@
   title: "",
   sub_title: "",
   course_name: "",  
+  cover_image: none,
+  cover_image_height: 10cm,
+  cover_image_caption: "Cover image caption",
   title_block: "",
   authors: (),
   date: none,
@@ -170,6 +173,11 @@
         text(weight: 700, course_name) + "\n" + text(title_block_content)
       )
     )
+  }
+
+   v(10fr, weak: true)
+  if cover_image != none{
+    figure(image(cover_image, height: cover_image_height), caption: cover_image_caption) 
   }
 
   v(10fr, weak: true)
