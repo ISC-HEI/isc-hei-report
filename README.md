@@ -23,29 +23,29 @@ This template will initialize an sample report with sensible default values.
 
 ## Installing fonts locally
 
-If you are running `typst` locally, you might need to download fonts. For your convenience, all the required fonts are included in the original repos [residing here](https://github.com/ISC-HEI/ISC-report), which is not a problem because they were all released using the [SIL Open Font License](https://openfontlicense.org/) which is included in this repository.
+If you are running `typst` locally, you might miss some of the required fonts. For your convenience, all the required fonts are included in this repos. As all the fonts are released under the [SIL Open Font License](https://openfontlicense.org/), there are no file inclusion issues here.
 
-To the install the fonts in a Linux environment, simply type
+To the install the fonts locally in a Linux environment, simply type
 
 ```bash
 source install_fonts.sh
 ```
 
-from within the `fonts` directory and the fonts will be installed.
+from within the `fonts` directory.
 
 ## PDF images inclusion
 
-Unfortunately, `typst` does not support PDF file types inclusion. As a temporary workaround, PDF files can be converted to SVG via `pdf2svg`.
+Unfortunately, `typst` does not support PDF file types inclusion at the time of writing this documentation. As a temporary workaround, PDF files can be converted to SVG via `pdf2svg`.
 
 # Usage
 
-Locally, after modifying `report.typ`, creating a PDF is straightforward with the command
+When used locally, creating a PDF is straightforward with the command
 
 ```bash
 typst compile report.typ
 ```
 
-or using 
+Even nicer, the following command compiles the report every time the file is modified.
 
 ```bash
 typst watch report.typ
