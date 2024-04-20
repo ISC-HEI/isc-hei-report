@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-echo "Installing fonts locally"
+echo "Installing fonts locally..."
+
+tar -zxvf fonts.tar.gz
 
 fonts_dir="${HOME}/.local/share/fonts"
 if [ ! -d "${fonts_dir}" ]; then
@@ -12,5 +14,9 @@ fi
 
 cp *.ttf ~/.local/share/fonts/    
 cp *.otf ~/.local/share/fonts/    
+
 echo "Rebuilding cache... with fc-cache -f"
 fc-cache -f
+
+rm -rf *.ttf
+rm -rf *.otf
