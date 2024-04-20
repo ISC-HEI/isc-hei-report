@@ -10,21 +10,21 @@ This work is licensed under a
 
 # ISC report template :scroll:
 
-This is a template for students reports for the [ISC degree programme](https://www.hevs.ch/isc) at the School of engineering in Sion.
+This is an official template for students reports for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. 
 
-<p align="center">
-<img src="sample.png" width="35%" height="35%">
-</P>
+## Using the template
 
-## Install and setup
+In the Typst web application, start with the `modern-isc-report` and voilà ! Using the CLI, you can initialize the project with the command : 
 
-Using this template requires the `typst` runtime which can be installed following the instructions from <https://github.com/typst/typst>
+```bash
+typst init @preview/modern-isc-report
+```
 
-You can also use the online editor from <https://typst.app> as the template can be used there as well but then you're on your own.
+This template will initialize an sample report with sensible default values.
 
-## Installing fonts
+## Installing fonts locally
 
-This report template uses several fonts packaged in this repository. All those fonts are distributed under the [SIL Open Font License](https://openfontlicense.org/) which is included in this repository.
+If you are running `typst` locally, you might need to download fonts. For your convenience, all the required fonts are included in the original repos [residing here](https://github.com/ISC-HEI/ISC-report), which is not a problem because they were all released using the [SIL Open Font License](https://openfontlicense.org/) which is included in this repository.
 
 To the install the fonts in a Linux environment, simply type
 
@@ -32,7 +32,7 @@ To the install the fonts in a Linux environment, simply type
 source install_fonts.sh
 ```
 
-from within the `fonts` directory.
+from within the `fonts` directory and the fonts will be installed.
 
 ## PDF images inclusion
 
@@ -40,10 +40,16 @@ Unfortunately, `typst` does not support PDF file types inclusion. As a temporary
 
 # Usage
 
-After modifying `report.typ`, creating a PDF is straighforward with the command
+Locally, after modifying `report.typ`, creating a PDF is straightforward with the command
 
 ```bash
 typst compile report.typ
+```
+
+or using 
+
+```bash
+typst watch report.typ
 ```
 
 Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP` plugin which enables direct compilation.
@@ -54,7 +60,7 @@ In the future, several things _might_ be updated, such as :
 
 - [x] Acronyms inclusion
 - [ ] Glossary inclusion
-- [ ] Master thesis changes for the template
+- [ ] Master thesis version of this template
 - [ ] Themes for code
 - [ ] Other nice things
 

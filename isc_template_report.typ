@@ -1,9 +1,8 @@
-// Template for basic ISC reports
-// v0.1 - mui 2023
+// Template for ISC reports at the school of engineering
+// v0.1.0 - mui 2023
 //
 // Missing features : 
 // - page and locations (above, under) references for figures not available yet
-// - 
 
 // Fancy pretty print with line numbers and stuff
 #import "@preview/codelst:2.0.1": sourcecode 
@@ -12,11 +11,12 @@
 #import "@preview/showybox:2.0.1": showybox
 
 // Define our own functions
-#let todo(body, fill_color: yellow) = {
+#let todo(body, fill_color: yellow.lighten(50%)) = {
   set text(black)
   box(
+    baseline:25%,
     fill: fill_color,
-    inset: 1pt,
+    inset: 3pt,
     [*TODO* #body],
   )
 }
@@ -32,13 +32,13 @@
   academic-year: [2023-2024],
 
   cover-image: none,
-  cover-image_height: 10cm,
+  cover-image-height: 10cm,
   cover-image-caption: "KNN exposed, by Marcus Volg",
     
   // A list of authors, separated by commas
   authors: (),
   date: none,
-  logo: "isc_logo.svg",
+  logo: none,
 
   version : "1.0.0",
   language : "fr",
@@ -49,7 +49,7 @@
   set document(author: authors, title: title)
 
   // Document language for hyphenation and other things  
-  let internal_language = language
+  let internal-language = language
 
   // 
   //  Fonts
@@ -60,7 +60,7 @@
   let math-font = ("Asana Math", "Fira Math")
 
   // Default body font
-  set text(font: body-font, lang: internal_language)
+  set text(font: body-font, lang: internal-language)
   
   // Set other fonts
   // show math.equation: set text(font: math-font) // For math equations
@@ -79,25 +79,25 @@
     margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm) // Binding inside
   )  
 
-  let space_after_heading = 0.5em
-  show heading: it => {it; v(space_after_heading)} // Space after heading
+  let space-after-heading = 0.5em
+  show heading: it => {it; v(space-after-heading)} // Space after heading
   
-  let authors_str = ()
+  let authors-str = ()
 
   if (authors.len() > 1){
-     authors_str = authors.join(", ")
+     authors-str = authors.join(", ")
   }
   else{
-     authors_str = authors.at(0)
+     authors-str = authors.at(0)
   }
 
-  let header_content = text(0.85em)[
-    #emph(authors_str)
+  let header-content = text(0.85em)[
+    #emph(authors-str)
     #h(1fr)    
     v#version
   ]
 
-  let footer_content = text(0.85em)[    
+  let footer-content = text(0.85em)[    
     #emph(title)
     #h(1fr)    
     #counter(page).display(
@@ -111,7 +111,7 @@
     header: locate(loc => {
       // For pages other than the first one
       if counter(page).at(loc).first() > 1 {
-        header_content
+        header-content
       }
     }),
 
@@ -121,7 +121,7 @@
       // For pages other than the first one
       if counter(page).at(loc).first() > 1 [
         #line(length: 100%, stroke: 0.5pt)                
-        #footer_content
+        #footer-content
       ]
     })
   )  
@@ -155,39 +155,42 @@
 
   /////////////////////////////////////////////////
   // Our own specific commands
-  /////////////////////////////////////////////////
-  
+  /////////////////////////////////////////////////  
+  let insertLogo(logo) = {
+    if logo != none {  
+      place(top + right,
+        dx: 6mm,
+        dy: -12mm,
+        clearance: 0em,
+        // Put it in a box to be resized
+        box(height:2.0cm, logo)
+      )      
+    }
+  }
+
   /////////////////////////////////////////////////
   // Let's make the template now
   /////////////////////////////////////////////////
 
   // Title page.
-  // The page can contain a logo if you pass one with `logo: "logo.png"`.  
-  if logo != none {
-    //align(right, image(logo, height: 2cm))
-    place(top + right,
-      dx: 0mm,
-      dy: -12mm,
-      clearance: 0em,
-      image(logo, height: 2.0cm)
-    )
+  insertLogo(logo)
+  
+  let title-block = course-supervisor + "\n" + semester + " " + academic-year
+  let title-block-content = title-block
 
-    let title_block_content = title_block
-
-    place(top + left,
-      dy: -2em,
+  place(top + left,
+    dy: -2em,
       text(1em, 
-        text(weight: 700, course_name) + "\n" + text(title_block_content)
+      text(weight: 700, course-name) + "\n" + text(title-block-content)
       )
-    )
-  }
+  )
 
   v(10fr, weak: true)
 
   // Puts a default cover image
-  if cover_image != none{    
+  if cover-image != none{    
       show figure.caption: emph      
-      figure(image(cover_image, height: cover_image_height), caption: text(10pt)[#cover_image_caption], numbering: none)         
+      figure(box(cover-image, height: cover-image-height), caption: text(10pt)[#cover-image-caption], numbering: none)         
   }
 
   v(10fr, weak: true)
@@ -199,12 +202,10 @@
   
   // Subtitle
   v(1em, weak: true)
-  text(font: sans-font, 1.2em, sub_title)
+  text(font: sans-font, 1.2em, sub-title)
   line(length: 100%)
   
-
   v(4em)
-
 
   // Author information on the title page
   pad(

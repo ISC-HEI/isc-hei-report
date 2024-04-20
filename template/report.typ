@@ -1,27 +1,28 @@
-#import "@preview/modern-isc-report:0.1.0": *
+#import "@preview/modern-isc-report:0.1.0" : *
 
-#show: template.with(
-  title: "Rapport de projet ISC",
-  sub-title: "Les éléments d'écriture avec Typst",
+#show: project.with(
+  title: "Rapport de projet en filière ISC",
+  sub-title: "Avec une mise en page avec Typst",
 
   course-name: "101.1 Programmation impérative",
   course-supervisor : "Prof. P.-A. Mudry",
-  semester: "Automne",
+  semester: "Semestre d'automne",
   academic-year : "2023-2024",
 
-  cover-image: "cover_image_placeholder.png",
-  cover-image_height: 8cm, // Default value = 10cm
-  cover-image_caption: "KNN graph, inspired by Marcus Volg",
+  cover-image: image("figs/cover_image_placeholder.png"),
+  cover-image-height: 8cm, // Default value = 10cm
+  cover-image-caption: "KNN graph, inspired by Marcus Volg",
   
   authors: (
     "P.-A. Mudry",  
     "Louis Lettry", 
     "Pamela Delgado"
-  ),    
-  logo: "isc_logo.svg",
-  date: "5 décembre 2023",
+  ),
+
+  logo: image("figs/isc_logo.svg"),
+  date: "20 avril 2024",
   language: "fr", // Or en if required
-  version: "1.0.0",  
+  version: "0.1.0",  
 )    
 
 //// If using acronyms
