@@ -1,4 +1,14 @@
-[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+![GitHub Repo stars](https://img.shields.io/github/stars/ISC-HEI/modern-isc-report)
+
+<p align="center">
+  <a href="https://hevs.ch/isc">
+  <img src="https://user-images.githubusercontent.com/4624112/214764929-89aa8609-c540-4cc0-9905-23886814772e.png"/>    
+  </a>
+</p>
+
+*University of applied sciences western Swizerland - HES-SO*
+
+*School of engineering, Computer science and communication bachelor degree programme (ISC)*
 
 This work is licensed under a
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
@@ -7,6 +17,7 @@ This work is licensed under a
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
+---
 
 # ISC report template :scroll:
 
@@ -59,6 +70,10 @@ Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP
 In the future, several things _might_ be updated, such as :
 
 - [x] Acronyms inclusion
+- [ ] Multiple languages (FR/EN)
+- [ ] Nice tables examples
+- [ ] State diagrams and UML diagrams examples
+- [ ] Appendix
 - [ ] Glossary inclusion
 - [ ] Master thesis version of this template
 - [ ] Themes for code
