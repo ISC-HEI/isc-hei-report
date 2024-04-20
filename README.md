@@ -1,5 +1,5 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/ISC-HEI/modern-isc-report)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/ISC-HEI/modern-isc-report)
+![GitHub Release](https://img.shields.io/github/v/release/ISC-HEI/modern-isc-report?include_prereleases)
 
 <p align="center">
   <a href="https://hevs.ch/isc">
