@@ -16,7 +16,7 @@ This is an official template for students reports for the [ISC degree programme]
 In the Typst web application, start with the `modern-isc-report` and voilà ! Using the CLI, you can initialize the project with the command : 
 
 ```bash
-typst init @preview/modern-isc-report
+typst init @preview/modern-isc-report:0.1.0
 ```
 
 This template will initialize an sample report with sensible default values.
