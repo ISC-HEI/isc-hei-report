@@ -2,7 +2,8 @@
 
 echo "Installing fonts locally..."
 
-tar -zxvf fonts.tar.gz
+wget https://marcellus.begincoding.net/fonts/modern-isc-fonts.tar.gz
+tar -zxvf modern-isc-fonts.tar.gz
 
 fonts_dir="${HOME}/.local/share/fonts"
 if [ ! -d "${fonts_dir}" ]; then
@@ -18,5 +19,6 @@ cp *.otf ~/.local/share/fonts/
 echo "Rebuilding cache... with fc-cache -f"
 fc-cache -f
 
+rm modern-isc-fonts.tar.gz
 rm -rf *.ttf
 rm -rf *.otf
