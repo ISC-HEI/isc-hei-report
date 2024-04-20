@@ -1,32 +1,36 @@
-#import "template/isc_template_report.typ": *
-#import "template/isc_template_shared.typ": *
+#import "@preview/modern-isc-report:0.1.0": *
 
-#show: project.with(
+#show: template.with(
   title: "Rapport de projet ISC",
-  course_name: "101.1 Programmation impérative",
-  title_block: "Semestre automne 2023\nCours du Prof. P.-A. Mudry",
-  cover_image: "cover_image_placeholder.png",
-  cover_image_height: 10cm, // Default value = 10cm
-  cover_image_caption: "Cover image caption", // Default value = "Cover image caption"
-  sub_title: "Avec un joli sous-titre",
+  sub-title: "Les éléments d'écriture avec Typst",
+
+  course-name: "101.1 Programmation impérative",
+  course-supervisor : "Prof. P.-A. Mudry",
+  semester: "Automne",
+  academic-year : "2023-2024",
+
+  cover-image: "cover_image_placeholder.png",
+  cover-image_height: 8cm, // Default value = 10cm
+  cover-image_caption: "KNN graph, inspired by Marcus Volg",
+  
   authors: (
     "P.-A. Mudry",  
-    "Louis Lettry",
+    "Louis Lettry", 
     "Pamela Delgado"
-  ),  
+  ),    
   logo: "isc_logo.svg",
   date: "5 décembre 2023",
   language: "fr", // Or en if required
-  version: "1.0.0",
-)  
+  version: "1.0.0",  
+)    
 
 //// If using acronyms
 #import "@preview/acrostiche:0.3.0": *
-#include "acronyms.typ"
+#include "acronyms.typ" 
 
 // Let's get started   
 = Introduction  
-Ecrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://learn.hevs.ch].
+Ecrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch].
 
 Il convient tout d'abord pour présenter le contenu de se rendre compte que ce système de typesetting permet d'utiliser une forme de _markdown_ comme entrée. Comme dans tout `markdown` qui se respecte, il est tout à fait possible de faire des listes avec nombres, ce qui est aussi joli :
 
@@ -47,7 +51,7 @@ def foo(val a : Any) : Int = {
 }  
 ```
  
-On peut si on le souhaite également avoir des blocs encore plus fancy à l'aide d'un package : 
+On peut si on le souhaite également avoir des blocs encore plus "fancy" à l'aide d'un package : 
 
 #sourcecode()[
 ```scala

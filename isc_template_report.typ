@@ -6,7 +6,7 @@
 // - 
 
 // Fancy pretty print with line numbers and stuff
-#import "@preview/codelst:2.0.0": sourcecode 
+#import "@preview/codelst:2.0.1": sourcecode 
 
 // Nice color boxes
 #import "@preview/showybox:2.0.1": showybox
@@ -23,21 +23,28 @@
 
 // The template itself
 #let project(
-  title: "",
-  sub_title: "",
-  course_name: "",  
-  cover_image: none,
-  cover_image_height: 10cm,
-  cover_image_caption: "Cover image caption",
-  title_block: "",
+  title: [Report title],
+  sub-title: [Report sub-title], 
+  
+  course-name: [Course name],
+  course-supervisor: [Course supervisor],
+  semester: [Semester],
+  academic-year: [2023-2024],
+
+  cover-image: none,
+  cover-image_height: 10cm,
+  cover-image-caption: "KNN exposed, by Marcus Volg",
+    
+  // A list of authors, separated by commas
   authors: (),
   date: none,
-  logo: none,
-  version : "",
+  logo: "isc_logo.svg",
+
+  version : "1.0.0",
   language : "fr",
   body,
 ) = {
-
+ 
   // Set the document's basic properties.
   set document(author: authors, title: title)
 
@@ -175,9 +182,12 @@
     )
   }
 
-   v(10fr, weak: true)
-  if cover_image != none{
-    figure(image(cover_image, height: cover_image_height), caption: cover_image_caption) 
+  v(10fr, weak: true)
+
+  // Puts a default cover image
+  if cover_image != none{    
+      show figure.caption: emph      
+      figure(image(cover_image, height: cover_image_height), caption: text(10pt)[#cover_image_caption], numbering: none)         
   }
 
   v(10fr, weak: true)
