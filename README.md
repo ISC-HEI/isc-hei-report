@@ -2,8 +2,8 @@
 ![GitHub Release](https://img.shields.io/github/v/release/ISC-HEI/isc-hei-report?include_prereleases)
 
 <p align="center">
-  <a href="https://hevs.ch/isc">
-  <img src="https://user-images.githubusercontent.com/4624112/214764929-89aa8609-c540-4cc0-9905-23886814772e.png"/>    
+  <a href="https://hevs.ch/isc">    
+  <img src="https://github.com/pmudry/packages/assets/4624112/eac56695-d2f7-42b5-ae35-62b821de8afa" width="50%"/>
   </a>
 </p>
 
@@ -58,7 +58,7 @@ Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP
 In the future, several things _might_ be updated, such as :
 
 - [x] Acronyms inclusion
-- [ ] Basic support for including code files
+- [x] Basic support for including code files
 - [ ] State diagrams and UML diagrams examples
 - [ ] Appendix
 - [ ] Glossary inclusion
