@@ -1,5 +1,5 @@
 // Template for ISC reports at the School of engineering
-// v0.1.0 - mui 2024
+// v0.1.3 - mui 2024
 //
 // Missing features : 
 // - page and locations (above, under) references for figures not available yet
@@ -52,10 +52,10 @@
   let internal-language = language
 
   // 
-  //  Fonts
+  //  Fonts 
   //   
-  let body-font = ("Source Sans 3", "Linux Libertine")
-  let sans-font = ("Source Sans 3", "Inria Sans")
+  let body-font = ("Source Sans Pro", "Source Sans 3", "Linux Libertine")
+  let sans-font = ("Source Sans Pro", "Source Sans 3", "Inria Sans")
   let raw-font = "Fira Code"
   let math-font = ("Asana Math", "Fira Math")
 

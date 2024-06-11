@@ -16,7 +16,7 @@ This is an official template for students reports for the [ISC degree programme]
 In the Typst web application, start with the `isc-hei-report` and voilà ! Using the CLI, you can initialize the project with the command :
 
 ```bash
-typst init @preview/isc-hei-report:0.1.0
+typst init @preview/isc-hei-report:0.1.3
 ```
 
 This template will initialize an sample report with sensible default values.
@@ -58,8 +58,7 @@ Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP
 In the future, several things _might_ be updated, such as :
 
 - [x] Acronyms inclusion
-- [ ] Multiple languages (FR/EN)
-- [ ] Nice tables examples
+- [ ] Basic support for including code files
 - [ ] State diagrams and UML diagrams examples
 - [ ] Appendix
 - [ ] Glossary inclusion

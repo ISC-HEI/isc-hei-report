@@ -1,12 +1,12 @@
-#import "@preview/isc-hei-report:0.1.0" : *
-
+#import "@preview/isc-hei-report:0.1.3" : *
+ 
 #show: project.with(
-  title: "Rapport de projet en filière ISC",
+  title: "Rapport de projet pour la filière ISC",
   sub-title: "Avec une mise en page avec Typst",
 
   course-name: "101.1 Programmation impérative",
   course-supervisor : "Prof. P.-A. Mudry",
-  semester: "Semestre d'automne",
+  semester: "Semestre de printemps",
   academic-year : "2023-2024",
 
   cover-image: image("figs/cover_image_placeholder.png"),
@@ -14,46 +14,56 @@
   cover-image-caption: "KNN graph, inspired by Marcus Volg",
   
   authors: (
-    "P.-A. Mudry",  
+    "P.-A. Mudry",   
     "Louis Lettry", 
     "Pamela Delgado"
   ),
 
   logo: image("figs/isc_logo.svg"),
-  date: "20 avril 2024",
-  language: "fr", // Or en if required
-  version: "0.1.0",  
+  date: "21 juin 2024",
+  language: "fr", // Or en if required 
+  version: "0.1.3",  
 )    
 
 //// If using acronyms
-#import "@preview/acrostiche:0.3.0": *
+#import "@preview/acrostiche:0.3.1": * 
 #include "acronyms.typ" 
 
 // Let's get started   
-= Introduction  
-Ecrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch].
 
-Il convient tout d'abord pour présenter le contenu de se rendre compte que ce système de typesetting permet d'utiliser une forme de _markdown_ comme entrée. Comme dans tout `markdown` qui se respecte, il est tout à fait possible de faire des listes avec nombres, ce qui est aussi joli :
+= Introduction   
 
+Ecrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch]. 
+
+Il convient tout d'abord pour présenter le contenu de se rendre compte que ce système de typesetting permet d'utiliser une forme de _markdown_ comme entrée. Le _markdown_ est une manière de formatter des fichiers textes afin de pouvoir les transformer avec un programme afin de les afficher dans différents formats, comme PDF ou encore sous forme de page web. 
+
+Le langage _markdown_ utilise différents types de balises permettant de faire du *gras*, de _l'italique_ ou encore du _*gras et de l'italique*_. Il est également possible de faire des listes, des tableaux, des images, des liens hypertextes, des notes de bas de page, des équations mathématiques comme $x^2 = 3$, des blocs de code comme par exemple `def hello()` et encore bien d'autres choses.
+
+Vous trouverez ici de la documentation sur la manière d'utiliser le langage `markdown` pour écrire des documents ici : https://www.markdownguide.org/basic-syntax/. Vous trouverez également une version spécifique sur l'écriture de documents en Typst ici https://typst.app/docs/guides/markdown-guide/.
+
+En plus des choses simples montrées ci-dessus, le `markdown` simplifie la création de listes avec des nombres comme suit :
+  
 + Un élément
 + Un autre élément de liste
 + Encore d'autres éléments si nécessaire
 
-Voici un peu de #todo[texte mis en évidence] et qui sera discuté dans le @intro[point].
+Des choses plus exotiques, comme mettre du #todo[texte mis en évidence] sont également possibles, tout comme les références à d'autres parties, comme dans le @intro[point].
 
 == Insertion de code
-Nous pouvons également avoir du `code brut directement en ligne` mais cela peut également être fait avec du code Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'avoir des blocs de code joliment mis en forme également. Ainsi, lorsque l'on souhaite avoir du code inséré dans une figure, on peut également utiliser le package `sourcecode` qui rajoute notamment les numéros de ligne. En complément avec une `figure`, il est possible d'avoir une _légende_, un numéro de figure ainsi que du code centré: 
 
-#figure(
+Nous pouvons également avoir du `code brut directement en ligne` mais cela peut également être fait avec du code 
+Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'avoir des blocs de code joliment mis en forme également. Ainsi, lorsque l'on souhaite avoir du code inséré dans une figure, on peut également utiliser le package `sourcecode` qui rajoute notamment les numéros de ligne. En complément avec une `figure`, il est possible d'avoir une _légende_, un numéro de figure ainsi que du code centré :
+ 
+#figure( 
   sourcecode()[
   ```scala 
-  def foo(val a : Any) : Int = {
-    a match : 
+  def foo(val a : Any) : Int = { 
+    a match :  
       case a: Int  => 12
       case _ => 42
   }  
   ```],
-  caption: "Un tout petit listing"
+  caption: "Un tout petit listinsg"
 )
 
 On peut si on le souhaite également avoir des blocs de code plus long si nécessaire : 
@@ -80,6 +90,18 @@ On peut si on le souhaite également avoir des blocs de code plus long si néces
   }
   ```],
   caption: "Un petit exemple de code"
+)
+
+=== Insérér du code à partir d'un fichiers
+
+Il est tout à fait possible de mettre du code qui provient d'un fichier comme ci-dessous :
+
+#let code_sample = read("code_examples/example.scala")
+#figure(
+    sourcecode()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Code included from the file example.scala"
 )
 
 == Insertion d'images 
@@ -124,7 +146,7 @@ $ sum_(n=1)^(infinity) 2^(-n) = 1 "ou encore" integral_(x = 0)^3 x^2 dif x $
 
 == Des tables
 
-Il est possible d'insérer des tables relativement simples : 
+Il est possible d'insérer des tables simples : 
 
 #figure(
 table(
@@ -139,29 +161,26 @@ table(
 
 Des tables plus compliquées sont également possible. La page https://typst.app/docs/guides/table-guide/ donne d'ailleurs de bonnes informations.
 
-#show table.cell.where(x: 0): set text(style: "italic")
-#show table.cell.where(y: 0): set text(style: "normal", weight: "bold")
-
-// #set table(stroke: (_, y) => if y > 0 { (top: 0.8pt) })
 #set table(stroke: (x, y) => (
   left: if x > 0 { 0.8pt },
-  top: if y > 0 { 0.8pt },
+  top: if y > 0 { 1.5pt },
 ))
 
-#figure(
-  table(
-    columns: 3,
-    align: center + horizon,
-    table.header[Technique][Advantage][Drawback],
+#figure(  
+  table(    
+    // Table with 3 columns and 3 rows
+    // There are 3 columns, the first one is twice as large as the two others
+    columns: (2fr, 1fr, 1fr),
+    align: center + horizon,    
+    table.header[*Technique*][*Advantage*][*Drawback*],
     [Diegetic], [Immersive], [May be contrived],
     [Extradiegetic], [Breaks immersion], [Obstrusive],
     [Omitted], [Fosters engagement], [May fracture audience],
   ), 
-  caption: [Une petite table],
+  caption: [Une table plus complexe],
 )
 
 == Citer ses sources
-
 Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références comlètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acroymes comme par exemple [#acr("USB")]
 
 ==  Le filtre de Sobel
@@ -197,20 +216,20 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 
 #pagebreak()
 
-#set heading(numbering: none)
+// From now on, do not number the sections and remove from general outline
+#set heading(numbering: none, outlined : false)
 
 #place(center + horizon,  
   [
     #set text(size:18pt)
-    = Annexes
+    = Annexes    
   ]
 )
 
 #pagebreak()
 
 // Table of acronyms
-#print-index(title: [ 
-    Liste des acronymes #move(dy:-10pt, line(length: 100%, stroke: 0.5pt))])
+#print-index(title: [Liste des acronymes #move(dy:-10pt, line(length: 100%, stroke: 0.5pt))])
 
 // Table of figures
 #pagebreak()
@@ -219,5 +238,45 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 // Table of listings
 #pagebreak()
 #outline(title: "Table des listings", depth: 1, indent: true, target: figure.where(kind: raw))
+
+// Including code
+#pagebreak()
+
+= Code annexé
+#let code_sample = read("code_examples/example.scala")
+#figure(
+    sourcecode()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Code included from the file example.scala"
+)
+
+#figure(
+    sourcecode()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Code included from the file example.scala"
+)
+
+#figure(
+    sourcecode()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Code included from the file example.scala"
+)
+
+#figure(
+    sourcecode()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Code included from the file example.scala"
+)
+
+#figure(
+    sourcecode()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Code included from the file example.scala"
+)
 
 // This is the end !
