@@ -225,10 +225,13 @@
   // Code related
   /////////////////////////////////////////////////
 
+  // Code listing background color
+  let background-luma = luma(245)
+
   // Inline code display, 
   // In a small box that retains the correct baseline.
   show raw.where(block: false): box.with(
-    fill: luma(250),
+    fill: background-luma,
     inset: (x: 3pt, y: 0pt),
     outset: (y: 2pt),
     radius: 2pt,
@@ -237,7 +240,7 @@
   // Block code insertion in a larger block, 
   // with more padding.
   show raw.where(block: true): block.with(
-    fill: luma(250),
+    fill: background-luma,
     inset: 8pt,
     radius: 3pt,    
   )

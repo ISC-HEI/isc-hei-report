@@ -13,7 +13,7 @@ This is an official template for students reports for the [ISC degree programme]
 
 ## Using the template
 
-In the Typst web application, start with the `isc-hei-report` and voilà ! Using the CLI, you can initialize the project with the command :
+In the `Typst` web application, start with the `isc-hei-report` and voilà ! Using the CLI, you can initialize the project with the command :
 
 ```bash
 typst init @preview/isc-hei-report:0.1.3
