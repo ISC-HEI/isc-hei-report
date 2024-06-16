@@ -24,7 +24,7 @@
   logo: image("figs/isc_logo.svg"),
   date: "21 juin 2024",
   language: doc_language, // Or en/de if required 
-  version: "v0.9.0 $alpha$"
+  version: "Using template 0.1.5 $omega$"
 )    
  
 //// If using acronyms 
