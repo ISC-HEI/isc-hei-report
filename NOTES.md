@@ -22,7 +22,7 @@ pngquant *.png --ext .png --force
 - Additional testing can be conducted to see if the template instance works correctly with 
 
     ```bash
-    typst init @preview/isc-hei-report:0.1.0
+    typst init @preview/isc-hei-report:0.1.5
     ```
 
 - Copy the content of this repos to the `typst-template` repository. Create PR as usual.
