@@ -34,6 +34,8 @@
   cover-image: none,
   cover-image-height: 10cm,
   cover-image-caption: "KNN exposed, by Marcus Volg",
+  cover-image-kind: auto,
+  cover-image-supplement: auto,
     
   // A list of authors, separated by commas
   authors: (),
@@ -148,7 +150,7 @@
     } else if (it.func() == raw){
       "Listing"
     } else{
-      panic(it.func())
+      auto
     }
   }  
 
@@ -215,9 +217,15 @@
   v(10fr, weak: true)
 
   // Puts a default cover image
-  if cover-image != none{    
-      show figure.caption: emph      
-      figure(box(cover-image, height: cover-image-height), caption: cover-image-caption, numbering: none)
+  if cover-image != none {
+    show figure.caption: emph
+    figure(
+      box(cover-image, height: cover-image-height),
+      caption: cover-image-caption,
+      numbering: none,
+      kind: cover-image-kind,
+      supplement: cover-image-supplement
+    )
   }
 
   v(10fr, weak: true)
