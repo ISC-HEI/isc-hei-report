@@ -21,6 +21,54 @@
   )
 }
 
+// Different languages suppport
+// Thanks @LordBaryhobal for the original idea
+#let langs = (
+  fr: (
+    toc-title: "Table des matières",
+    bib-title: "Bibliographie",
+    chapter-title: "Chapitre",
+    figure-name: "Figure",
+    appendix-title: "Annexes",
+    acronym-table-title: "Glossaire des acronymes",
+    figure-table-title: "Table des figures",
+    listing-table-title: "Table des listings",    
+  ),
+  en: (
+    toc-title: "Table of contents",
+    bib-title: "Bibliography",
+    chapter-title: "Chapter",
+    figure-name: "Figure",
+    appendix-title: "Appendix",
+    acronym-table-title: "Glossary",
+    figure-table-title: "Table of figures",
+    listing-table-title: "Table of listings",
+  ),
+  de: (
+    toc-title: "Inhaltsverzeichnis",
+    bib-title: "Literatur",
+    chapter-title: "Kapitel",
+    figure-name: "Abb.",
+    appendix-title: "Anhang",
+    acronym-table-title: "Table of acronyms",
+    figure-table-title: "Table of figures",
+    listing-table-title: "Quelltexte",
+  ),
+)
+
+#let i18n(lang, key) = {
+  if not lang in langs {
+    lang = "fr"
+  }
+  
+  let keys = langs.at(lang)
+
+  if not key in keys {
+    panic("I18n key " + key + "doesn't exist")
+  }
+  return keys.at(key)
+}
+
 // The template itself
 #let project(
   title: [Report title],
@@ -52,7 +100,7 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
 
-  // Document language for hyphenation and other things  
+  // Document language for hyphenation and other things   
   let internal-language = language
 
   // 
@@ -99,11 +147,11 @@
   let header-content = text(0.75em)[
     #emph(authors-str)
     #h(1fr)    
-    v#version
+    v #eval(version, mode: "markup")
   ]
 
   let footer-content = text(0.75em)[    
-    #emph(title)
+    #emph(eval(title, mode: "markup"))  
     #h(1fr)    
     #counter(page).display(
           "1/1",
@@ -160,9 +208,9 @@
 
   // Make the caption like I like them
   show figure.caption: set text(9pt) // Smaller font size
-  show figure.caption: emph // Use italics
+  show figure.caption: emph // Use italics  
   set figure.caption(separator: " - ") // With a nice separator
-
+  
   /////////////////////////////////////////////////
   // Code related
   /////////////////////////////////////////////////
@@ -234,12 +282,12 @@
 
   // Main title
   set par(leading: 0.2em)
-  text(font: sans-font, 2em, weight: 700, smallcaps(title))
+  text(font: sans-font, 2em, weight: 700, smallcaps(eval(title, mode:"markup")))
   set par(leading: 0.65em)
   
   // Subtitle
   v(1em, weak: true)
-  text(font: sans-font, 1.2em, sub-title)
+  text(font: sans-font, 1.2em, eval(sub-title, mode:"markup"))
   line(length: 100%)
   
   v(4em)

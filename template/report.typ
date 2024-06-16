@@ -1,8 +1,10 @@
 #import "@preview/isc-hei-report:0.1.5" : *
- 
+
+#let doc_language = "fr"
+
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
-  sub-title: "Avec une mise en page avec Typst",
+  sub-title: "Avec une mise en page avec `Typst`",
 
   course-name: "101.1 Programmation impérative",
   course-supervisor : "Prof. P.-A. Mudry",
@@ -23,18 +25,17 @@
 
   logo: image("figs/isc_logo.svg"),
   date: "21 juin 2024",
-  language: "fr", // Or en if required 
-  version: "0.1.4",  
+  language: doc_language, // Or en/de if required 
+  version: "0.9$alpha$"
 )    
-
-//// If using acronyms
-#import "@preview/acrostiche:0.3.1": * 
+ 
+//// If using acronyms 
+#import "@preview/acrostiche:0.3.1": *  
 #include "acronyms.typ" 
 
 // Let's get started   
 
 = Introduction   
-
 Écrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch]. 
 
 Il convient tout d'abord pour présenter le contenu de se rendre compte que ce système de mise en page permet d'utiliser une forme de _markdown_ comme entrée. Le _markdown_ est une manière de formatter des fichiers textes afin de pouvoir les transformer avec un programme afin de les afficher dans différents formats, comme PDF ou encore sous forme de page web. 
@@ -65,7 +66,7 @@ Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'
       case _ => 42
   }  
   ```],
-  caption: "Un tout petit listinsg"
+  caption: "Un tout petit listing en Scala"
 )
 
 On peut si on le souhaite également avoir des blocs de code plus long si nécessaire : 
@@ -218,36 +219,44 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 
 #pagebreak()
 
-// From now on, do not number the sections and remove from general outline
-#set heading(numbering: none, outlined : false)
+// Include the appendix in the TOC but without numeration
+#set heading(numbering: none, outlined : true)
 
+// The appendix page
 #place(center + horizon,  
   [
     #set text(size:18pt)
-    = Annexes    
+    = #i18n(doc_language, "appendix-title")
   ]
 )
 
-#pagebreak()
+// From now on, do not number the sections and remove from general outline
+#set heading(numbering: none, outlined : false)
 
+#pagebreak() 
+ 
 // Table of acronyms
-#print-index(title: [Liste des acronymes #move(dy:-10pt, line(length: 100%, stroke: 0.5pt))])
+#print-index(title: [#i18n(doc_language, "acronym-table-title") #move(dy:-10pt, line(length: 100%, stroke: 0.5pt))])
 
 // Table of figures
 #pagebreak()
-#outline(title: "Table des figures", depth: 1, indent: true, target: figure.where(kind: image, numbering:"1"))
+#outline( title: i18n(doc_language, "figure-table-title"),
+          depth: 1, indent: true, 
+          target: figure.where(kind: image, numbering:"1"))
 
 // Table of listings
 #pagebreak()
-#outline(title: "Table des listings", depth: 1, indent: true, target: figure.where(kind: raw))
+#outline( title: i18n(doc_language, "listing-table-title"),
+          depth: 1, indent: true,
+          target: figure.where(kind: raw))
 
 // Including code
 #pagebreak()
 
-= Code annexé
+= Code annexé 
 #let code_sample = read("code_examples/example.scala")
 #figure(
-    sourcecode()[
+    sourcecode()[ 
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"

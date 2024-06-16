@@ -12,7 +12,7 @@ pngquant *.png --ext .png --force
 
 - Create symlink to this repository from `~/.cache/typst/packages` to `git/packages/packages/preview`. For this : 
     ```bash
-    ln -s ~/git/packages/packages/preview/isc-hei-report ~/.cache/typst/packages/preview/
+    ln -s ~/git/packages/packages/preview/isc-hei-report ~/.cache/typst/packages/preview/isc-hei-report/0.1.5
     ```
 
     This prevents the download of packages and uses the local versions of this package.
