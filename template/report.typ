@@ -1,4 +1,4 @@
-#import "@preview/isc-hei-report:0.1.3" : *
+#import "@preview/isc-hei-report:0.1.5" : *
  
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
@@ -12,6 +12,8 @@
   cover-image: image("figs/cover_image_placeholder.png"),
   cover-image-height: 8cm, // Default value = 10cm
   cover-image-caption: "KNN graph, inspired by Marcus Volg",
+
+  toc-title: "Table des matières",
   
   authors: (
     "P.-A. Mudry",   
@@ -22,7 +24,7 @@
   logo: image("figs/isc_logo.svg"),
   date: "21 juin 2024",
   language: "fr", // Or en if required 
-  version: "0.1.3",  
+  version: "0.1.4",  
 )    
 
 //// If using acronyms
@@ -33,9 +35,9 @@
 
 = Introduction   
 
-Ecrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch]. 
+Écrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch]. 
 
-Il convient tout d'abord pour présenter le contenu de se rendre compte que ce système de typesetting permet d'utiliser une forme de _markdown_ comme entrée. Le _markdown_ est une manière de formatter des fichiers textes afin de pouvoir les transformer avec un programme afin de les afficher dans différents formats, comme PDF ou encore sous forme de page web. 
+Il convient tout d'abord pour présenter le contenu de se rendre compte que ce système de mise en page permet d'utiliser une forme de _markdown_ comme entrée. Le _markdown_ est une manière de formatter des fichiers textes afin de pouvoir les transformer avec un programme afin de les afficher dans différents formats, comme PDF ou encore sous forme de page web. 
 
 Le langage _markdown_ utilise différents types de balises permettant de faire du *gras*, de _l'italique_ ou encore du _*gras et de l'italique*_. Il est également possible de faire des listes, des tableaux, des images, des liens hypertextes, des notes de bas de page, des équations mathématiques comme $x^2 = 3$, des blocs de code comme par exemple `def hello()` et encore bien d'autres choses.
 
@@ -92,7 +94,7 @@ On peut si on le souhaite également avoir des blocs de code plus long si néces
   caption: "Un petit exemple de code"
 )
 
-=== Insérér du code à partir d'un fichiers
+=== Insérer du code à partir d'un fichiers
 
 Il est tout à fait possible de mettre du code qui provient d'un fichier comme ci-dessous :
 
@@ -181,7 +183,7 @@ Des tables plus compliquées sont également possible. La page https://typst.app
 )
 
 == Citer ses sources
-Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références comlètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acroymes comme par exemple [#acr("USB")]
+Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références complètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acronymes comme par exemple [#acr("USB")]
 
 ==  Le filtre de Sobel
 Une autre méthode pour extraire les contours à l'intérieur d'une image est d'utiliser #link("https://fr.wikipedia.org/wiki/Détection_de_contours")[l'algorithme de Sobel] Cette méthode est très similaire à celle de la dérivée, mais un peu plus compliquée et donne de meilleurs résultats. 
