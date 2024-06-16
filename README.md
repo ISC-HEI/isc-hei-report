@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://hevs.ch/isc">    
-  <img src="https://github.com/pmudry/packages/assets/4624112/eac56695-d2f7-42b5-ae35-62b821de8afa" width="50%"/>
+  <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" width="50%"/>
   </a>
 </p>
 
