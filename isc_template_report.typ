@@ -36,7 +36,9 @@
   cover-image-caption: "KNN exposed, by Marcus Volg",
   cover-image-kind: auto,
   cover-image-supplement: auto,
-    
+  
+  toc-title: "Table des matières",
+  
   // A list of authors, separated by commas
   authors: (),
   date: none,
@@ -264,7 +266,7 @@
   outline(
     title: {
       v(5em)
-      text(font: body-font, 1.5em, weight: 700, "Table des matières")
+      text(font: body-font, 1.5em, weight: 700, toc-title)
       v(3em)
     },
     indent: 2em,
