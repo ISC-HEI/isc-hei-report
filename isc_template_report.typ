@@ -150,7 +150,7 @@
     } else if (it.func() == raw){
       "Listing"
     } else{
-      panic(it.func())
+      auto
     }
   }  
 
