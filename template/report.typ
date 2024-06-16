@@ -13,7 +13,7 @@
 
   cover-image: image("figs/cover_image_placeholder.png"),
   cover-image-height: 8cm, // Default value = 10cm
-  cover-image-caption: "KNN graph - Inspired by Marcus Volg",
+  cover-image-caption: "KNN graph -- Inspired by _Marcus Volg_",
 
   authors: (
     "P.-A. Mudry",   
@@ -24,7 +24,7 @@
   logo: image("figs/isc_logo.svg"),
   date: "21 juin 2024",
   language: doc_language, // Or en/de if required 
-  version: "0.9$alpha$"
+  version: "v0.9.0 $alpha$"
 )    
  
 //// If using acronyms 
@@ -54,9 +54,9 @@ Des choses plus exotiques, comme mettre du #todo[texte mis en évidence] sont é
 
 Nous pouvons également avoir du `code brut directement en ligne` mais cela peut également être fait avec du code 
 Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'avoir des blocs de code joliment mis en forme également. Ainsi, lorsque l'on souhaite avoir du code inséré dans une figure, on peut également utiliser le package `sourcecode` qui rajoute notamment les numéros de ligne. En complément avec une `figure`, il est possible d'avoir une _légende_, un numéro de figure ainsi que du code centré :
- 
+
 #figure( 
-  sourcecode()[
+  code()[
   ```scala 
   def foo(val a : Any) : Int = { 
     a match :  
@@ -64,13 +64,13 @@ Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'
       case _ => 42
   }  
   ```],
-  caption: "Un tout petit listing en Scala"
+  caption: "Un tout petit listing en `Scala`"
 )
 
-On peut si on le souhaite également avoir des blocs de code plus long si nécessaire : 
+On peut si on le souhaite également avoir des blocs de code plus long si nécessaire, sur plusieurs pages : 
 
 #figure(
-  sourcecode()[
+  code()[
   ```scala
   object ImageProcessingApp_Animation extends App {
     val imageFile = "./res/grace_hopper.jpg"
@@ -90,7 +90,7 @@ On peut si on le souhaite également avoir des blocs de code plus long si néces
     } 
   }
   ```],
-  caption: "Un petit exemple de code"
+  caption: "Un autre exemple de code, plus long"
 )
 
 === Insérer du code à partir d'un fichiers
@@ -99,10 +99,10 @@ Il est tout à fait possible de mettre du code qui provient d'un fichier comme c
 
 #let code_sample = read("code_examples/example.scala")
 #figure(
-    sourcecode()[
+    code()[
       #raw(code_sample, lang: "scala")
     ],
-  caption: "Code included from the file example.scala"
+  caption: "Code included from the file `example.scala`"
 )
 
 == Insertion d'images 
@@ -254,35 +254,35 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 = #i18n(doc_language, "appendix-code-name")
 #let code_sample = read("code_examples/example.scala")
 #figure(
-    sourcecode()[ 
+    code()[ 
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"
 )
 
 #figure(
-    sourcecode()[ 
+    code()[ 
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"
 )
 
 #figure(
-    sourcecode()[
+    code()[
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"
 )
 
 #figure(
-    sourcecode()[
+    code()[
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"
 )
 
 #figure(
-    sourcecode()[
+    code()[
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"

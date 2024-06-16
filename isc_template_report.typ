@@ -21,7 +21,10 @@
   )
 }
 
-// Different languages suppport
+//
+// Multiple languages support
+//
+
 // Thanks @LordBaryhobal for the original idea
 #let langs = (
   fr: (
@@ -80,6 +83,28 @@
   }
   return keys.at(key)
 }
+
+
+//
+// Source code inclusion
+//
+#let luma_background = luma(250)
+
+// Replace the original function by ours
+#let codelst-sourcecode = sourcecode
+#let code = codelst-sourcecode.with(
+  frame: block.with(    
+    fill: luma_background,
+    stroke: 0.5pt + luma(80%),
+    radius: 3pt,
+    inset: (x: 6pt, y: 7pt)
+  ),
+  numbering: "1",
+  numbers-style: (lno) => text(luma(210), size:7pt, lno),
+  numbers-step: 1,
+  numbers-width: -1em,
+  gutter:1.2em
+)
 
 // The template itself
 #let project(
@@ -157,7 +182,7 @@
   let header-content = text(0.75em)[
     #emph(authors-str)
     #h(1fr)    
-    v #eval(version, mode: "markup")
+    #emph(eval(version, mode: "markup"))
   ]
 
   let footer-content = text(0.75em)[    
@@ -221,29 +246,33 @@
   show figure.caption: emph // Use italics  
   set figure.caption(separator: " - ") // With a nice separator
   
-  /////////////////////////////////////////////////
-  // Code related
-  /////////////////////////////////////////////////
+  show figure.caption: it => {it.counter.display()} // Used for debugging
 
-  // Code listing background color
-  let background-luma = luma(245)
-
+  // Make the caption like I like them  
+  show figure.caption: it => {
+      if it.numbering == none {
+        eval(mode:"markup", it.body.text) 
+      } else { 
+        it.supplement + " " + it.counter.display() + it.separator + eval(mode:"markup", it.body.text)
+      }                                
+    }
+  
+  /////////////////////////////////////////////////
+  // Code related, only for inline as the
+  // code block is handled by function at the top of the file
+  /////////////////////////////////////////////////
+  
   // Inline code display, 
   // In a small box that retains the correct baseline.
   show raw.where(block: false): box.with(
-    fill: background-luma,
-    inset: (x: 3pt, y: 0pt),
+    fill: luma_background,
+    inset: (x: 2pt, y: 0pt),
     outset: (y: 2pt),
-    radius: 2pt,
+    radius: 1pt,
   )
-  
-  // Block code insertion in a larger block, 
-  // with more padding.
-  show raw.where(block: true): block.with(
-    fill: background-luma,
-    inset: 8pt,
-    radius: 3pt,    
-  )
+    
+  // Allow page breaks for raw figures
+  show figure.where(kind:raw): set block(breakable: true)
 
   /////////////////////////////////////////////////
   // Our own specific commands
