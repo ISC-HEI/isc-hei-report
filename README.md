@@ -57,14 +57,15 @@ Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP
 
 In the future, several things _might_ be updated, such as :
 
-- [x] Acronyms inclusion
-- [x] Basic support for including code files
 - [ ] State diagrams and UML diagrams examples
-- [ ] Appendix
 - [ ] Glossary inclusion
 - [ ] Master thesis version of this template
 - [ ] Themes for code
 - [ ] Other nice things
+- [x] Appendix
+- [x] Acronyms inclusion
+- [x] Basic support for including code files
+
 
 # Questions and help
 

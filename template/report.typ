@@ -1,6 +1,6 @@
 #import "@preview/isc-hei-report:0.1.5" : *
 
-#let doc_language = "fr"
+#let doc_language = "fr" // Or en/de
 
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
@@ -13,10 +13,8 @@
 
   cover-image: image("figs/cover_image_placeholder.png"),
   cover-image-height: 8cm, // Default value = 10cm
-  cover-image-caption: "KNN graph, inspired by Marcus Volg",
+  cover-image-caption: "KNN graph - Inspired by Marcus Volg",
 
-  toc-title: "Table des matières",
-  
   authors: (
     "P.-A. Mudry",   
     "Louis Lettry", 
@@ -253,7 +251,7 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 // Including code
 #pagebreak()
 
-= Code annexé 
+= #i18n(doc_language, "appendix-code-name")
 #let code_sample = read("code_examples/example.scala")
 #figure(
     sourcecode()[ 
@@ -263,7 +261,7 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 )
 
 #figure(
-    sourcecode()[
+    sourcecode()[ 
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"

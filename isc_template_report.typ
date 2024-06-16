@@ -29,30 +29,42 @@
     bib-title: "Bibliographie",
     chapter-title: "Chapitre",
     figure-name: "Figure",
+    table-name: "Table",
+    listing-name: "Listing",    
     appendix-title: "Annexes",
-    acronym-table-title: "Glossaire des acronymes",
+    appendix-code-name: "Code annexé",
+    acronym-table-title: "Table des acronymes",
     figure-table-title: "Table des figures",
     listing-table-title: "Table des listings",    
+    table-table-title: "Table des tableaux",    
   ),
   en: (
     toc-title: "Table of contents",
     bib-title: "Bibliography",
     chapter-title: "Chapter",
     figure-name: "Figure",
+    table-name: "Table",
+    listing-name: "Listing",
+    appendix-code-name: "Code appendix",
     appendix-title: "Appendix",
-    acronym-table-title: "Glossary",
-    figure-table-title: "Table of figures",
-    listing-table-title: "Table of listings",
+    acronym-table-title: "Table of acronyms",
+    figure-table-title: "List of figures",
+    listing-table-title: "List of listings",
+    table-table-title: "List of tables",
   ),
   de: (
     toc-title: "Inhaltsverzeichnis",
     bib-title: "Literatur",
     chapter-title: "Kapitel",
-    figure-name: "Abb.",
+    figure-name: "Abb.",    
+    table-name: "Tabelle",
+    listing-name: "Listing",
+    appendix-code-name: "Kode Anhang",
     appendix-title: "Anhang",
-    acronym-table-title: "Table of acronyms",
-    figure-table-title: "Table of figures",
+    acronym-table-title: "Akronymtabelle",
+    figure-table-title: "Abbildungen",
     listing-table-title: "Quelltexte",
+    table-table-title: "Tabellen",
   ),
 )
 
@@ -84,9 +96,7 @@
   cover-image-caption: "KNN exposed, by Marcus Volg",
   cover-image-kind: auto,
   cover-image-supplement: auto,
-  
-  toc-title: "Table des matières",
-  
+    
   // A list of authors, separated by commas
   authors: (),
   date: none,
@@ -191,14 +201,14 @@
   
   // TODO : Make this suitable for different languages
 
-  // Compute a suitable supplement for french as they are not to my liking
+  // Compute a suitable supplement as they are not to my liking
   let getSupplement(it) = {        
     if(it.func() == image){
-      "Figure"
+      i18n(internal-language, "figure-name")
     } else if (it.func() == table){
-      "Table"
+      i18n(internal-language, "table-name")
     } else if (it.func() == raw){
-      "Listing"
+      i18n(internal-language, "listing-name")
     } else{
       auto
     }
@@ -314,7 +324,7 @@
   outline(
     title: {
       v(5em)
-      text(font: body-font, 1.5em, weight: 700, toc-title)
+      text(font: body-font, 1.5em, weight: 700, i18n(internal-language, "toc-title"))
       v(3em)
     },
     indent: 2em,
