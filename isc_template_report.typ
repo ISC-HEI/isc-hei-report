@@ -28,7 +28,17 @@
 // Thanks @LordBaryhobal for the original idea
 #let langs = json("i18n.json")
 
-#let i18n(lang, key) = {
+#let i18n(lang, key, extra-i18n: none) = {
+  let langs = langs
+  if type(extra-i18n) == dictionary {
+    for (lng, keys) in extra-i18n {
+      if not lng in langs {
+        langs.insert(lng, (:))
+      }
+      langs.at(lng) += keys
+    }
+  }
+  
   if not lang in langs {
     lang = "fr"
   }
@@ -86,8 +96,11 @@
 
   version : "1.0.0",
   language : "fr",
+  extra-i18n : none,
   body,
 ) = {
+
+  let i18n = i18n.with(extra-i18n: extra-i18n)
  
   // Set the document's basic properties.
   set document(author: authors, title: title)
