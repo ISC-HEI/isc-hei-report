@@ -9,7 +9,7 @@
 
 # ISC report template :scroll:
 
-This is an official template for students reports for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. An example of the generated output can be [accessed here](https://).
+This is an official template for students reports for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. An example of the generated output can be [accessed here](https://https://github.com/ISC-HEI/isc-hei-report/blob/master/template/report.pdf?raw=true).
 
 ## Using the template
 
