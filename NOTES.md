@@ -12,7 +12,7 @@ pngquant *.png --ext .png --force
 
 - Create symlink to this repository from `~/.cache/typst/packages` to `git/packages/packages/preview`. For this : 
     ```bash
-    ln -s ~/git/modern-isc-report ~/.cache/typst/packages/preview/isc-hei-report/0.1.5
+    ln -s ~/git/isc-hei-report ~/.cache/typst/packages/preview/isc-hei-report/0.1.5
     ```
 
     This prevents the download of packages and uses the local versions of this package.
@@ -28,8 +28,12 @@ pngquant *.png --ext .png --force
 - Copy the content of this repos to the `typst-template` repository using 
 
     ```bash
-    cp * -R ~/git/packages/packages/preview/isc-hei-report/0.1.5/
+    cp * -R ~/git/packages/packages/preview/isc-hei-report/0.1.5/    
     ```
+
+- Do not forget to add a proper `.gitignore` to remove all PDFs
+
+- Lint for kebab-case only
 
 - Create PR as usual.
 
