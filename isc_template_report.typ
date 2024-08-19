@@ -26,52 +26,19 @@
 //
 
 // Thanks @LordBaryhobal for the original idea
-#let langs = (
-  fr: (
-    toc-title: "Table des matières",
-    bib-title: "Bibliographie",
-    chapter-title: "Chapitre",
-    figure-name: "Figure",
-    table-name: "Table",
-    listing-name: "Listing",    
-    appendix-title: "Annexes",
-    appendix-code-name: "Code annexé",
-    acronym-table-title: "Table des acronymes",
-    figure-table-title: "Table des figures",
-    listing-table-title: "Table des listings",    
-    table-table-title: "Table des tableaux",    
-  ),
-  en: (
-    toc-title: "Table of contents",
-    bib-title: "Bibliography",
-    chapter-title: "Chapter",
-    figure-name: "Figure",
-    table-name: "Table",
-    listing-name: "Listing",
-    appendix-code-name: "Code appendix",
-    appendix-title: "Appendix",
-    acronym-table-title: "Table of acronyms",
-    figure-table-title: "List of figures",
-    listing-table-title: "List of listings",
-    table-table-title: "List of tables",
-  ),
-  de: (
-    toc-title: "Inhaltsverzeichnis",
-    bib-title: "Literatur",
-    chapter-title: "Kapitel",
-    figure-name: "Abb.",    
-    table-name: "Tabelle",
-    listing-name: "Listing",
-    appendix-code-name: "Kode Anhang",
-    appendix-title: "Anhang",
-    acronym-table-title: "Akronymtabelle",
-    figure-table-title: "Abbildungen",
-    listing-table-title: "Quelltexte",
-    table-table-title: "Tabellen",
-  ),
-)
+#let langs = json("i18n.json")
 
-#let i18n(lang, key) = {
+#let i18n(lang, key, extra-i18n: none) = {
+  let langs = langs
+  if type(extra-i18n) == dictionary {
+    for (lng, keys) in extra-i18n {
+      if not lng in langs {
+        langs.insert(lng, (:))
+      }
+      langs.at(lng) += keys
+    }
+  }
+  
   if not lang in langs {
     lang = "fr"
   }
@@ -129,8 +96,11 @@
 
   version : "1.0.0",
   language : "fr",
+  extra-i18n : none,
   body,
 ) = {
+
+  let i18n = i18n.with(extra-i18n: extra-i18n)
  
   // Set the document's basic properties.
   set document(author: authors, title: title)
