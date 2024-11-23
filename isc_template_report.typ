@@ -1,11 +1,11 @@
 // Template for ISC reports at the School of engineering
 // v0.1.5 - mui 2024
 //
-// Missing features : 
+// Missing features :
 // - page and locations (above, under) references for figures not available yet
 
 // Fancy pretty print with line numbers and stuff
-#import "@preview/codelst:2.0.1": sourcecode 
+#import "@preview/codelst:2.0.1": sourcecode
 
 // Nice color boxes
 #import "@preview/showybox:2.0.1": showybox
@@ -60,7 +60,7 @@
 // Replace the original function by ours
 #let codelst-sourcecode = sourcecode
 #let code = codelst-sourcecode.with(
-  frame: block.with(    
+  frame: block.with(
     fill: _luma-background,
     stroke: 0.5pt + luma(80%),
     radius: 3pt,
@@ -76,7 +76,7 @@
 // The template itself
 #let project(
   title: [Report title],
-  sub-title: [Report sub-title], 
+  sub-title: [Report sub-title],
   
   course-name: [Course name],
   course-supervisor: [Course supervisor],
@@ -105,12 +105,12 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
 
-  // Document language for hyphenation and other things   
+  // Document language for hyphenation and other things
   let internal-language = language
 
-  // 
-  //  Fonts 
-  //   
+  //
+  //  Fonts
+  //
   let body-font = ("Source Sans Pro", "Source Sans 3", "Linux Libertine")
   let sans-font = ("Source Sans Pro", "Source Sans 3", "Inria Sans")
   let raw-font = "Fira Code"
@@ -127,15 +127,15 @@
   /////////////////////////////////////////////////
   // Citation style
   /////////////////////////////////////////////////
-  set cite(style: auto, form: "normal")  
+  set cite(style: auto, form: "normal")
 
   /////////////////////////////////////////////////
   //  Basic pagination and typesetting
   /////////////////////////////////////////////////
-  set page(        
+  set page(
     margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
     paper: "a4"
-  )  
+  )
 
   let space-after-heading = 0.5em
   show heading: it => {it; v(space-after-heading)} // Space after heading
@@ -151,13 +151,13 @@
 
   let header-content = text(0.75em)[
     #emph(authors-str)
-    #h(1fr)    
+    #h(1fr)
     #emph(eval(version, mode: "markup"))
   ]
 
-  let footer-content = text(0.75em)[    
-    #emph(eval(title, mode: "markup"))  
-    #h(1fr)    
+  let footer-content = text(0.75em)[
+    #emph(eval(title, mode: "markup"))
+    #h(1fr)
     #counter(page).display(
           "1/1",
           both: true
@@ -165,7 +165,7 @@
   ]
 
   // Set header and footers
-  set page(    
+  set page(
     header: locate(loc => {
       // For pages other than the first one
       if counter(page).at(loc).first() > 1 {
@@ -182,22 +182,22 @@
         #footer-content
       ]
     })
-  )  
+  )
   
   // Links coloring
   show link: set text(ligatures: true, fill: blue)
 
-  // Sections numbers 
+  // Sections numbers
   set heading(numbering: "1.1.1 -")
 
   /////////////////////////////////////////////////
   // Handle specific captions styling
-  /////////////////////////////////////////////////  
+  /////////////////////////////////////////////////
   
   // TODO : Make this suitable for different languages
 
   // Compute a suitable supplement as they are not to my liking
-  let getSupplement(it) = {        
+  let getSupplement(it) = {
     if(it.func() == image){
       i18n(internal-language, "figure-name")
     } else if (it.func() == table){
@@ -207,24 +207,24 @@
     } else{
       auto
     }
-  }  
+  }
 
   set figure(numbering: "1", supplement: getSupplement)
 
   // Make the caption like I like them
   show figure.caption: set text(9pt) // Smaller font size
-  show figure.caption: emph // Use italics  
+  show figure.caption: emph // Use italics
   set figure.caption(separator: " - ") // With a nice separator
   
   show figure.caption: it => {it.counter.display()} // Used for debugging
 
-  // Make the caption like I like them  
+  // Make the caption like I like them
   show figure.caption: it => {
       if it.numbering == none {
-        eval(mode:"markup", it.body.text) 
-      } else { 
+        eval(mode:"markup", it.body.text)
+      } else {
         it.supplement + " " + it.counter.display() + it.separator + eval(mode:"markup", it.body.text)
-      }                                
+      }
     }
   
   /////////////////////////////////////////////////
@@ -232,7 +232,7 @@
   // code block is handled by function at the top of the file
   /////////////////////////////////////////////////
   
-  // Inline code display, 
+  // Inline code display,
   // In a small box that retains the correct baseline.
   show raw.where(block: false): box.with(
     fill: _luma-background,
@@ -246,16 +246,16 @@
 
   /////////////////////////////////////////////////
   // Our own specific commands
-  /////////////////////////////////////////////////  
+  /////////////////////////////////////////////////
   let insertLogo(logo) = {
-    if logo != none {  
+    if logo != none {
       place(top + right,
         dx: 6mm,
         dy: -12mm,
         clearance: 0em,
         // Put it in a box to be resized
         box(height:2.0cm, logo)
-      )      
+      )
     }
   }
 
@@ -271,7 +271,7 @@
 
   place(top + left,
     dy: -2em,
-      text(1em, 
+      text(1em,
       text(weight: 700, course-name) + "\n" + text(title-block-content)
       )
   )
@@ -307,7 +307,7 @@
   // Author information on the title page
   pad(
     top: 1em,
-    right: 20%,    
+    right: 20%,
     grid(
       columns: 3,
       column-gutter: 3em,
