@@ -5,16 +5,16 @@
 // - page and locations (above, under) references for figures not available yet
 
 // Fancy pretty print with line numbers and stuff
-#import "@preview/codelst:2.0.1": sourcecode
+#import "@preview/codelst:2.0.2": sourcecode
 
 // Nice color boxes
-#import "@preview/showybox:2.0.1": showybox
+#import "@preview/showybox:2.0.3": showybox
 
 // Define our own functions
 #let todo(body, fill-color: yellow.lighten(50%)) = {
   set text(black)
   box(
-    baseline:25%,
+    baseline: 25%,
     fill: fill-color,
     inset: 3pt,
     [*TODO* #body],
@@ -45,9 +45,10 @@
   
   let keys = langs.at(lang)
 
-  if not key in keys {
-    panic("I18n key " + key + "doesn't exist")
-  }
+  assert(
+    key in keys,
+    message: "I18n key " + str(key) + "doesn't exist"
+  )
   return keys.at(key)
 }
 
@@ -88,7 +89,7 @@
   cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
   cover-image-kind: auto,
   cover-image-supplement: auto,
-    
+  
   // A list of authors, separated by commas
   authors: (),
   date: none,
@@ -100,7 +101,7 @@
   body,
 ) = {
 
-  let i18n = i18n.with(extra-i18n: extra-i18n)
+  let i18n = i18n.with(extra-i18n: extra-i18n, language)
  
   // Set the document's basic properties.
   set document(author: authors, title: title)
@@ -191,13 +192,14 @@
 
   // Compute a suitable supplement as they are not to my liking
   let getSupplement(it) = {
-    if(it.func() == image){
-      i18n(internal-language, "figure-name")
-    } else if (it.func() == table){
-      i18n(internal-language, "table-name")
-    } else if (it.func() == raw){
-      i18n(internal-language, "listing-name")
-    } else{
+    let f = it.func()
+    if (f == image) {
+      i18n("figure-name")
+    } else if (f == table) {
+      i18n("table-name")
+    } else if (f == raw) {
+      i18n("listing-name")
+    } else {
       auto
     }
   }
@@ -235,14 +237,15 @@
   )
     
   // Allow page breaks for raw figures
-  show figure.where(kind:raw): set block(breakable: true)
+  show figure.where(kind: raw): set block(breakable: true)
 
   /////////////////////////////////////////////////
   // Our own specific commands
   /////////////////////////////////////////////////
-  let insertLogo(logo) = {
+  let insert-logo(logo) = {
     if logo != none {
-      place(top + right,
+      place(
+        top + right,
         dx: 6mm,
         dy: -12mm,
         clearance: 0em,
@@ -257,16 +260,21 @@
   /////////////////////////////////////////////////
 
   // Title page.
-  insertLogo(logo)
+  insert-logo(logo)
   
-  let title-block = course-supervisor + "\n" + semester + " " + academic-year
+  let title-block = [
+    #course-supervisor\
+    #semester #academic-year
+  ]
   let title-block-content = title-block
 
-  place(top + left,
+  place(
+    top + left,
     dy: -2em,
-      text(1em,
-      text(weight: 700, course-name) + "\n" + text(title-block-content)
-      )
+    text(1em)[
+      #text(weight: 700, course-name)\
+      #text(title-block-content)
+    ]
   )
 
   v(10fr, weak: true)
@@ -319,7 +327,7 @@
   outline(
     title: {
       v(5em)
-      text(font: body-font, 1.5em, weight: 700, i18n(internal-language, "toc-title"))
+      text(font: body-font, 1.5em, weight: 700, i18n("toc-title"))
       v(3em)
     },
     indent: 2em,
