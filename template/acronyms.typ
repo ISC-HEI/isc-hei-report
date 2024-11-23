@@ -1,4 +1,4 @@
-#import "@preview/acrostiche:0.3.0": *
+#import "@preview/acrostiche:0.4.1": *
 
 #let acronyms = (
   "DVI": (link("https://fr.wikipedia.org/wiki/Digital_visual_interface")[Digital Visual Interface],),
