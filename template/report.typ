@@ -4,16 +4,16 @@
 
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
-  sub-title: "Avec une mise en page avec `Typst`",
+  sub-title: [Avec une mise en page avec `Typst`],
 
   course-name: "101.1 Programmation impérative",
   course-supervisor : "Prof. P.-A. Mudry",
-  semester: "Semestre de printemps",
-  academic-year : "2023-2024",
+  semester: "Semestre d'automne",
+  academic-year : "2024-2025",
 
   cover-image: image("figs/cover_image_placeholder.png"),
   cover-image-height: 8cm, // Default value = 10cm
-  cover-image-caption: "KNN graph -- Inspired by _Marcus Volg_",
+  cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
 
   authors: (
     "P.-A. Mudry",
@@ -22,9 +22,9 @@
   ),
 
   logo: image("figs/isc_logo.svg"),
-  date: "21 juin 2024",
+  date: "23 novembre 2024",
   language: doc_language, // Or en/de if required
-  version: "Using template 0.1.5 $omega$"
+  version: [Using template 0.1.6 $alpha$]
 )
  
 //// If using acronyms
