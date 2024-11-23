@@ -111,7 +111,7 @@
   //
   //  Fonts
   //
-  let body-font = ("Source Sans Pro", "Source Sans 3", "Linux Libertine")
+  let body-font = ("Source Sans Pro", "Source Sans 3", "Libertinus Serif")
   let sans-font = ("Source Sans Pro", "Source Sans 3", "Inria Sans")
   let raw-font = "Fira Code"
   let math-font = ("Asana Math", "Fira Math")
@@ -155,33 +155,28 @@
     #emph(eval(version, mode: "markup"))
   ]
 
-  let footer-content = text(0.75em)[
+  let footer-content = context text(0.75em)[
     #emph(eval(title, mode: "markup"))
     #h(1fr)
     #counter(page).display(
-          "1/1",
-          both: true
-        )
+      "1/1",
+      both: true
+    )
   ]
 
   // Set header and footers
   set page(
-    header: locate(loc => {
-      // For pages other than the first one
-      if counter(page).at(loc).first() > 1 {
-        header-content
-      }
-    }),
-
+    // For pages other than the first one
+    header: context if counter(page).get().first() > 1 {
+      header-content
+    },
     header-ascent: 40%,
 
-    footer: locate(loc => {
-      // For pages other than the first one
-      if counter(page).at(loc).first() > 1 [
-        #move(dy:5pt, line(length: 100%, stroke: 0.5pt))
-        #footer-content
-      ]
-    })
+    // For pages other than the first one
+    footer: context if counter(page).get().first() > 1 [
+      #move(dy: 5pt, line(length: 100%, stroke: 0.5pt))
+      #footer-content
+    ]
   )
   
   // Links coloring
@@ -193,8 +188,6 @@
   /////////////////////////////////////////////////
   // Handle specific captions styling
   /////////////////////////////////////////////////
-  
-  // TODO : Make this suitable for different languages
 
   // Compute a suitable supplement as they are not to my liking
   let getSupplement(it) = {
@@ -219,7 +212,7 @@
   show figure.caption: it => {it.counter.display()} // Used for debugging
 
   // Make the caption like I like them
-  show figure.caption: it => {
+  show figure.caption: it => context {
       if it.numbering == none {
         eval(mode:"markup", it.body.text)
       } else {
