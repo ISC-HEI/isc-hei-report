@@ -85,7 +85,7 @@
 
   cover-image: none,
   cover-image-height: 10cm,
-  cover-image-caption: "KNN exposed, by Marcus Volg",
+  cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
   cover-image-kind: auto,
   cover-image-supplement: auto,
     
@@ -152,11 +152,11 @@
   let header-content = text(0.75em)[
     #emph(authors-str)
     #h(1fr)
-    #emph(eval(version, mode: "markup"))
+    #emph(version)
   ]
 
   let footer-content = context text(0.75em)[
-    #emph(eval(title, mode: "markup"))
+    #emph(title)
     #h(1fr)
     #counter(page).display(
       "1/1",
@@ -214,9 +214,9 @@
   // Make the caption like I like them
   show figure.caption: it => context {
       if it.numbering == none {
-        eval(mode:"markup", it.body.text)
+        it.body
       } else {
-        it.supplement + " " + it.counter.display() + it.separator + eval(mode:"markup", it.body.text)
+        it.supplement + " " + it.counter.display() + it.separator + it.body
       }
     }
   
@@ -287,12 +287,12 @@
 
   // Main title
   set par(leading: 0.2em)
-  text(font: sans-font, 2em, weight: 700, smallcaps(eval(title, mode:"markup")))
+  text(font: sans-font, 2em, weight: 700, smallcaps(title))
   set par(leading: 0.65em)
   
   // Subtitle
   v(1em, weak: true)
-  text(font: sans-font, 1.2em, eval(sub-title, mode:"markup"))
+  text(font: sans-font, 1.2em, sub-title)
   line(length: 100%)
   
   v(4em)
