@@ -1,7 +1,7 @@
 [package]
 name = "isc-hei-report"
-version = "0.1.5"
-compiler = "0.11.1"
+version = "0.1.6"
+compiler = "0.12.0"
 entrypoint = "isc_template_report.typ"
 repository = "https://github.com/ISC-HEI/ISC-report"
 authors = ["Pierre-André Mudry"]

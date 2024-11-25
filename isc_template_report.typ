@@ -1,20 +1,20 @@
 // Template for ISC reports at the School of engineering
-// v0.1.5 - mui 2024
+// v0.1.6 - mui 2024
 //
-// Missing features : 
+// Missing features :
 // - page and locations (above, under) references for figures not available yet
 
 // Fancy pretty print with line numbers and stuff
-#import "@preview/codelst:2.0.1": sourcecode 
+#import "@preview/codelst:2.0.2": sourcecode
 
 // Nice color boxes
-#import "@preview/showybox:2.0.1": showybox
+#import "@preview/showybox:2.0.3": showybox
 
 // Define our own functions
 #let todo(body, fill-color: yellow.lighten(50%)) = {
   set text(black)
   box(
-    baseline:25%,
+    baseline: 25%,
     fill: fill-color,
     inset: 3pt,
     [*TODO* #body],
@@ -45,12 +45,28 @@
   
   let keys = langs.at(lang)
 
-  if not key in keys {
-    panic("I18n key " + key + "doesn't exist")
-  }
+  assert(
+    key in keys,
+    message: "I18n key " + str(key) + " doesn't exist"
+  )
   return keys.at(key)
 }
 
+#let make-outline(font: auto, title, ..args) = {
+  let title = if font == auto {title} else {
+    text(font: font, title)
+  }
+  outline(
+    title: {
+      v(5em)
+      text(size: 1.5em, weight: 700, title)
+      v(3em)
+    },
+    indent: 2em,
+    ..args
+  )
+  pagebreak(weak: true)
+}
 
 //
 // Source code inclusion
@@ -60,7 +76,7 @@
 // Replace the original function by ours
 #let codelst-sourcecode = sourcecode
 #let code = codelst-sourcecode.with(
-  frame: block.with(    
+  frame: block.with(
     fill: _luma-background,
     stroke: 0.5pt + luma(80%),
     radius: 3pt,
@@ -76,7 +92,7 @@
 // The template itself
 #let project(
   title: [Report title],
-  sub-title: [Report sub-title], 
+  sub-title: [Report sub-title],
   
   course-name: [Course name],
   course-supervisor: [Course supervisor],
@@ -85,14 +101,22 @@
 
   cover-image: none,
   cover-image-height: 10cm,
-  cover-image-caption: "KNN exposed, by Marcus Volg",
+  cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
   cover-image-kind: auto,
   cover-image-supplement: auto,
-    
+  
   // A list of authors, separated by commas
   authors: (),
   date: none,
   logo: none,
+
+  tables: (
+    contents: true,
+    figures: false,
+    tables: false,
+    listings: false,
+    equations: false
+  ),
 
   version : "1.0.0",
   language : "fr",
@@ -100,18 +124,18 @@
   body,
 ) = {
 
-  let i18n = i18n.with(extra-i18n: extra-i18n)
+  let i18n = i18n.with(extra-i18n: extra-i18n, language)
  
   // Set the document's basic properties.
   set document(author: authors, title: title)
 
-  // Document language for hyphenation and other things   
+  // Document language for hyphenation and other things
   let internal-language = language
 
-  // 
-  //  Fonts 
-  //   
-  let body-font = ("Source Sans Pro", "Source Sans 3", "Linux Libertine")
+  //
+  //  Fonts
+  //
+  let body-font = ("Source Sans Pro", "Source Sans 3", "Libertinus Serif")
   let sans-font = ("Source Sans Pro", "Source Sans 3", "Inria Sans")
   let raw-font = "Fira Code"
   let math-font = ("Asana Math", "Fira Math")
@@ -127,15 +151,15 @@
   /////////////////////////////////////////////////
   // Citation style
   /////////////////////////////////////////////////
-  set cite(style: auto, form: "normal")  
+  set cite(style: auto, form: "normal")
 
   /////////////////////////////////////////////////
   //  Basic pagination and typesetting
   /////////////////////////////////////////////////
-  set page(        
+  set page(
     margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
     paper: "a4"
-  )  
+  )
 
   let space-after-heading = 0.5em
   show heading: it => {it; v(space-after-heading)} // Space after heading
@@ -151,80 +175,74 @@
 
   let header-content = text(0.75em)[
     #emph(authors-str)
-    #h(1fr)    
-    #emph(eval(version, mode: "markup"))
+    #h(1fr)
+    #emph(version)
   ]
 
-  let footer-content = text(0.75em)[    
-    #emph(eval(title, mode: "markup"))  
-    #h(1fr)    
+  let footer-content = context text(0.75em)[
+    #emph(title)
+    #h(1fr)
     #counter(page).display(
-          "1/1",
-          both: true
-        )
+      "1/1",
+      both: true
+    )
   ]
 
   // Set header and footers
-  set page(    
-    header: locate(loc => {
-      // For pages other than the first one
-      if counter(page).at(loc).first() > 1 {
-        header-content
-      }
-    }),
-
+  set page(
+    // For pages other than the first one
+    header: context if counter(page).get().first() > 1 {
+      header-content
+    },
     header-ascent: 40%,
 
-    footer: locate(loc => {
-      // For pages other than the first one
-      if counter(page).at(loc).first() > 1 [
-        #move(dy:5pt, line(length: 100%, stroke: 0.5pt))
-        #footer-content
-      ]
-    })
-  )  
+    // For pages other than the first one
+    footer: context if counter(page).get().first() > 1 [
+      #move(dy: 5pt, line(length: 100%, stroke: 0.5pt))
+      #footer-content
+    ]
+  )
   
   // Links coloring
   show link: set text(ligatures: true, fill: blue)
 
-  // Sections numbers 
+  // Sections numbers
   set heading(numbering: "1.1.1 -")
 
   /////////////////////////////////////////////////
   // Handle specific captions styling
-  /////////////////////////////////////////////////  
-  
-  // TODO : Make this suitable for different languages
+  /////////////////////////////////////////////////
 
   // Compute a suitable supplement as they are not to my liking
-  let getSupplement(it) = {        
-    if(it.func() == image){
-      i18n(internal-language, "figure-name")
-    } else if (it.func() == table){
-      i18n(internal-language, "table-name")
-    } else if (it.func() == raw){
-      i18n(internal-language, "listing-name")
-    } else{
+  let getSupplement(it) = {
+    let f = it.func()
+    if (f == image) {
+      i18n("figure-name")
+    } else if (f == table) {
+      i18n("table-name")
+    } else if (f == raw) {
+      i18n("listing-name")
+    } else {
       auto
     }
-  }  
+  }
 
   set figure(numbering: "1", supplement: getSupplement)
 
   // Make the caption like I like them
   show figure.caption: set text(9pt) // Smaller font size
-  show figure.caption: emph // Use italics  
+  show figure.caption: emph // Use italics
   set figure.caption(separator: " - ") // With a nice separator
   
   show figure.caption: it => {it.counter.display()} // Used for debugging
 
-  // Make the caption like I like them  
-  show figure.caption: it => {
+  // Make the caption like I like them
+  show figure.caption: it => context {
       if it.numbering == none {
-        eval(mode:"markup", it.body.text) 
-      } else { 
-        it.supplement + " " + it.counter.display() + it.separator + eval(mode:"markup", it.body.text)
-      }                                
+        it.body
+      } else {
+        it.supplement + " " + it.counter.display() + it.separator + it.body
+      }
     }
   
   /////////////////////////////////////////////////
@@ -232,7 +250,7 @@
   // code block is handled by function at the top of the file
   /////////////////////////////////////////////////
   
-  // Inline code display, 
+  // Inline code display,
   // In a small box that retains the correct baseline.
   show raw.where(block: false): box.with(
     fill: _luma-background,
@@ -242,20 +260,21 @@
   )
     
   // Allow page breaks for raw figures
-  show figure.where(kind:raw): set block(breakable: true)
+  show figure.where(kind: raw): set block(breakable: true)
 
   /////////////////////////////////////////////////
   // Our own specific commands
-  /////////////////////////////////////////////////  
-  let insertLogo(logo) = {
-    if logo != none {  
-      place(top + right,
+  /////////////////////////////////////////////////
+  let insert-logo(logo) = {
+    if logo != none {
+      place(
+        top + right,
         dx: 6mm,
         dy: -12mm,
         clearance: 0em,
         // Put it in a box to be resized
         box(height:2.0cm, logo)
-      )      
+      )
     }
   }
 
@@ -264,16 +283,21 @@
   /////////////////////////////////////////////////
 
   // Title page.
-  insertLogo(logo)
+  insert-logo(logo)
   
-  let title-block = course-supervisor + "\n" + semester + " " + academic-year
+  let title-block = [
+    #course-supervisor\
+    #semester #academic-year
+  ]
   let title-block-content = title-block
 
-  place(top + left,
+  place(
+    top + left,
     dy: -2em,
-      text(1em, 
-      text(weight: 700, course-name) + "\n" + text(title-block-content)
-      )
+    text(1em)[
+      #text(weight: 700, course-name)\
+      #text(title-block-content)
+    ]
   )
 
   v(10fr, weak: true)
@@ -294,12 +318,12 @@
 
   // Main title
   set par(leading: 0.2em)
-  text(font: sans-font, 2em, weight: 700, smallcaps(eval(title, mode:"markup")))
+  text(font: sans-font, 2em, weight: 700, smallcaps(title))
   set par(leading: 0.65em)
   
   // Subtitle
   v(1em, weak: true)
-  text(font: sans-font, 1.2em, eval(sub-title, mode:"markup"))
+  text(font: sans-font, 1.2em, sub-title)
   line(length: 100%)
   
   v(4em)
@@ -307,7 +331,7 @@
   // Author information on the title page
   pad(
     top: 1em,
-    right: 20%,    
+    right: 20%,
     grid(
       columns: 3,
       column-gutter: 3em,
@@ -323,17 +347,43 @@
   pagebreak()
   
   // --- Table of Contents ---
-  outline(
-    title: {
-      v(5em)
-      text(font: body-font, 1.5em, weight: 700, i18n(internal-language, "toc-title"))
-      v(3em)
-    },
-    indent: 2em,
-    depth: 2
+
+  let make-outline = make-outline.with(
+    font: body-font
   )
   
-  pagebreak()
+  if tables != none {
+    if tables.at("contents", default: false) {
+      make-outline(
+        i18n("toc-title"),
+        depth: 2
+      )
+    }
+    if tables.at("figures", default: false) {
+      make-outline(
+        i18n("figure-table-title"),
+        target: figure.where(kind: image)
+      )
+    }
+    if tables.at("tables", default: false) {
+      make-outline(
+        i18n("table-table-title"),
+        target: figure.where(kind: table)
+      )
+    }
+    if tables.at("listings", default: false) {
+      make-outline(
+        i18n("listing-table-title"),
+        target: figure.where(kind: raw)
+      )
+    }
+    if tables.at("equations", default: false) {
+      make-outline(
+        i18n("equation-table-title"),
+        target: math.equation.where(block:true)
+      )
+    }
+  }
 
   // Main body.
   set par(justify: true)
