@@ -47,11 +47,26 @@
 
   assert(
     key in keys,
-    message: "I18n key " + str(key) + "doesn't exist"
+    message: "I18n key " + str(key) + " doesn't exist"
   )
   return keys.at(key)
 }
 
+#let make-outline(font: auto, title, ..args) = {
+  let title = if font == auto {title} else {
+    text(font: font, title)
+  }
+  outline(
+    title: {
+      v(5em)
+      text(size: 1.5em, weight: 700, title)
+      v(3em)
+    },
+    indent: 2em,
+    ..args
+  )
+  pagebreak(weak: true)
+}
 
 //
 // Source code inclusion
@@ -94,6 +109,14 @@
   authors: (),
   date: none,
   logo: none,
+
+  tables: (
+    contents: true,
+    figures: false,
+    tables: false,
+    listings: false,
+    equations: false
+  ),
 
   version : "1.0.0",
   language : "fr",
@@ -324,17 +347,43 @@
   pagebreak()
   
   // --- Table of Contents ---
-  outline(
-    title: {
-      v(5em)
-      text(font: body-font, 1.5em, weight: 700, i18n("toc-title"))
-      v(3em)
-    },
-    indent: 2em,
-    depth: 2
+
+  let make-outline = make-outline.with(
+    font: body-font
   )
   
-  pagebreak()
+  if tables != none {
+    if tables.at("contents", default: false) {
+      make-outline(
+        i18n("toc-title"),
+        depth: 2
+      )
+    }
+    if tables.at("figures", default: false) {
+      make-outline(
+        i18n("figure-table-title"),
+        target: figure.where(kind: image)
+      )
+    }
+    if tables.at("tables", default: false) {
+      make-outline(
+        i18n("table-table-title"),
+        target: figure.where(kind: table)
+      )
+    }
+    if tables.at("listings", default: false) {
+      make-outline(
+        i18n("listing-table-title"),
+        target: figure.where(kind: raw)
+      )
+    }
+    if tables.at("equations", default: false) {
+      make-outline(
+        i18n("equation-table-title"),
+        target: math.equation.where(block:true)
+      )
+    }
+  }
 
   // Main body.
   set par(justify: true)

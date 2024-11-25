@@ -21,6 +21,11 @@
     "Pamela Delgado"
   ),
 
+  tables: (
+    contents: true,
+    listings: true,
+  ),
+
   logo: image("figs/isc_logo.svg"),
   date: "23 novembre 2024",
   language: doc_language, // Or en/de if required
