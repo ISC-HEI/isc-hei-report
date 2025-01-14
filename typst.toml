@@ -1,6 +1,6 @@
 [package]
 name = "isc-hei-report"
-version = "0.1.6"
+version = "0.2.0"
 compiler = "0.12.0"
 entrypoint = "isc_template_report.typ"
 repository = "https://github.com/ISC-HEI/ISC-report"

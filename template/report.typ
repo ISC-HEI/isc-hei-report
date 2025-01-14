@@ -1,4 +1,4 @@
-#import "@preview/isc-hei-report:0.1.6" : *
+#import "@preview/isc-hei-report:1.0.0" : *
 
 #let doc_language = "fr" // Or en/de
 
@@ -17,8 +17,8 @@
 
   authors: (
     "P.-A. Mudry",
-    "Louis Lettry",
-    "Pamela Delgado"
+    "Florian Desmons",
+    "Renaud Richardet"
   ),
 
   tables: (
@@ -27,9 +27,9 @@
   ),
 
   logo: image("figs/isc_logo.svg"),
-  date: "23 novembre 2024",
+  date: "13 janvier 2025",
   language: doc_language, // Or en/de if required
-  version: [Using template 0.1.6 $alpha$]
+  version: [Using template 0.2.0 $beta$]
 )
  
 //// If using acronyms

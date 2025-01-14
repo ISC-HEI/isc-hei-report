@@ -1,5 +1,5 @@
 // Template for ISC reports at the School of engineering
-// v0.1.6 - mui 2024
+// v0.2.0 - since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
 //
 // Missing features :
 // - page and locations (above, under) references for figures not available yet
@@ -97,7 +97,7 @@
   course-name: [Course name],
   course-supervisor: [Course supervisor],
   semester: [Semester],
-  academic-year: [2023-2024],
+  academic-year: [2023-2025],
 
   cover-image: none,
   cover-image-height: 10cm,
@@ -118,7 +118,7 @@
     equations: false
   ),
 
-  version : "1.0.0",
+  version : "0.2.0",
   language : "fr",
   extra-i18n : none,
   body,

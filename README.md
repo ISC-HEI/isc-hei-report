@@ -16,7 +16,7 @@ This is an official template for students reports for the [ISC degree programme]
 In the `Typst` web application, start with the `isc-hei-report` and voilà ! Using the CLI, you can initialize the project with the command :
 
 ```bash
-typst init @preview/isc-hei-report:0.1.5
+typst init @preview/isc-hei-report:0.2.0
 ```
 
 This template will initialize an sample report with sensible default values.
@@ -65,6 +65,10 @@ In the future, several things _might_ be updated, such as :
 - [x] Appendix
 - [x] Acronyms inclusion
 - [x] Basic support for including code files
+
+# Updating this template
+
+TODO: Complete this
 
 
 # Questions and help
