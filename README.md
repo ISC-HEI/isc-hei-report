@@ -93,7 +93,7 @@ Then go the directory, try to compile with `typst watch report.typ`.
 
 ## Deploying
 
-Clone the `Typst universe repos`
+Clone the `Typst universe repos`, and `just package DEST/preview/packages`. 
 
 # Questions and help
 
