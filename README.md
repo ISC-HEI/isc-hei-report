@@ -60,8 +60,8 @@ In the future, several things _might_ be updated, such as :
 - [ ] State diagrams and UML diagrams examples
 - [ ] Glossary inclusion
 - [ ] Master thesis version of this template
-- [ ] Themes for code
 - [ ] Other nice things
+- [x] Themes for code
 - [x] Appendix
 - [x] Acronyms inclusion
 - [x] Basic support for including code files
@@ -93,7 +93,7 @@ Then go the directory, try to compile with `typst watch report.typ`.
 
 ## Deploying
 
-Clone the `Typst universe repos`, and `just package DEST/preview/packages`. 
+Clone the `Typst universe repos`, and `just package DEST/packages/preview`. 
 
 # Questions and help
 
