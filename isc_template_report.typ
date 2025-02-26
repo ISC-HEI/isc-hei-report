@@ -119,8 +119,9 @@
   ),
 
   version : "0.2.0",
-  language : "fr",
+  language : "fr", 
   extra-i18n : none,
+  code-theme: "bluloco-light",
   body,
 ) = {
 
@@ -145,7 +146,10 @@
   
   // Set other fonts
   // show math.equation: set text(font: math-font) // For math equations
+  let selected-theme = "template/themes/" + code-theme + ".tmTheme"
+  set raw(theme: selected-theme)
   show raw: set text(font: raw-font) // For code
+  
   show heading: set text(font: sans-font) // For sections, sub-sections etc..
 
   /////////////////////////////////////////////////

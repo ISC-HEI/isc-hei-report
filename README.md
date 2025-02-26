@@ -1,10 +1,10 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/ISC-HEI/isc-hei-report)
 ![GitHub Release](https://img.shields.io/github/v/release/ISC-HEI/isc-hei-report?include_prereleases)
-
+![License](https://img.shields.io/badge/license-MIT-brightgreen")
+  
 <p align="center">
   <a href="https://hevs.ch/isc">    
-  <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" width="50%"/>
-  </a>
+  <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" width="50%"/>        
 </p>
 
 # ISC report template :scroll:
@@ -66,10 +66,34 @@ In the future, several things _might_ be updated, such as :
 - [x] Acronyms inclusion
 - [x] Basic support for including code files
 
-# Updating this template
+# Updating this template and deploying to Typst universe
 
-TODO: Complete this
+Work in the `template` directory directly when updating the template. When sufficiently confident that it seems to work, it's time to test a `preview` version as created by `typst`.
 
+To build, test and deploy new releases I'm using [Just](https://github.com/casey/just).
+
+## Preparing env
+Run `script/setup`
+
+## Testing preview
+
+To deploy locally in `typst`
+
+```bash
+just install-preview
+```
+
+then for example
+
+```bash
+typst init @preview/isc-hei-report:0.2.0
+```
+
+Then go the directory, try to compile with `typst watch report.typ`.
+
+## Deploying
+
+Clone the `Typst universe repos`
 
 # Questions and help
 

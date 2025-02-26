@@ -6,17 +6,17 @@ export TYPST_ROOT := root
 default:
 	@just --list --unsorted
 
-<!-- # generate manual
-doc:
-	typst compile docs/manual.typ docs/manual.pdf
+# <!-- # generate manual
+# doc:
+# 	typst compile docs/manual.typ docs/manual.pdf
 
-# run test suite
-test *args:
-	typst-test run {{ args }}
+# # run test suite
+# test *args:
+# 	typst-test run {{ args }}
 
-# update test cases
-update *args:
-	typst-test update {{ args }} -->
+# # update test cases
+# update *args:
+# 	typst-test update {{ args }} -->
 
 # package the library into the specified destination folder
 package target:
@@ -37,6 +37,3 @@ uninstall: (remove "@local")
 
 # uninstalls the library from the "@preview" prefix (for pre-release testing)
 uninstall-preview: (remove "@preview")
-
-# run ci suite
-ci: test doc

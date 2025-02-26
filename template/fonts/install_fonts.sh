@@ -2,7 +2,7 @@
 
 echo "Installing fonts locally..."
 
-wget https://marcellus.begincoding.net/fonts/modern-isc-fonts.tar.gz
+wget https://files.isc-vs.ch/typst/modern-isc-fonts.tar.gz
 tar -zxvf modern-isc-fonts.tar.gz
 
 fonts_dir="${HOME}/.local/share/fonts"

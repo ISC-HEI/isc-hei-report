@@ -1,6 +1,7 @@
 # [unreleased](https://github.com/<author>/<my-package>/releases/tag/<the-tag>)
+
 ## Added
-- `typst` v0.12 warning removed
+- `typst` v0.13 warning removed
 - removed extra spaces
 - removed eval calls
 - updated `codelst` and `showybox`

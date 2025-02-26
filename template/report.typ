@@ -29,11 +29,13 @@
   logo: image("figs/isc_logo.svg"),
   date: "13 janvier 2025",
   language: doc_language, // Or en/de if required
-  version: [Using template 0.2.0 $beta$]
+  version: [Using template 0.2.0],
+
+  code-theme: "bluloco-light",
 )
  
 //// If using acronyms
-#import "@preview/acrostiche:0.4.1": *
+#import "@preview/acrostiche:0.5.1": *
 #include "acronyms.typ"
 
 // Let's get started
@@ -57,8 +59,7 @@ Des choses plus exotiques, comme mettre du #todo[texte mis en évidence] sont é
 
 == Insertion de code
 
-Nous pouvons également avoir du `code brut directement en ligne` mais cela peut également être fait avec du code
-Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'avoir des blocs de code joliment mis en forme également. Ainsi, lorsque l'on souhaite avoir du code inséré dans une figure, on peut également utiliser le package `sourcecode` qui rajoute notamment les numéros de ligne. En complément avec une `figure`, il est possible d'avoir une _légende_, un numéro de figure ainsi que du code centré :
+Nous pouvons également avoir du `code brut directement en ligne` mais cela peut également être fait avec du code Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'avoir des blocs de code joliment mis en forme également. Ainsi, lorsque l'on souhaite avoir du code inséré dans une figure, on peut également utiliser le package `sourcecode` qui rajoute notamment les numéros de ligne. En complément avec une `figure`, il est possible d'avoir une _légende_, un numéro de figure ainsi que du code centré :
 
 #figure(
   code()[
@@ -69,7 +70,7 @@ Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'
       case _ => 42
   }
   ```],
-  caption: "Un tout petit listing en `Scala`"
+  caption: "Un tout petit listing en Scala"
 )
 
 On peut si on le souhaite également avoir des blocs de code plus long si nécessaire, sur plusieurs pages :
@@ -244,13 +245,13 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 // Table of figures
 #pagebreak()
 #outline( title: i18n(doc_language, "figure-table-title"),
-          depth: 1, indent: true,
+          depth: 1, indent: auto,
           target: figure.where(kind: image, numbering:"1"))
 
 // Table of listings
 #pagebreak()
 #outline( title: i18n(doc_language, "listing-table-title"),
-          depth: 1, indent: true,
+          depth: 1, indent: auto,
           target: figure.where(kind: raw))
 
 // Including code
