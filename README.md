@@ -58,42 +58,13 @@ Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP
 In the future, several things _might_ be updated, such as :
 
 - [ ] State diagrams and UML diagrams examples
-- [ ] Glossary inclusion
 - [ ] Master thesis version of this template
 - [ ] Other nice things
+- [x] Glossary inclusion
 - [x] Themes for code
 - [x] Appendix
 - [x] Acronyms inclusion
 - [x] Basic support for including code files
-
-# Updating this template and deploying to Typst universe
-
-Work in the `template` directory directly when updating the template. When sufficiently confident that it seems to work, it's time to test a `preview` version as created by `typst`.
-
-To build, test and deploy new releases I'm using [Just](https://github.com/casey/just).
-
-## Preparing env
-Run `script/setup`
-
-## Testing preview
-
-To deploy locally in `typst`
-
-```bash
-just install-preview
-```
-
-then for example
-
-```bash
-typst init @preview/isc-hei-report:0.2.0
-```
-
-Then go the directory, try to compile with `typst watch report.typ`.
-
-## Deploying
-
-Clone the `Typst universe repos`, and `just package DEST/packages/preview`. 
 
 # Questions and help
 
