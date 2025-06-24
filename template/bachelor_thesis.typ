@@ -3,45 +3,41 @@
 #let doc_language = "fr" // Or en/de
 
 #show: project.with(
-  title: "Rapport de projet pour la filière ISC",
-  sub-title: [Avec une mise en page `Typst`],
+  title: "ISC Bachelor Thesis Template", 
+  sub-title: [Typeset with `Typst`],
 
-  course-name: "101.1 Programmation impérative",
-  course-supervisor : "Prof. Dr P.-A. Mudry",
-  semester: "Semestre de printemps",
-  academic-year : "2025-2026",
+    // If its a thesis 
+  is-thesis: true, 
+  thesis-supervisor: [Thesis supervisor],
+  thesis-co-supervisor: [Thesis co-supervisor],
+  thesis-expert: [Thesis expert],
+  faculty: [Faculty name],
 
   cover-image: image("figs/cover_image_placeholder.png"),
   cover-image-height: 8cm, // Default value = 10cm
   cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
 
-  authors: (
-    "D. Knuth",
-    "L. Torvalds",
-    "M. Odersky", 
-  ),
+  authors: ["James Gosling"],
 
   tables: (
     contents: true,
-    listings: true,
+    listings: true, 
   ),
 
-  is-thesis: false, // Set to true if this is a thes
-
   logo: image("figs/isc_logo.svg"),
-  date: datetime(year: 2025, month: 6, day: 24), // or datetime.today()
+  date: datetime(year: 2025, month: 6, day: 24), // or datetime.today() 
   language: doc_language, // Or en/de if required
   version: [Using template 0.3.0],
  
   code-theme: "bluloco-light",
 )
- 
+  
 //// If using acronyms
 #import "@preview/acrostiche:0.5.2": * 
 #include "acronyms.typ"
-
-// Let's get started
-
+  
+// Let's get started  
+  
 = Introduction
 Écrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch].
 

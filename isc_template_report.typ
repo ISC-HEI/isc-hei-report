@@ -96,15 +96,23 @@
 #let project(
   title: [Report title],
   sub-title: [Report sub-title],
+  academic-year: [2024-2025],
   
+  // If its a thesis
+  is-thesis: false,
+  thesis-supervisor: [Thesis supervisor],
+  thesis-co-supervisor: [Thesis co-supervisor],
+  thesis-expert: "[Thesis expert]",
+  faculty: [Faculty name],
+
+  // If its a report
   course-name: [Course name],
   course-supervisor: [Course supervisor],
   semester: [Semester],
-  academic-year: [2023-2025],
 
   cover-image: none,
   cover-image-height: 10cm,
-  cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
+  cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
   cover-image-kind: auto,
   cover-image-supplement: auto,
   
@@ -125,7 +133,7 @@
   language : "fr", 
   extra-i18n : none,
   code-theme: "bluloco-light",
-  body,
+  body
 ) = {
 
   let i18n = i18n.with(extra-i18n: extra-i18n, language)
@@ -163,10 +171,46 @@
   /////////////////////////////////////////////////
   //  Basic pagination and typesetting
   /////////////////////////////////////////////////
-  set page(
-    margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
-    paper: "a4"
-  )
+
+  if(is-thesis) {
+    // Thesis specific settings
+    set page(
+      margin: (inside: 3.5cm, outside: 1.5cm, y: 2.1cm), // Binding inside
+      paper: "a4"
+    )
+  } else {
+    // Report specific settings
+    set page(
+      margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
+      paper: "a4"
+    )
+  }
+  
+  // In a thesis, new chapters start on the right-hand side (odd page)
+  if(is-thesis){
+    show heading: it => {
+    if it.level == 1 { // Assuming level 1 is for chapter headings
+      pagebreak(to: "odd", weak: false) // Ensure the first chapter starts on an odd page (right-hand)
+      [
+        #set text(size: 28pt, weight: "bold")
+        #counter(heading).display()
+        #it.body
+      ]
+      v(0.8em)
+    } else {
+      it // For other heading levels, use the default behavior
+    }
+  }}
+
+
+//TODO investigate this
+
+    let cleardoublepage() = {
+      pagebreak(to: "odd")
+      align(center)[*BLANK*]
+      pagebreak()
+    }
+
 
   let space-after-heading = 0.5em
   show heading: it => {it; v(space-after-heading)} // Space after heading
@@ -174,6 +218,7 @@
   let authors-str = ()
 
   if (authors.len() > 1){
+      panic(str(authors.len()) + " : " + authors)    
      authors-str = authors.join(", ")
   }
   else{

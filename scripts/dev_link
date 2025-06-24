@@ -1,0 +1,56 @@
+#!/bin/bash
+# For development, create a symlink to the local package directory
+
+# Local package directories per platform
+if [[ "$OSTYPE" == "linux"* ]]; then
+  DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  DATA_DIR="$HOME/Library/Application Support"
+else
+  DATA_DIR="${APPDATA}"
+fi
+
+function read-toml() {
+  local file="$1"
+  local key="$2"
+  # Read a key value pair in the format: <key> = "<value>"
+  # stripping surrounding quotes.
+  perl -lne "print \"\$1\" if /^${key}\\s*=\\s*\"(.*)\"/" < "$file"
+}
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)/.." # macOS has no realpath
+
+PKG_PREFIX="$(read-toml "$ROOT/typst.toml" "name")"
+VERSION="$(read-toml "$ROOT/typst.toml" "version")"
+
+function resolve-target() {
+  local target="$1"
+
+	if [[ "$target" == "@local" ]]; then
+		echo "${DATA_DIR}/typst/packages/local"
+	elif [[ "$target" == "@preview" ]]; then
+		echo "${DATA_DIR}/typst/packages/preview"
+	else
+		echo "$target"
+	fi
+}
+
+TARGET_DIR="$(resolve-target "$1")"
+SRC_DIR="$ROOT/template"
+DEST_LINK="$TARGET_DIR/$PKG_PREFIX"
+
+echo "Creating symlink for development in $TARGET_DIR"
+
+if [ -e "$DEST_LINK/$VERSION" ]; then
+  echo "Removing existing $DEST_LINK/$VERSION"
+  rm -rf "$DEST_LINK/$VERSION"
+fi
+mkdir -p "$TARGET_DIR"
+ln -sf "$SRC_DIR" "$DEST_LINK/$VERSION"
+
+if [ $? -eq 0 ]; then
+  echo "Symlink created: $DEST_LINK/$VERSION"
+else
+  echo "Error: Failed to create symlink $DEST_LINK/$VERSION" >&2
+  exit 1
+fi

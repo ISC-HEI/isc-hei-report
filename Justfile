@@ -29,6 +29,13 @@ install: (package "@local")
 install-preview: (package "@preview")
 
 [private]
+symblink target:
+  ./scripts/dev_link "{{target}}"
+
+# create symblink for dev
+install-symblink: (symblink "@preview")
+
+[private]
 remove target:
   ./scripts/uninstall "{{target}}"
 
