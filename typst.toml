@@ -1,14 +1,14 @@
 [package]
 name = "isc-hei-report"
-version = "0.3.0"
-compiler = "0.13.0"
+version = "0.5.0"
+compiler = "0.13.1"
 entrypoint = "isc_template_report.typ"
 repository = "https://github.com/ISC-HEI/ISC-report"
 authors = ["Pierre-André Mudry"]
 license = "MIT"
-description = "An official report template for the 'Informatique et systèmes de communication' (ISC) bachelor degree programme at the School of Engineering (HEI) in Sion, Switzerland."
-keywords = ["report", "ISC", "university", "Informatique et systèmes de communication", "HES-SO Valais", "Sion", "HEI", "School of engineering"]
-categories = ["report"]
+description = "An official report and thesis (all-in-one) template. Tailor-made for the 'Informatique et systèmes de communication' (ISC) bachelor degree programme at the School of Engineering (HEI) in Sion, Switzerland."
+keywords = ["report", "ISC", "thesis", "university", "Informatique et systèmes de communication", "HES-SO Valais", "Sion", "HEI", "School of engineering"]
+categories = ["report", "thesis"]
 disciplines = ["computer-science", "engineering"]
 
 [template]

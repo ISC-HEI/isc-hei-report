@@ -1,5 +1,5 @@
 // Template for ISC reports at the School of engineering
-// v0.3.0 - since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
+// v0.5.0 - since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
 //
 // Missing features :
 // - page and locations (above, under) references for figures not available yet
@@ -13,7 +13,7 @@
 // Custom date format
 #import "@preview/datify:0.1.4": day-name, month-name, custom-date-format
 
-// Define our own functions
+// Indicate that something still needs to be done
 #let todo(body, fill-color: yellow.lighten(50%)) = {
   set text(black)
   box(
@@ -26,9 +26,8 @@
 
 //
 // Multiple languages support
-//
-
 // Thanks @LordBaryhobal for the original idea
+// 
 #let langs = json("i18n.json")
 
 #let i18n(lang, key, extra-i18n: none) = {
@@ -55,7 +54,7 @@
   return keys.at(key)
 }
 
-#let make-outline(font: auto, title, ..args) = {
+#let make-outline(font: auto, title, ..args) = {   
   let title = if font == auto {title} else {
     text(font: font, title)
   }
@@ -65,15 +64,31 @@
       text(size: 1.5em, weight: 700, title)
       v(3em)
     },
-    indent: 2em,
+    indent: 2em, 
     ..args
   )
   pagebreak(weak: true)
 }
 
-//
-// Source code inclusion
-//
+// Make the table of contents with a given depth
+#let table_of_contents(lang, depth: 2) = {
+  make-outline(i18n(lang, "toc-title"), depth: depth)
+}
+
+// Generate the table of figures
+#let table_of_figures(lang, depth: 1) = {          
+
+  [= #i18n(lang, "figure-table-title")]
+  
+  // make-outline(i18n(lang, "figure-table-title"), depth: depth, target: figure.where(kind: image))
+          
+  // outline(title: none, depth: 1, indent: auto,
+  //         target: figure.where(kind: image))
+}
+
+/*********************************
+ * Source code inclusion
+ *********************************/
 #let _luma-background = luma(250)
 
 // Replace the original function by ours
@@ -92,7 +107,9 @@
   gutter:1.2em
 )
 
-// The template itself
+/*********************************
+ ** The template itself
+ ********************************/
 #let project(
   title: [Report title],
   sub-title: [Report sub-title],
@@ -100,6 +117,7 @@
   
   // If its a thesis
   is-thesis: false,
+  split-chapters: true,
   thesis-supervisor: [Thesis supervisor],
   thesis-co-supervisor: [Thesis co-supervisor],
   thesis-expert: "[Thesis expert]",
@@ -122,7 +140,7 @@
   logo: none,
 
   tables: (
-    contents: true,
+    contents: false,
     figures: false,
     tables: false,
     listings: false,
@@ -172,49 +190,40 @@
   //  Basic pagination and typesetting
   /////////////////////////////////////////////////
 
-  if(is-thesis) {
-    // Thesis specific settings
-    set page(
-      margin: (inside: 3.5cm, outside: 1.5cm, y: 2.1cm), // Binding inside
-      paper: "a4"
-    )
-  } else {
-    // Report specific settings
-    set page(
-      margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
-      paper: "a4"
-    )
-  }
-  
-  // In a thesis, new chapters start on the right-hand side (odd page)
-  if(is-thesis){
-    show heading: it => {
-    if it.level == 1 { // Assuming level 1 is for chapter headings
-      pagebreak(to: "odd", weak: false) // Ensure the first chapter starts on an odd page (right-hand)
-      [
-        #set text(size: 28pt, weight: "bold")
-        #counter(heading).display()
-        #it.body
-      ]
-      v(0.8em)
-    } else {
-      it // For other heading levels, use the default behavior
-    }
-  }}
+  set rect(
+    width: 100%,
+    height: 100%,
+    inset: 4pt
+  )
 
+  // Thesis specific settings
+  set page(
+    margin: (inside: 2.5cm, outside: 1.5cm, bottom: 2.1cm, top: 2cm), // Binding inside
+    paper: "a4",
+  ) if(is-thesis)
 
-//TODO investigate this
-
-    let cleardoublepage() = {
-      pagebreak(to: "odd")
-      align(center)[*BLANK*]
-      pagebreak()
-    }
-
+  // Report specific settings
+  set page(
+    margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
+    paper: "a4"
+  ) if(not is-thesis)
 
   let space-after-heading = 0.5em
-  show heading: it => {it; v(space-after-heading)} // Space after heading
   
+    show heading: it => {        
+    if it.level == 1 and is-thesis and split-chapters {      
+      set text(font: sans-font, size: 1.5em, weight: 800)
+      pagebreak(to: "odd", weak: false)      
+      block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 1em), below: 1em, it)
+    }   
+    else {
+      it      
+    }
+  }
+
+  // Tag the header like = Chapter title <unnumbered> to remove the numbering
+  show heading.where(label: <unnumbered>): set heading(numbering: none, outlined:  false, bookmarked:  true)
+
   let authors-str = ()
 
   if type(authors) == str {    
@@ -269,7 +278,7 @@
   // Handle specific captions styling
   /////////////////////////////////////////////////
 
-  // Compute a suitable supplement as they are not to my liking
+  // Compute a supplement for captions as they are not to my liking
   let getSupplement(it) = {
     let f = it.func()
     if (f == image) {
