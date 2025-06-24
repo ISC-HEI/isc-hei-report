@@ -1,4 +1,4 @@
-#import "@preview/isc-hei-report:0.2.0" : *
+#import "@preview/isc-hei-report:0.3.0" : *
 
 #let doc_language = "fr" // Or en/de
 
@@ -16,9 +16,9 @@
   cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
 
   authors: (
-    "P.-A. Mudry",
-    "Florian Desmons",
-    "Renaud Richardet"
+    "D. Knuth",
+    "L. Torvalds",
+    "M. Odersky",
   ),
 
   tables: (
@@ -27,9 +27,9 @@
   ),
 
   logo: image("figs/isc_logo.svg"),
-  date: "13 janvier 2025",
+  date: datetime(year: 2025, month: 6, day: 24), // or datetime.today()
   language: doc_language, // Or en/de if required
-  version: [Using template 0.2.0],
+  version: [Using template 0.3.0],
 
   code-theme: "bluloco-light",
 )
@@ -188,11 +188,9 @@ Des tables plus compliquées sont également possible. La page https://typst.app
 )
 
 == Citer ses sources
-Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références complètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acronymes comme par exemple [#acr("USB")]. 
+Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références complètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acronymes comme par exemple [#acr("USB")]
 
-Si l'on souhaite citer des références issues d'une page ou d'un site web et que cette référence est importante, on utilisera la syntaxe @WinNT qui cite une référence de la bibliographie. Pour les autres cas, il est possible de référer au site uniquement avec son URL. 
-
-==  Un exemple de texte : le filtre de Sobel
+==  Le filtre de Sobel
 Une autre méthode pour extraire les contours à l'intérieur d'une image est d'utiliser #link("https://fr.wikipedia.org/wiki/Détection_de_contours")[l'algorithme de Sobel] Cette méthode est très similaire à celle de la dérivée, mais un peu plus compliquée et donne de meilleurs résultats.
 
 Pour l'exemple, la valeur du filtre de Sobel selon _x_ vaudrait :

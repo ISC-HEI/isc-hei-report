@@ -1,5 +1,5 @@
 // Template for ISC reports at the School of engineering
-// v0.2.0 - since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
+// v0.3.0 - since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
 //
 // Missing features :
 // - page and locations (above, under) references for figures not available yet
@@ -8,7 +8,10 @@
 #import "@preview/codelst:2.0.2": sourcecode
 
 // Nice color boxes
-#import "@preview/showybox:2.0.4": showybox
+#import "@preview/showybox:2.0.3": showybox
+
+// Custom date format
+#import "@preview/datify:0.1.4": day-name, month-name, custom-date-format
 
 // Define our own functions
 #let todo(body, fill-color: yellow.lighten(50%)) = {
@@ -345,7 +348,9 @@
   )
   
   // The date
-  text(1.1em, date)
+  text(1.1em, 
+    custom-date-format(date, i18n("date-format"), internal-language)
+  )
 
   v(2.4fr)
   pagebreak()

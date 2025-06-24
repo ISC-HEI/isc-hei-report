@@ -12,7 +12,8 @@
         "figure-table-title": "Table des figures",
         "listing-table-title": "Table des listings",
         "table-table-title": "Table des tableaux",
-        "equation-table-title": "Table des équations"
+        "equation-table-title": "Table des équations",
+        "date-format": "DD Month YYYY"
     },
     "en": {
         "toc-title": "Table of contents",
@@ -27,7 +28,8 @@
         "figure-table-title": "List of figures",
         "listing-table-title": "List of listings",
         "table-table-title": "List of tables",
-        "equation-table-title": "List of equations"
+        "equation-table-title": "List of equations",
+        "date-format": "Month DD, YYYY"
     },
     "de": {
         "toc-title": "Inhaltsverzeichnis",
@@ -42,6 +44,7 @@
         "figure-table-title": "Abbildungen",
         "listing-table-title": "Quelltexte",
         "table-table-title": "Tabellen",
-        "equation-table-title": "Gleichungen"
+        "equation-table-title": "Gleichungen",
+        "date-format": "DD. MMMM YYYY"
     }
 }
