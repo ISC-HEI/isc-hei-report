@@ -55,6 +55,12 @@
 }
 
 #let make-outline(font: auto, title, ..args) = {   
+  {
+    show heading:none
+    heading(bookmarked: true, outlined:false)[Table of contents]
+    // TODO c'est lidée pour bookmarker la table des matières mais il faut disable le reste des show rules
+  }
+
   let title = if font == auto {title} else {
     text(font: font, title)
   }
@@ -63,7 +69,7 @@
       v(5em)
       text(size: 1.5em, weight: 700, title)
       v(3em)
-    },
+    },    
     indent: 2em, 
     ..args
   )
@@ -209,12 +215,18 @@
   ) if(not is-thesis)
 
   let space-after-heading = 0.5em
+  let chapter-font-size = 1.5em
   
     show heading: it => {        
     if it.level == 1 and is-thesis and split-chapters {      
-      set text(font: sans-font, size: 1.5em, weight: 800)
+      set text(font: sans-font, size: chapter-font-size, weight: 800)
       pagebreak(to: "odd", weak: false)      
-      block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 1em), below: 1em, it)
+      block(
+        fill: none,
+        inset: (x: 0pt, bottom: 2pt, top: 1em),
+        below
+        : space-after-heading*2, 
+        i18n("chapter-title") + " " + counter(heading).display() + " " + it.body) // Add a space before and the chapter title
     }   
     else {
       it      
@@ -222,7 +234,7 @@
   }
 
   // Tag the header like = Chapter title <unnumbered> to remove the numbering
-  show heading.where(label: <unnumbered>): set heading(numbering: none, outlined:  false, bookmarked:  true)
+  show heading.where(label: <unnumbered>): set heading(numbering: none, outlined: false, bookmarked: true)
 
   let authors-str = ()
 
@@ -272,7 +284,9 @@
   show link: set text(ligatures: true, fill: blue)
 
   // Sections numbers
-  set heading(numbering: "1.1.1 -")
+  set heading(numbering: "1.1.1 –") if (is-thesis)
+  set heading(numbering: "1.1.1 –") if (not is-thesis)
+
 
   /////////////////////////////////////////////////
   // Handle specific captions styling

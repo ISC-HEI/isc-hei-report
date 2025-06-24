@@ -144,7 +144,7 @@ This structure may vary depending on the field of study, but these elements are 
 #pagebreak()
   
 // Table of acronyms
-// #print-index(title: [#i18n(doc_language, "acronym-table-title")], sorted: "up", delimiter: " : ", row-gutter: 0.7em, outlined: true) 
+// #print-index(title: [#i18n(doc_language, "acronym-table-title")], sorted: "up", delimiter: " : ", row-gutter: 0.7em, outlined: true)  
 
 // // Table of figures
 // #pagebreak()
@@ -156,15 +156,8 @@ This structure may vary depending on the field of study, but these elements are 
 // // Table of listings 
 // #pagebreak()
 
-= List of Figures !
-#v(10em)
+= List of Figures 
 #table_of_figures(doc_language)
-#v(10em)
-
-- asdfjaskldf
-- asdjflkasjdf
-- asjdkfasljdf
-- asjdflkjas
 
 // Including code 
 // #pagebreak() 
