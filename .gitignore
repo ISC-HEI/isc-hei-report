@@ -2,4 +2,12 @@ isc_template_report.pdf
 template/report.pdf
 test
 template/acronyms.pdf
+
+template/fonts/modern-isc-fonts
+
+# Ignore macOS system files
 .DS_Store
+.AppleDouble
+.Spotlight-V100
+.Trashes
+._*

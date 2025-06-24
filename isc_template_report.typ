@@ -8,7 +8,7 @@
 #import "@preview/codelst:2.0.2": sourcecode
 
 // Nice color boxes
-#import "@preview/showybox:2.0.3": showybox
+#import "@preview/showybox:2.0.4": showybox
 
 // Define our own functions
 #let todo(body, fill-color: yellow.lighten(50%)) = {
