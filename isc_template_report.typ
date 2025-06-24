@@ -217,12 +217,16 @@
   
   let authors-str = ()
 
-  if (authors.len() > 1){
-      panic(str(authors.len()) + " : " + authors)    
-     authors-str = authors.join(", ")
+  if type(authors) == str {    
+    authors = (authors,)
   }
-  else{
-     authors-str = authors.at(0)
+
+  if authors.len() > 1 {    
+    authors-str = authors.join(", ")
+  } else if authors.len() == 1 {
+    authors-str = authors.at(0)
+  } else {
+    panic("No authors provided for the report")
   }
 
   let header-content = text(0.75em)[

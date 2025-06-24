@@ -36,7 +36,7 @@ function resolve-target() {
 }
 
 TARGET_DIR="$(resolve-target "$1")"
-SRC_DIR="$ROOT/template"
+SRC_DIR="$ROOT"
 DEST_LINK="$TARGET_DIR/$PKG_PREFIX"
 
 echo "Creating symlink for development in $TARGET_DIR"
@@ -49,7 +49,7 @@ mkdir -p "$TARGET_DIR"
 ln -sf "$SRC_DIR" "$DEST_LINK/$VERSION"
 
 if [ $? -eq 0 ]; then
-  echo "Symlink created: $DEST_LINK/$VERSION"
+  echo "Symlink created: $DEST_LINK/$VERSION to $SRC_DIR"
 else
   echo "Error: Failed to create symlink $DEST_LINK/$VERSION" >&2
   exit 1

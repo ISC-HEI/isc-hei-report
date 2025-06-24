@@ -2,13 +2,13 @@
 
 #let doc_language = "fr" // Or en/de
 
-#show: project.with(
+#show: project.with( 
   title: "ISC Bachelor Thesis Template", 
   sub-title: [Typeset with `Typst`],
 
     // If its a thesis 
-  is-thesis: true, 
-  thesis-supervisor: [Thesis supervisor],
+  is-thesis: true,  
+  thesis-supervisor: [Thesis supervisor], 
   thesis-co-supervisor: [Thesis co-supervisor],
   thesis-expert: [Thesis expert],
   faculty: [Faculty name],
@@ -17,7 +17,7 @@
   cover-image-height: 8cm, // Default value = 10cm
   cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
 
-  authors: ["James Gosling"],
+  authors: "James Gosling",
 
   tables: (
     contents: true,
