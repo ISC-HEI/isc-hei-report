@@ -18,10 +18,10 @@
   set text(black)
   box(
     baseline: 25%,
-    fill: fill-color,
+    fill: fill-color, 
     inset: 3pt,
     [*TODO* #body],
-  )
+  ) 
 }
 
 //
@@ -131,7 +131,7 @@
   let i18n = i18n.with(extra-i18n: extra-i18n, language)
  
   // Set the document's basic properties.
-  set document(author: authors, title: title)
+  set document(author: authors, title: title, date: date)
 
   // Document language for hyphenation and other things
   let internal-language = language

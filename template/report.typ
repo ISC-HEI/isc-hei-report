@@ -18,7 +18,7 @@
   authors: (
     "D. Knuth",
     "L. Torvalds",
-    "M. Odersky",
+    "M. Odersky", 
   ),
 
   tables: (
@@ -35,7 +35,7 @@
 )
  
 //// If using acronyms
-#import "@preview/acrostiche:0.5.1": *
+#import "@preview/acrostiche:0.5.2": * 
 #include "acronyms.typ"
 
 // Let's get started
@@ -188,9 +188,11 @@ Des tables plus compliquées sont également possible. La page https://typst.app
 )
 
 == Citer ses sources
-Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références complètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acronymes comme par exemple [#acr("USB")]
+Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références complètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acronymes comme par exemple #acr("USB"). Si on l'utilise une deuxième fois, seul l'acronyme apparaît, ainsi #acr("USB") est suffisant.
 
-==  Le filtre de Sobel
+Si l'on souhaite citer des références issues d'une page ou d'un site web et que cette référence est importante, on utilisera la syntaxe @WinNT qui cite une référence de la bibliographie. Pour les autres cas, il est possible de référer au site uniquement avec son URL. 
+
+==  Un exemple de texte : le filtre de Sobel
 Une autre méthode pour extraire les contours à l'intérieur d'une image est d'utiliser #link("https://fr.wikipedia.org/wiki/Détection_de_contours")[l'algorithme de Sobel] Cette méthode est très similaire à celle de la dérivée, mais un peu plus compliquée et donne de meilleurs résultats.
 
 Pour l'exemple, la valeur du filtre de Sobel selon _x_ vaudrait :
@@ -240,7 +242,7 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 #pagebreak()
  
 // Table of acronyms
-#print-index(title: [#i18n(doc_language, "acronym-table-title") #move(dy:-10pt, line(length: 100%, stroke: 0.5pt))])
+#print-index(title: [#i18n(doc_language, "acronym-table-title") #move(dy:-10pt, line(length: 100%, stroke: 0.5pt))], sorted: "up", delimiter: " : ", row-gutter: 0.7em)
 
 // Table of figures
 #pagebreak()
