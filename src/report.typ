@@ -26,7 +26,7 @@
 
 // Let's get started folks!
 
-#table_of_contents(depth: 1)
+#table-of-contents(depth: 1)
 
 = Introduction
 Écrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch].
@@ -204,18 +204,18 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 #lorem(500)
 
 #pagebreak()
-#the_bibliography(bib-file: "bibliography.bib", full: true, style: "ieee")
+#the-bibliography(bib-file: "bibliography.bib", full: true, style: "ieee")
 
 //////////////
 // Appendices
 //////////////
 #pagebreak()
-#appendix_page()
+#appendix-page()
 #pagebreak()
 
 // Table of acronyms, NOT COMPULSORY
 #print-index(
-  title: heavy_title(i18n(doc_language, "acronym-table-title"), mult:1, top:1em, bottom: 1em),
+  title: heavy-title(i18n(doc_language, "acronym-table-title"), mult:1, top:1em, bottom: 1em),
   sorted: "up",
   delimiter: " : ",
   row-gutter: 0.7em,
@@ -225,11 +225,11 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 #pagebreak()
 
 // Table of listings
-#table_of_figures()
+#table-of-figures()
 
 // Code inclusion
 #pagebreak()
-#code_samples()
+#code-samples()
 
 #let code_sample = read("code/sample.scala")
 

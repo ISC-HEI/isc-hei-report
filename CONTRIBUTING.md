@@ -54,6 +54,7 @@ Then go the directory, try to compile with `typst watch report.typ`.
 ## Deploying to Typst universe
 
 - Clone the [Typst universe repos](https://github.com/typst/packages/tree/main), and `just pack_distro DEST_TO_REPOS/packages/preview`. 
+- Test using `typst-package-check` from https://github.com/typst/package-check
 - Do not forget to add a proper `.gitignore` to remove all PDFs
 - Lint for kebab-case only
 - Create PR as usual. A template creates automatically the PR text with update etc... If changes are required by CI/CD, push to local repository. It updates the PR automatically.

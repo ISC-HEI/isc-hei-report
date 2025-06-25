@@ -1,6 +1,6 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-#heavy_title("Résumé")
+#heavy-title("Résumé")
 
 Le résumé d’un mémoire de bachelor doit fournir un aperçu concis de l’ensemble du travail. Il inclut généralement :
 
@@ -19,4 +19,4 @@ Le résumé doit être rédigé en français *et* en anglais.
 
 #v(1fr)
 
-*Keywords* : #context inc.global_keywords.get().join(", ")
+*Keywords* : #context inc.global-keywords.get().join(", ")

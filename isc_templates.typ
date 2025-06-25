@@ -7,12 +7,12 @@
 #let space-after-heading = 0.5em
 #let chapter-font-size = 1.4em
 #let chapter-font-weight = 650
-#let global_keywords = inc.global_keywords
+#let global-keywords = inc.global-keywords
 
 //////////////////////////
 // User callable functions
 // //////////////////////////
-#let heavy_title(title, mult: 1.5, bottom: 2pt, top: 4em) = {
+#let heavy-title(title, mult: 1.5, bottom: 2pt, top: 4em) = {
   set text(size: chapter-font-size * mult, weight: chapter-font-weight)
   // pagebreak(to: "odd", weak: false)
   block(fill: none, inset: (x: 0pt, bottom: bottom, top: top), below: space-after-heading * mult, {
@@ -21,8 +21,8 @@
 }
 
 // Enable the display of headers and footers
-#let set_header_footer(enabled) = {
-  context inc.header_footers_enabled.update(enabled)
+#let set-header-footer(enabled) = {
+  context inc.header-footers-enabled.update(enabled)
 }
 
 // Make a page break so that the next page starts on an odd page
@@ -79,37 +79,37 @@
 }
 
 // Generates the special appendix page
-#let appendix_page() = {
+#let appendix-page() = {
   context{
     {
       show heading: none
-      heading(numbering:none)[#i18n(inc.global_language.get(), "appendix-title")]      
+      heading(numbering:none)[#i18n(inc.global-language.get(), "appendix-title")]      
     }
 
     // The appendix page
     place(center + horizon, [
       #{
         set text(size: chapter-font-size * 2, weight: chapter-font-weight)
-        i18n(inc.global_language.get(), "appendix-title")
+        i18n(inc.global-language.get(), "appendix-title")
       }
     ])
   }
 }
 
 // Generate the table of contents with a given depth
-#let table_of_contents(depth: 2) = {
+#let table-of-contents(depth: 2) = {
   context {
-    let f = inc.global_language.get()
+    let f = inc.global-language.get()
     _make-outline(i18n(f, "toc-title"), depth: depth)
   }
 }
 
 // Generate the table of figures
-#let table_of_figures(depth: 1) = {
+#let table-of-figures(depth: 1) = {
   context {
-    let f = inc.global_language.get()
+    let f = inc.global-language.get()
     outline(
-      title: heavy_title(i18n(f, "figure-table-title"), mult: 1, top: 1em, bottom: 1em),
+      title: heavy-title(i18n(f, "figure-table-title"), mult: 1, top: 1em, bottom: 1em),
       depth: 1,
       indent: auto,
       target: figure.where(kind: image),
@@ -118,7 +118,7 @@
 }
 
 // Genereate the proper header for the code samples appendix
-#let code_samples() = {  
+#let code-samples() = {  
   context{
     heading(
       numbering: none,
@@ -126,21 +126,21 @@
       outlined: false,
       bookmarked: false,
       text(
-        heavy_title(i18n(inc.global_language.get(), "appendix-code-name"), mult: 1, top: 1em, bottom: 1em)),
+        heavy-title(i18n(inc.global-language.get(), "appendix-code-name"), mult: 1, top: 1em, bottom: 1em)),
     )
   }  
 }
 
-#let the_bibliography(
+#let the-bibliography(
   bib-file: none,
   full: false,
   style: "ieee"  
 ) = {
   context {        
-    let title = i18n(inc.global_language.get(), "bibliography-title")    
+    let title = i18n(inc.global-language.get(), "bibliography-title")    
     show heading: none
     heading(bookmarked: true, numbering: none, outlined: true)[#title]
-    heavy_title(title, mult: 1, top: 0.5em, bottom: 0.3em)    
+    heavy-title(title, mult: 1, top: 0.5em, bottom: 0.3em)    
     bibliography("src/" + bib-file, full: full, style: style, title:none)
   }
 }
@@ -201,8 +201,8 @@
 ) = {
   
   // Update state with the passed values so they are accessible globally
-  inc.global_keywords.update(keywords)
-  inc.global_language.update(language)
+  inc.global-keywords.update(keywords)
+  inc.global-language.update(language)
 
   let i18n = i18n.with(extra-i18n: extra-i18n, language)
 
@@ -252,10 +252,10 @@
 
   if (not is-thesis) {
     // For reports, we want to put the header and footer on all pages
-    set_header_footer(true)
+    set-header-footer(true)
   } else {
     // For theses, we want to put the header and footer only on the first page
-    set_header_footer(false)
+    set-header-footer(false)
   }
 
   show heading: it => {
@@ -308,7 +308,7 @@
   set page(
     // For pages other than the first one
     header: context if counter(page).get().first() > 1 {
-      if inc.header_footers_enabled.get() {
+      if inc.header-footers-enabled.get() {
         header-content
       } else {
         none
@@ -317,7 +317,7 @@
     header-ascent: 40%,
     // For pages other than the first one
     footer: context if counter(page).get().first() > 1 {
-      if inc.header_footers_enabled.get() {
+      if inc.header-footers-enabled.get() {
         move(dy: 5pt, line(length: 100%, stroke: 0.5pt))
         footer-content
       } else {

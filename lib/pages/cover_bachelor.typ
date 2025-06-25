@@ -1,5 +1,5 @@
 #import "../includes.typ" as inc
-#import "../../isc_templates.typ" as isc
+#import "/isc_templates.typ" as isc
 
 // Adapted from https://github.com/LasseRosenow/HAW-Hamburg-Typst-Template/tree/main
 

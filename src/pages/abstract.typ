@@ -1,6 +1,6 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-#heavy_title("Abstract")
+#heavy-title("Abstract")
 
 The abstract of a bachelor thesis should provide a concise summary of the entire work. It typically includes:
 
@@ -18,4 +18,4 @@ The abstract *must* be written in both French and English.
 
 #v(1fr)
 
-*Keywords* : #context inc.global_keywords.get().join(", ")
+*Keywords* : #context inc.global-keywords.get().join(", ")

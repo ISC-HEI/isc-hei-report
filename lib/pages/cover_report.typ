@@ -1,6 +1,6 @@
 // Fancy pretty print with line numbers and stuff
 #import "../includes.typ" as inc
-#import "../../isc_templates.typ" as isc
+#import "/isc_templates.typ" as isc
 
 #let cover_page(
   course-supervisor: "",

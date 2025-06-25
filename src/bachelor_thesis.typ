@@ -43,12 +43,12 @@
 #cleardoublepage()
 #include "pages/acknowledgements.typ"
 
-#table_of_contents(depth:2)
+#table-of-contents(depth:2)
 
 = Writing a thesis 
 
 // Enable headers and footers from this point on
-#set_header_footer(true)
+#set-header-footer(true)
 
 Writing a report is an exercise that involves both *content and form*. In this document, we aim to simplify the formatting aspect without making any assumptions about the content, specifically in the context of the ISC program#footnote[Here is how to add a footnote https://isc.hevs.ch].
 
@@ -97,18 +97,18 @@ Have fun #todo[writing your thesis!] and good luck with it !
 
 //#bibliography("bibliography.bib", full: true, style: "ieee", title)
 #pagebreak()
-#the_bibliography(bib-file: "bibliography.bib", full: true, style: "ieee")
+#the-bibliography(bib-file: "bibliography.bib", full: true, style: "ieee")
 
 //////////////
 // Appendices
 ////////////// 
 #cleardoublepage()
-#appendix_page()
+#appendix-page()
 #pagebreak()
 
 // Table of acronyms, NOT COMPULSORY
 #print-index(
-  title: heavy_title(i18n(doc_language, "acronym-table-title"), mult:1, top:1em, bottom: 1em),
+  title: heavy-title(i18n(doc_language, "acronym-table-title"), mult:1, top:1em, bottom: 1em),
   sorted: "up",
   delimiter: " : ",
   row-gutter: 0.7em,
@@ -118,11 +118,11 @@ Have fun #todo[writing your thesis!] and good luck with it !
 #pagebreak()
 
 // Table of listings 
-#table_of_figures()
+#table-of-figures()
 
 // Code inclusion
 #pagebreak()
-#code_samples()
+#code-samples()
 
 #let code_sample = read("code/sample.scala")
 
