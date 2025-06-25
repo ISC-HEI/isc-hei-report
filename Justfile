@@ -52,5 +52,5 @@ pack_distro_preview : (pack_distro "@preview")
 
 # creates the thumbnails from the examples
 generate_thumbs:
-  convert -density 150 'examples/bachelor_thesis.pdf' -flatten bachelor_thesis_thumb.png
-  convert -density 150 'examples/report.pdf' -flatten report_thumb.png
+  convert -density 150 'examples/bachelor_thesis.pdf[0]' -flatten bachelor_thesis_thumb.png
+  convert -density 150 'examples/report.pdf[0]' -flatten report_thumb.png
