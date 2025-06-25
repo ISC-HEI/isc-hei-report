@@ -1,19 +1,20 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-#let doc_language = "en"
+#let doc_language = "en" // Valid values are en, fr
 
 #show: project.with( 
   title: "Life, the Universe and Everything", 
-    
+  sub-title: "A Bachelor Thesis in Data Engineering", // Optional
+
   is-thesis: true,   
   split-chapters: true,
 
-  thesis-supervisor: [Prof. Dr John Von Neumann], 
-  thesis-co-supervisor: [Lady Ada Lovelace], // Optional
-  thesis-expert: [Thesis expert],
+  thesis-supervisor: "Prof. Dr John Von Neumann", 
+  thesis-co-supervisor: "Lady Ada Lovelace", // Optional, use none if not needed
+  thesis-expert: "Dr Grace Hopper", // Optional, use none if not needed
   
-  school: [Haute École d'Ingénierie de Sion], 
-  programme: [Informatique et Systèmes de communication],
+  school: "Haute École d'Ingénierie de Sion", 
+  programme: "Informatique et Systèmes de communication (ISC)",
 
   // Some keywords related to your thesis
   keywords: ("engineering", "data", "machine learning", "meteorology"),
@@ -42,7 +43,7 @@
 #cleardoublepage()
 #include "pages/acknowledgements.typ"
 
-#table_of_contents(depth:1)
+#table_of_contents(depth:2)
 
 = Writing a thesis 
 
@@ -94,10 +95,9 @@ Have fun #todo[writing your thesis!] and good luck with it !
 = Conclusion
 #lorem(1256)
 
-#bibliography("bibliography.bib", full: true, style: "ieee")
-
-// #bibliography("bibliography.bib", full: true, style: "ieee", title: heavy_title("Bibliography", mult: 1, top: 1em, bottom: 1em))
-
+//#bibliography("bibliography.bib", full: true, style: "ieee", title)
+#pagebreak()
+#the_bibliography(bib-file: "bibliography.bib", full: true, style: "ieee")
 
 //////////////
 // Appendices

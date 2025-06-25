@@ -6,13 +6,14 @@
 // Global settings
 #let space-after-heading = 0.5em
 #let chapter-font-size = 1.4em
+#let chapter-font-weight = 650
 #let global_keywords = inc.global_keywords
 
 //////////////////////////
 // User callable functions
 // //////////////////////////
 #let heavy_title(title, mult: 1.5, bottom: 2pt, top: 4em) = {
-  set text(size: chapter-font-size * mult, weight: 800)
+  set text(size: chapter-font-size * mult, weight: chapter-font-weight)
   // pagebreak(to: "odd", weak: false)
   block(fill: none, inset: (x: 0pt, bottom: bottom, top: top), below: space-after-heading * mult, {
     title
@@ -70,8 +71,8 @@
   }
   
   outline(title: {
-    v(5em)
-    text(size: 1.5em, weight: 700, title)
+    v(2em)
+    text(size: chapter-font-size, weight: chapter-font-weight, title)
     v(3em)
   }, indent: 2em, ..args)
   pagebreak(weak: true)
@@ -82,14 +83,13 @@
   context{
     {
       show heading: none
-      heading(numbering:none)[#i18n(inc.global_language.get(), "appendix-title")]
-      
+      heading(numbering:none)[#i18n(inc.global_language.get(), "appendix-title")]      
     }
 
     // The appendix page
     place(center + horizon, [
       #{
-        set text(size: chapter-font-size * 2, weight: 800)
+        set text(size: chapter-font-size * 2, weight: chapter-font-weight)
         i18n(inc.global_language.get(), "appendix-title")
       }
     ])
@@ -129,6 +129,20 @@
         heavy_title(i18n(inc.global_language.get(), "appendix-code-name"), mult: 1, top: 1em, bottom: 1em)),
     )
   }  
+}
+
+#let the_bibliography(
+  bib-file: none,
+  full: false,
+  style: "ieee"  
+) = {
+  context {        
+    let title = i18n(inc.global_language.get(), "bibliography-title")    
+    show heading: none
+    heading(bookmarked: true, numbering: none, outlined: true)[#title]
+    heavy_title(title, mult: 1, top: 0.5em, bottom: 0.3em)    
+    bibliography("src/" + bib-file, full: full, style: style, title:none)
+  }
 }
 
 //////////////////////////
@@ -251,7 +265,7 @@
       pagebreak(to: "odd", weak: false)
       block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 1em), below: space-after-heading * 2, if (it.numbering != none) {
         // If the heading has a numbering, display it
-        text(i18n("chapter-title") + " " + counter(heading).display() + " " + it.body, size: chapter-font-size, weight: 800)        
+        text(i18n("chapter-title") + " " + counter(heading).display() + " " + it.body, size: chapter-font-size, weight: chapter-font-weight)        
       } else {
         // Otherwise just display the body
         it
@@ -406,6 +420,7 @@
 
     let report_cover = cover_page(
       supervisors: supervisors,
+      expert: thesis-expert,
       font: sans-font,
       title: title,
       sub-title: sub-title,

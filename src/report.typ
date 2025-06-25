@@ -1,6 +1,6 @@
 #import "@preview/isc-hei-report:0.3.1" : *
 
-#let doc_language = "fr" // Or en/de
+#let doc_language = "fr" // Valid values are en, fr
 
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
@@ -204,8 +204,7 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 #lorem(500)
 
 #pagebreak()
-
-#bibliography("bibliography.bib", full: false, style: "ieee")
+#the_bibliography(bib-file: "bibliography.bib", full: true, style: "ieee")
 
 //////////////
 // Appendices
