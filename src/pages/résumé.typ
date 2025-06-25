@@ -1,6 +1,5 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-// TODO Remove heading top here
 #heavy_title("Résumé")
 
 Le résumé d’un mémoire de bachelor doit fournir un aperçu concis de l’ensemble du travail. Il inclut généralement :

@@ -1,6 +1,6 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-#let doc_language = "en"
+#let doc_language = "fr"
 
 #show: project.with( 
   title: "Life, the Universe and Everything", 
@@ -16,7 +16,7 @@
   programme: [Informatique et Systèmes de communication],
 
   // Some keywords related to your thesis
-  keywords: ("engineering", "data", "machine learning", "meteorology"), // or global_keywords.get() if defined in includes.typ
+  keywords: ("engineering", "data", "machine learning", "meteorology"),
   major : "Data engineering", // "Software engineering", "Embedded systems", "Security", "something else"
 
   authors: "James Gosling", 
@@ -28,10 +28,10 @@
 ) 
 
 // // If using acronyms 
-// #import "@preview/acrostiche:0.5.2": *     
-// #include "acronyms.typ"
+#import "@preview/acrostiche:0.5.2": *     
+#include "acronyms.typ"
 
-// Let's get started folks !
+// Let's get started folks!
 
 #cleardoublepage()
 #include "pages/abstract.typ"
@@ -42,10 +42,10 @@
 #cleardoublepage()
 #include "pages/acknowledgements.typ"
 
-// Generate the Table of Contents
-#table_of_contents(doc_language, depth:1)
+#table_of_contents(depth:1)
 
 = Writing a thesis 
+// Enable headers and footers from this point on
 #set_header_footer(true)
 
 Writing a report is an exercise that involves both *content and form*. In this document, we aim to simplify the formatting aspect without making any assumptions about the content, specifically in the context of the ISC program#footnote[Here is how to add a footnote https://isc.hevs.ch].
@@ -70,6 +70,11 @@ This structure may vary depending on the field of study, but these elements are 
 = Introduction
 Have fun #todo[writing your thesis!] and good luck with it !
 
+#figure(
+  image("figs/pixelize.png", height: 4cm),
+  caption: [Grace Hopper]
+) <fig_engineer>
+
 #lorem(1000)
 
 = Methodology
@@ -88,81 +93,31 @@ Have fun #todo[writing your thesis!] and good luck with it !
 
 #bibliography("bibliography.bib", full: true, style: "ieee")
 
-// Include the appendix in the TOC but without numeration
-#set heading(numbering: none, outlined : true, bookmarked: true)
-
+//////////////
+// Appendices
+////////////// 
 #cleardoublepage()
-
-// The appendix page
-#place(center + horizon,
-   [
-    #{
-     set text(size: chapter-font-size*2, weight: 800)
-     i18n(doc_language, "appendix-title")
-    }
-   ]
-) 
-
-// // From now on, do not number the sections and remove from general outline
-#set heading(numbering: none, outlined : true)
-
+#appendix_page()
 #pagebreak()
-  
-// Table of acronyms
-// #print-index(title: [#i18n(doc_language, "acronym-table-title")], sorted: "up", delimiter: " : ", row-gutter: 0.7em, outlined: true)  
 
-// // Table of figures
-// #pagebreak()
-// #outline(title: i18n(doc_language, "figure-table-title"),
-//          depth: 1, indent: auto, 
-//          target: figure.where(kind: image, numbering:"1"),
-//          )  
+// Table of acronyms, NOT COMPULSORY
+#print-index(title: [#i18n(doc_language, "acronym-table-title")], sorted: "up", delimiter: " : ", row-gutter: 0.7em, outlined: false)
 
-// // Table of listings 
-// #pagebreak()
+// Table of listings 
+#table_of_figures()
 
-#table_of_figures(doc_language)
+// Code inclusion
+#pagebreak()
+#code_samples()
 
-// Including code 
-// #pagebreak() 
+#let code_sample = read("code/sample.scala")
 
-// = #i18n(doc_language, "appendix-code-name")
+#figure( 
+    code()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Code included from the file example.scala"
+)
 
-// #let code_sample = read("sample.scala")
 
-// #figure( 
-//     code()[
-//       #raw(code_sample, lang: "scala")
-//     ],
-//   caption: "Code included from the file example.scala"
-// )
-
-// #figure(
-//     code()[
-//       #raw(code_sample, lang: "scala")
-//     ],
-//   caption: "Code included from the file example.scala"
-// )
-
-// // #figure(
-// //     code()[
-// //       #raw(code_sample, lang: "scala")
-// //     ],
-// //   caption: "Code included from the file example.scala"
-// // )
-
-// // #figure(
-// //     code()[
-// //       #raw(code_sample, lang: "scala")
-// //     ],
-// //   caption: "Code included from the file example.scala"
-// // )
-
-// // #figure(
-// //     code()[
-// //       #raw(code_sample, lang: "scala")
-// //     ],
-// //   caption: "Code included from the file example.scala"
-// // )
-
-// // This is the end !
+// This is the end, folks!

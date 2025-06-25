@@ -1,7 +1,7 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-// TODO Remove heading top here
-#heavy_title("Acknowledgements")
+// Get the proper title for acknowledgements if not written in English
+#heavy_title(context i18n(inc.global_language.get(), "acknowledgements"))
 
 The *Acknowledgements* section of a bachelor thesis is where you express gratitude to those who supported you during your research and writing process. It is an *OPTIONAL* section. It may include:
 

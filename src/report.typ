@@ -1,46 +1,33 @@
 #import "@preview/isc-hei-report:0.3.1" : *
 
 #let doc_language = "fr" // Or en/de
- 
+
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
   sub-title: [Avec une mise en page `Typst`],
-
   course-name: "101.1 Programmation impérative",
-  course-supervisor : "Prof. Dr P.-A. Mudry",
+  course-supervisor: "Prof. Dr P.-A. Mudry",
   semester: "Semestre de printemps",
-  academic-year : "2025-2026",
-
+  academic-year: "2025-2026",
   cover-image: image("figs/cover_image_placeholder.png"),
   cover-image-height: 8cm, // Default value = 10cm
   cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
-
-  authors: (
-    "D. Knuth",
-    "L. Torvalds",
-    "M. Odersky", 
-  ),
-
-  tables: (
-    contents: true,
-    listings: true,
-  ),
-
-  is-thesis: false, // Set to true if this is a thes
-
+  authors: ("D. Knuth", "L. Torvalds", "M. Odersky",),  
   logo: image("figs/isc_logo.svg"),
   date: datetime(year: 2025, month: 6, day: 24), // or datetime.today()
-  language: doc_language, // Or en/de if required
+  language: doc_language, // Please change the value above
   version: [Using template 0.3.1],
- 
   code-theme: "bluloco-light",
 )
- 
+
 //// If using acronyms
-#import "@preview/acrostiche:0.5.2": * 
+#import "@preview/acrostiche:0.5.2": *
 #include "acronyms.typ"
 
-// Let's get started
+// Let's get started folks!
+
+#table_of_contents(depth: 1)
+
 = Introduction
 Écrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch].
 
@@ -51,7 +38,7 @@ Le langage _markdown_ utilise différents types de balises permettant de faire d
 Vous trouverez ici de la documentation sur la manière d'utiliser le langage `markdown` pour écrire des documents ici : https://www.markdownguide.org/basic-syntax/. Vous trouverez également une version spécifique sur l'écriture de documents en Typst ici https://typst.app/docs/guides/markdown-guide/.
 
 En plus des choses simples montrées ci-dessus, le `markdown` simplifie la création de listes avec des nombres comme suit :
-  
+
 + Un élément
 + Un autre élément de liste
 + Encore d'autres éléments si nécessaire
@@ -62,23 +49,20 @@ Des choses plus exotiques, comme mettre du #todo[texte mis en évidence] sont é
 
 Nous pouvons également avoir du `code brut directement en ligne` mais cela peut également être fait avec du code Scala comme par exemple dans ```scala def foo(x: Int)```. Cela n'empêche pas d'avoir des blocs de code joliment mis en forme également. Ainsi, lorsque l'on souhaite avoir du code inséré dans une figure, on peut également utiliser le package `sourcecode` qui rajoute notamment les numéros de ligne. En complément avec une `figure`, il est possible d'avoir une _légende_, un numéro de figure ainsi que du code centré :
 
-#figure(
-  code()[
-  ```scala
+#figure(code()[
+```scala
   def foo(val a : Any) : Int = {
     a match :
       case a: Int  => 12
       case _ => 42
   }
-  ```],
-  caption: "Un tout petit listing en Scala"
-)
+  ```
+], caption: "Un tout petit listing en Scala")
 
 On peut si on le souhaite également avoir des blocs de code plus long si nécessaire, sur plusieurs pages :
 
-#figure(
-  code()[
-  ```scala
+#figure(code()[
+```scala
   object ImageProcessingApp_Animation extends App {
     val imageFile = "./res/grace_hopper.jpg"
 
@@ -96,30 +80,22 @@ On peut si on le souhaite également avoir des blocs de code plus long si néces
       dest2.setPixelsBW(ImageFilters_Solution.threshold(org.getPixelsBW(), i))
     }
   }
-  ```],
-  caption: "Un autre exemple de code, plus long"
-)
+  ```
+], caption: "Un autre exemple de code, plus long")
 
-=== Insérer du code à partir d'un fichiers
-
+=== Insérer du code à partir d'un fichier
 Il est tout à fait possible de mettre du code qui provient d'un fichier comme ci-dessous :
 
 #let code_sample = read("code/sample.scala")
-#figure(
-    code()[
-      #raw(code_sample, lang: "scala")
-    ],
-  caption: "Code included from the file `sample.scala`"
-)
+#figure(code()[
+  #raw(code_sample, lang: "scala")
+], caption: "Code included from the file `sample.scala`")
 
 == Insertion d'images
 
 Une image vaut souvent mieux que mille mots ! Il est possible d'ajouter des images, bien entendu. La syntaxe est relativement simple comme vous pouvez le voir dans l'exemple ci-dessous:
-   
-#figure(
-  image("figs/pixelize.png", height: 4cm),
-  caption: [Grace Hopper, informaticienne américaine]
-) <fig_engineer>
+
+#figure(image("figs/pixelize.png", height: 4cm), caption: [Grace Hopper, informaticienne américaine]) <fig_engineer>
 
 Pour le reste, voici un texte pour voir de quoi il retourne. Vous allez réaliser une fonction appelée _mean_ qui va appliquer un filtre de moyenne à l'image. Ce filtre a pour but de flouter l'image et d'enlever ainsi ses aspérités. Le principe est le suivant : la valeur d'un pixel est remplacée par la moyenne des pixels se trouvant dans une zone carrée de 3 par 3 pixels autour du pixel. Si on veut calculer la nouvelle valeur du pixel situé à la position $(x,y)$ selon la figure @fig_engineer, sa nouvelle valeur sera la moyenne des 9 valeurs affichées.
 
@@ -141,7 +117,7 @@ $ sum_(n=1)^(infinity) 2^(-n) = 1 "ou encore" integral_(x = 0)^3 x^2 dif x $
     border-color: blue,
     title-color: blue.lighten(30%),
     body-color: blue.lighten(95%),
-    footer-color: blue.lighten(80%)
+    footer-color: blue.lighten(80%),
   ),
   // footer: "Information extracted from a well-known public encyclopedia"
 )[
@@ -150,50 +126,58 @@ $ sum_(n=1)^(infinity) 2^(-n) = 1 "ou encore" integral_(x = 0)^3 x^2 dif x $
   $ integral.double_Sigma (bold(nabla) times bold(F)) dot bold(Sigma) = integral.cont_(diff Sigma) bold(F) dot dif bold(Gamma) $
 ]
 
+// You can create a new page with a pagebreak
 #pagebreak()
 
 == Des tables
 
 Il est possible d'insérer des tables simples :
 
-#figure( 
-table(
+#figure(table(
   align: left,
   columns: 4,
   stroke: none,
-  [*Monday*], [11.5], [13.0], [4.0],
-  [*Tuesday*], [8.0], [14.5], [5.0],
-  [*Wednesday*], [9.0], [18.5], [13.0],
-), caption: "Une table simple"
-)
+  [*Monday*],
+  [11.5],
+  [13.0],
+  [4.0],
+  [*Tuesday*],
+  [8.0],
+  [14.5],
+  [5.0],
+  [*Wednesday*],
+  [9.0],
+  [18.5],
+  [13.0],
+), caption: "Une table simple")
 
 Des tables plus compliquées sont également possible. La page https://typst.app/docs/guides/table-guide/ donne d'ailleurs de bonnes informations.
 
-#set table(stroke: (x, y) => (
-  left: if x > 0 { 0.8pt },
-  top: if y > 0 { 1.5pt },
-))
+#set table(stroke: (x, y) => (left: if x > 0 { 0.8pt }, top: if y > 0 { 1.5pt }))
 
-#figure(
-  table(
-    // Table with 3 columns and 3 rows
-    // There are 3 columns, the first one is twice as large as the two others
-    columns: (2fr, 1fr, 1fr),
-    align: center + horizon,
-    table.header[*Technique*][*Advantage*][*Drawback*],
-    [Diegetic], [Immersive], [May be contrived],
-    [Extradiegetic], [Breaks immersion], [Obstrusive],
-    [Omitted], [Fosters engagement], [May fracture audience],
-  ),
-  caption: [Une table plus complexe],
-)
+#figure(table(
+  // Table with 3 columns and 3 rows
+  // There are 3 columns, the first one is twice as large as the two others
+  columns: (2fr, 1fr, 1fr),
+  align: center + horizon,
+  table.header[*Technique*][*Advantage*][*Drawback*],
+  [Diegetic],
+  [Immersive],
+  [May be contrived],
+  [Extradiegetic],
+  [Breaks immersion],
+  [Obstrusive],
+  [Omitted],
+  [Fosters engagement],
+  [May fracture audience],
+), caption: [Une table plus complexe])
 
 == Citer ses sources
 Il est important de citer les sources que l'on utilise. Par exemple, les deux travaux @mui_nasa_dod09, @mui_hybrid_06 et @mudry:133438 sont deux papiers très intéressants à lire et dont les références complètes se trouvent dans la bibliographie à la fin de ce document. Il est également d'utiliser des acronymes comme par exemple #acr("USB"). Si on l'utilise une deuxième fois, seul l'acronyme apparaît, ainsi #acr("USB") est suffisant.
 
-Si l'on souhaite citer des références issues d'une page ou d'un site web et que cette référence est importante, on utilisera la syntaxe @WinNT qui cite une référence de la bibliographie. Pour les autres cas, il est possible de référer au site uniquement avec son URL. 
+Si l'on souhaite citer des références issues d'une page ou d'un site web et que cette référence est importante, on utilisera la syntaxe @WinNT qui cite une référence de la bibliographie. Pour les autres cas, il est possible de référer au site uniquement avec son URL.
 
-==  Un exemple de texte : le filtre de Sobel
+== Un exemple de texte : le filtre de Sobel
 Une autre méthode pour extraire les contours à l'intérieur d'une image est d'utiliser #link("https://fr.wikipedia.org/wiki/Détection_de_contours")[l'algorithme de Sobel] Cette méthode est très similaire à celle de la dérivée, mais un peu plus compliquée et donne de meilleurs résultats.
 
 Pour l'exemple, la valeur du filtre de Sobel selon _x_ vaudrait :
@@ -208,7 +192,6 @@ Comme auparavant, la norme du filtre de Sobel se calcule selon Pythagore et vaut
 
 $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 
-
 == Problématique <intro>
 #lorem(20)
 
@@ -216,7 +199,7 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 #lorem(40)
 
 #pagebreak()
- 
+
 = Conclusion
 #lorem(500)
 
@@ -224,77 +207,43 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 
 #bibliography("bibliography.bib", full: false, style: "ieee")
 
+//////////////
+// Appendices
+//////////////
+#pagebreak()
+#appendix_page()
 #pagebreak()
 
-// Include the appendix in the TOC but without numeration
-#set heading(numbering: none, outlined : true)
-
-// The appendix page
-#place(center + horizon,
-  [
-    #set text(size:18pt)
-    = #i18n(doc_language, "appendix-title")
-  ]
+// Table of acronyms, NOT COMPULSORY
+#print-index(
+  title: heavy_title(i18n(doc_language, "acronym-table-title"), mult:1, top:1em, bottom: 1em),
+  sorted: "up",
+  delimiter: " : ",
+  row-gutter: 0.7em,
+  outlined: false,
 )
 
-// From now on, do not number the sections and remove from general outline
-#set heading(numbering: none, outlined : false)
-
 #pagebreak()
- 
-// Table of acronyms
-#print-index(title: [#i18n(doc_language, "acronym-table-title") #move(dy:-10pt, line(length: 100%, stroke: 0.5pt))], sorted: "up", delimiter: " : ", row-gutter: 0.7em)
-
-// Table of figures
-#pagebreak()
-#outline( title: i18n(doc_language, "figure-table-title"),
-          depth: 1, indent: auto,
-          target: figure.where(kind: image, numbering:"1"))
 
 // Table of listings
-#pagebreak()
-#outline( title: i18n(doc_language, "listing-table-title"),
-          depth: 1, indent: auto,
-          target: figure.where(kind: raw))
+#table_of_figures()
 
-// Including code
+// Code inclusion
 #pagebreak()
+#code_samples()
 
-= #i18n(doc_language, "appendix-code-name")
 #let code_sample = read("code/sample.scala")
-#figure(
-    code()[
-      #raw(code_sample, lang: "scala")
-    ],
-  caption: "Code included from the file example.scala"
-)
 
-#figure(
-    code()[
-      #raw(code_sample, lang: "scala")
-    ],
-  caption: "Code included from the file example.scala"
-)
+#figure(code()[
+  #raw(code_sample, lang: "scala")
+], caption: "Code included from the file example.scala")
 
-#figure(
-    code()[
-      #raw(code_sample, lang: "scala")
-    ],
-  caption: "Code included from the file example.scala"
-)
+#figure(code()[
+  #raw(code_sample, lang: "scala")
+], caption: "Code included from the file example.scala")
 
-#figure(
-    code()[
-      #raw(code_sample, lang: "scala")
-    ],
-  caption: "Code included from the file example.scala"
-)
-
-#figure(
-    code()[
-      #raw(code_sample, lang: "scala")
-    ],
-  caption: "Code included from the file example.scala"
-)
+#figure(code()[
+  #raw(read("code/sort.py"), lang: "python")
+], caption: "Code included from the file sort.py")
 
 // This is the end !

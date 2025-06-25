@@ -1,27 +1,30 @@
-// Template for ISC reports at the School of engineering
-// v0.5.0 - since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
-//
-// Missing features :
-// - page and locations (above, under) references for figures not available yet
+// Template for ISC bachelor degree programme at the School of engineering in Sion
+// Since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
 
 #import "lib/includes.typ" as inc
 
+// Global settings
 #let space-after-heading = 0.5em
 #let chapter-font-size = 1.5em
 #let global_keywords = inc.global_keywords
 
-#let heavy_title(title) = {
-  set text(size: chapter-font-size * 2, weight: 800)
+//////////////////////////
+// User callable functions
+// //////////////////////////
+#let heavy_title(title, mult: 2, bottom: 2pt, top: 4em) = {
+  set text(size: chapter-font-size * mult, weight: 800)
   // pagebreak(to: "odd", weak: false)
-  block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 4em), below: space-after-heading * 2, {
+  block(fill: none, inset: (x: 0pt, bottom: bottom, top: top), below: space-after-heading * mult, {
     title
   })
 }
 
+// Enable the display of headers and footers
 #let set_header_footer(enabled) = {
   context inc.header_footers_enabled.update(enabled)
 }
 
+// Make a page break so that the next page starts on an odd page
 #let cleardoublepage() = {
   pagebreak(to: "even")
   pagebreak()
@@ -50,17 +53,13 @@
     }
   }
 
-  if not lang in langs {
-    lang = "fr"
-  }
-
   let keys = langs.at(lang)
 
   assert(key in keys, message: "I18n key " + str(key) + " doesn't exist")
   return keys.at(key)
 }
 
-#let make-outline(font: auto, title, ..args) = {
+#let _make-outline(font: auto, title, ..args) = {
   {
     show heading:none
     heading(bookmarked: true, numbering: none, outlined: false)[Table of contents]
@@ -78,22 +77,64 @@
   pagebreak(weak: true)
 }
 
-// Make the table of contents with a given depth
-#let table_of_contents(lang, depth: 2) = {
-  make-outline(i18n(lang, "toc-title"), depth: depth)
+// Generates the special appendix page
+#let appendix_page() = {
+  context{
+    heading(
+      numbering: none,
+      outlined: true,
+      bookmarked: true,
+      text(i18n(inc.global_language.get(), "appendix-title"), fill: white),
+    )
+
+    // The appendix page
+    place(center + horizon, [
+      #{
+        set text(size: chapter-font-size * 2, weight: 800)
+        i18n(inc.global_language.get(), "appendix-title")
+      }
+    ])
+  }
+}
+
+// Generate the table of contents with a given depth
+#let table_of_contents(depth: 2) = {
+  context {
+    let f = inc.global_language.get()
+    _make-outline(i18n(f, "toc-title"), depth: depth)
+  }
 }
 
 // Generate the table of figures
-#let table_of_figures(lang, depth: 1) = {
-  [= #i18n(lang, "figure-table-title")]
-  // make-outline(i18n(lang, "figure-table-title"), depth: depth, target: figure.where(kind: image))
-  // outline(title: none, depth: 1, indent: auto,
-  //         target: figure.where(kind: image))
+#let table_of_figures(depth: 1) = {
+  context {
+    let f = inc.global_language.get()
+    outline(
+      title: heavy_title(i18n(f, "figure-table-title"), mult: 1, top: 1em, bottom: 1em),
+      depth: 1,
+      indent: auto,
+      target: figure.where(kind: image),
+    )
+  }
 }
 
-/*********************************
- * Source code inclusion
- *********************************/
+// Genereate the proper header for the code samples appendix
+#let code_samples() = {  
+  context{
+    heading(
+      numbering: none,
+      depth: 2,
+      outlined: false,
+      bookmarked: false,
+      text(
+        heavy_title(i18n(inc.global_language.get(), "appendix-code-name"), mult: 1, top: 1em, bottom: 1em)),
+    )
+  }  
+}
+
+//////////////////////////
+// Source code inclusion
+//////////////////////////
 #let _luma-background = luma(250)
 
 // Replace the original function by ours
@@ -138,33 +179,33 @@
   authors: (),
   date: none,
   logo: none,
-  tables: (contents: false, figures: false, tables: false, listings: false, equations: false),
+  equations: false,
   version: "",
   language: "fr",
   extra-i18n: none,
   code-theme: "bluloco-light",
   body,
 ) = {
+  
+  // Update state with the passed values so they are accessible globally
   inc.global_keywords.update(keywords)
+  inc.global_language.update(language)
 
   let i18n = i18n.with(extra-i18n: extra-i18n, language)
 
   // Set the document's basic properties.
   set document(author: authors, title: title, date: date, keywords: keywords)
 
-  // Document language for hyphenation and other things
-  let internal-language = language
-
-  //
+  set par(justify: true)
+  
   //  Fonts
-  //
   let body-font = ("Source Sans Pro", "Source Sans 3", "Libertinus Serif")
   let sans-font = ("Source Sans Pro", "Source Sans 3", "Inria Sans")
   let raw-font = "Fira Code"
   let math-font = ("Asana Math", "Fira Math")
 
   // Default body font
-  set text(font: body-font, lang: internal-language)
+  set text(font: body-font, lang: language)
 
   // Set other fonts
   // show math.equation: set text(font: math-font) // For math equations
@@ -196,7 +237,7 @@
     paper: "a4",
   ) if(not is-thesis)
 
-  if(not is-thesis) {
+  if (not is-thesis) {
     // For reports, we want to put the header and footer on all pages
     set_header_footer(true)
   } else {
@@ -223,21 +264,7 @@
     }
   }
 
-  // show heading.where(label: <single_page>): it => {
-  //   it.numbering = none
-  //   set heading(numbering: none, outlined: false)
-  //   set text(font: sans-font, size: chapter-font-size, weight: 800)
-  //   pagebreak(to: "odd", weak: false)
-  //   block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 5em), below: space-after-heading * 2, if (it.numbering != none) {
-  //     // If the heading has a numbering, display it
-  //     it.body
-  //   } else {
-  //     // Otherwise just display the body
-  //     it
-  //     v(1fr)
-  //   })
-  // }
-
+  // Manage authors single and plural
   let authors-str = ()
 
   if type(authors) == str {
@@ -270,13 +297,11 @@
   set page(
     // For pages other than the first one
     header: context if counter(page).get().first() > 1 {
-      if inc.header_footers_enabled.get() {        
-        header-content  
-      }
-      else {
+      if inc.header_footers_enabled.get() {
+        header-content
+      } else {
         none
       }
-      
     },
     header-ascent: 40%,
     // For pages other than the first one
@@ -286,7 +311,7 @@
         footer-content
       } else {
         none
-      }      
+      }
     },
   )
 
@@ -346,13 +371,8 @@
   show figure.where(kind: raw): set block(breakable: true)
 
   /////////////////////////////////////////////////
-  // Our own specific commands
+  // Cover pages
   /////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////
-  // Let's make the template now
-  /////////////////////////////////////////////////
-
   if (not is-thesis) {
     import "lib/pages/cover_report.typ": cover_page
 
@@ -372,7 +392,7 @@
       authors: authors,
       date: date,
       logo: logo,
-      language: internal-language,
+      language: language,
     )
 
     report_cover
@@ -405,36 +425,11 @@
       authors: authors-str,
       submission-date: date,
       logo: logo,
-      language: internal-language,
+      language: language,
     )
 
     report_cover
   }
-
-  // --- Table of Contents ---
-
-  let make-outline = make-outline.with(font: body-font)
-
-  if tables != none {
-    if tables.at("contents", default: false) {
-      make-outline(i18n("toc-title"), depth: 2)
-    }
-    if tables.at("figures", default: false) {
-      make-outline(i18n("figure-table-title"), target: figure.where(kind: image))
-    }
-    if tables.at("tables", default: false) {
-      make-outline(i18n("table-table-title"), target: figure.where(kind: table))
-    }
-    if tables.at("listings", default: false) {
-      make-outline(i18n("listing-table-title"), target: figure.where(kind: raw))
-    }
-    if tables.at("equations", default: false) {
-      make-outline(i18n("equation-table-title"), target: math.equation.where(block: true))
-    }
-  }
-
-  // Main body.
-  set par(justify: true)
 
   body
 }
