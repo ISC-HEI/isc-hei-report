@@ -16,18 +16,13 @@
 // Indicate that something still needs to be done
 #let todo(body, fill-color: yellow.lighten(50%)) = {
   set text(black)
-  box(
-    baseline: 25%,
-    fill: fill-color, 
-    inset: 3pt,
-    [*TODO* #body],
-  ) 
+  box(baseline: 25%, fill: fill-color, inset: 3pt, [*TODO* #body])
 }
 
 //
 // Multiple languages support
 // Thanks @LordBaryhobal for the original idea
-// 
+//
 #let langs = json("i18n.json")
 
 #let i18n(lang, key, extra-i18n: none) = {
@@ -40,39 +35,32 @@
       langs.at(lng) += keys
     }
   }
-  
+
   if not lang in langs {
     lang = "fr"
   }
-  
+
   let keys = langs.at(lang)
 
-  assert(
-    key in keys,
-    message: "I18n key " + str(key) + " doesn't exist"
-  )
+  assert(key in keys, message: "I18n key " + str(key) + " doesn't exist")
   return keys.at(key)
 }
 
-#let make-outline(font: auto, title, ..args) = {   
+#let make-outline(font: auto, title, ..args) = {
   {
     show heading:none
-    heading(bookmarked: true, outlined:false)[Table of contents]
+    heading(bookmarked: true, numbering: none, outlined: false)[Table of contents]
     // TODO c'est lidée pour bookmarker la table des matières mais il faut disable le reste des show rules
   }
 
-  let title = if font == auto {title} else {
+  let title = if font == auto { title } else {
     text(font: font, title)
   }
-  outline(
-    title: {
-      v(5em)
-      text(size: 1.5em, weight: 700, title)
-      v(3em)
-    },    
-    indent: 2em, 
-    ..args
-  )
+  outline(title: {
+    v(5em)
+    text(size: 1.5em, weight: 700, title)
+    v(3em)
+  }, indent: 2em, ..args)
   pagebreak(weak: true)
 }
 
@@ -82,12 +70,9 @@
 }
 
 // Generate the table of figures
-#let table_of_figures(lang, depth: 1) = {          
-
+#let table_of_figures(lang, depth: 1) = {
   [= #i18n(lang, "figure-table-title")]
-  
   // make-outline(i18n(lang, "figure-table-title"), depth: depth, target: figure.where(kind: image))
-          
   // outline(title: none, depth: 1, indent: auto,
   //         target: figure.where(kind: image))
 }
@@ -100,17 +85,12 @@
 // Replace the original function by ours
 #let codelst-sourcecode = sourcecode
 #let code = codelst-sourcecode.with(
-  frame: block.with(
-    fill: _luma-background,
-    stroke: 0.5pt + luma(80%),
-    radius: 3pt,
-    inset: (x: 6pt, y: 7pt)
-  ),
+  frame: block.with(fill: _luma-background, stroke: 0.5pt + luma(80%), radius: 3pt, inset: (x: 6pt, y: 7pt)),
   numbering: "1",
-  numbers-style: (lno) => text(luma(210), size:7pt, lno),
+  numbers-style: (lno) => text(luma(210), size: 7pt, lno),
   numbers-step: 1,
   numbers-width: -1em,
-  gutter:1.2em
+  gutter: 1.2em,
 )
 
 /*********************************
@@ -120,7 +100,6 @@
   title: [Report title],
   sub-title: [Report sub-title],
   academic-year: [2024-2025],
-  
   // If its a thesis
   is-thesis: false,
   split-chapters: true,
@@ -128,40 +107,28 @@
   thesis-co-supervisor: [Thesis co-supervisor],
   thesis-expert: "[Thesis expert]",
   faculty: [Faculty name],
-
   // If its a report
   course-name: [Course name],
   course-supervisor: [Course supervisor],
   semester: [Semester],
-
   cover-image: none,
   cover-image-height: 10cm,
   cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
   cover-image-kind: auto,
   cover-image-supplement: auto,
-  
   // A list of authors, separated by commas
   authors: (),
   date: none,
   logo: none,
-
-  tables: (
-    contents: false,
-    figures: false,
-    tables: false,
-    listings: false,
-    equations: false
-  ),
-
-  version : "0.2.0",
-  language : "fr", 
-  extra-i18n : none,
+  tables: (contents: false, figures: false, tables: false, listings: false, equations: false),
+  version: "0.2.0",
+  language: "fr",
+  extra-i18n: none,
   code-theme: "bluloco-light",
-  body
+  body,
 ) = {
-
   let i18n = i18n.with(extra-i18n: extra-i18n, language)
- 
+
   // Set the document's basic properties.
   set document(author: authors, title: title, date: date)
 
@@ -178,13 +145,13 @@
 
   // Default body font
   set text(font: body-font, lang: internal-language)
-  
+
   // Set other fonts
   // show math.equation: set text(font: math-font) // For math equations
   let selected-theme = "template/themes/" + code-theme + ".tmTheme"
   set raw(theme: selected-theme)
   show raw: set text(font: raw-font) // For code
-  
+
   show heading: set text(font: sans-font) // For sections, sub-sections etc..
 
   /////////////////////////////////////////////////
@@ -196,11 +163,7 @@
   //  Basic pagination and typesetting
   /////////////////////////////////////////////////
 
-  set rect(
-    width: 100%,
-    height: 100%,
-    inset: 4pt
-  )
+  set rect(width: 100%, height: 100%, inset: 4pt)
 
   // Thesis specific settings
   set page(
@@ -211,25 +174,28 @@
   // Report specific settings
   set page(
     margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
-    paper: "a4"
+    paper: "a4",
   ) if(not is-thesis)
 
   let space-after-heading = 0.5em
   let chapter-font-size = 1.5em
-  
-    show heading: it => {        
-    if it.level == 1 and is-thesis and split-chapters {      
+
+  show heading: it => {
+    // In a thesis
+    // Put chapters begin on odd pages
+    // Add the header in a block to make space around it
+    if it.level == 1 and is-thesis and split-chapters {
       set text(font: sans-font, size: chapter-font-size, weight: 800)
-      pagebreak(to: "odd", weak: false)      
-      block(
-        fill: none,
-        inset: (x: 0pt, bottom: 2pt, top: 1em),
-        below
-        : space-after-heading*2, 
-        i18n("chapter-title") + " " + counter(heading).display() + " " + it.body) // Add a space before and the chapter title
-    }   
-    else {
-      it      
+      pagebreak(to: "odd", weak: false)
+      block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 1em), below: space-after-heading * 2, if (it.numbering != none) {
+        // If the heading has a numbering, display it
+        i18n("chapter-title") + " " + counter(heading).display() + " " + it.body
+      } else {
+        // Otherwise just display the body
+        it
+      })
+    } else {
+      it
     }
   }
 
@@ -238,11 +204,11 @@
 
   let authors-str = ()
 
-  if type(authors) == str {    
+  if type(authors) == str {
     authors = (authors,)
   }
 
-  if authors.len() > 1 {    
+  if authors.len() > 1 {
     authors-str = authors.join(", ")
   } else if authors.len() == 1 {
     authors-str = authors.at(0)
@@ -259,10 +225,7 @@
   let footer-content = context text(0.75em)[
     #emph(title)
     #h(1fr)
-    #counter(page).display(
-      "1/1",
-      both: true
-    )
+    #counter(page).display("1/1", both: true)
   ]
 
   // Set header and footers
@@ -272,21 +235,19 @@
       header-content
     },
     header-ascent: 40%,
-
     // For pages other than the first one
     footer: context if counter(page).get().first() > 1 [
       #move(dy: 5pt, line(length: 100%, stroke: 0.5pt))
       #footer-content
-    ]
+    ],
   )
-  
+
   // Links coloring
   show link: set text(ligatures: true, fill: blue)
 
   // Sections numbers
   set heading(numbering: "1.1.1 –") if (is-thesis)
   set heading(numbering: "1.1.1 –") if (not is-thesis)
-
 
   /////////////////////////////////////////////////
   // Handle specific captions styling
@@ -312,32 +273,27 @@
   show figure.caption: set text(9pt) // Smaller font size
   show figure.caption: emph // Use italics
   set figure.caption(separator: " - ") // With a nice separator
-  
-  show figure.caption: it => {it.counter.display()} // Used for debugging
+
+  show figure.caption: it => { it.counter.display() } // Used for debugging
 
   // Make the caption like I like them
   show figure.caption: it => context {
-      if it.numbering == none {
-        it.body
-      } else {
-        it.supplement + " " + it.counter.display() + it.separator + it.body
-      }
+    if it.numbering == none {
+      it.body
+    } else {
+      it.supplement + " " + it.counter.display() + it.separator + it.body
     }
-  
+  }
+
   /////////////////////////////////////////////////
   // Code related, only for inline as the
   // code block is handled by function at the top of the file
   /////////////////////////////////////////////////
-  
+
   // Inline code display,
   // In a small box that retains the correct baseline.
-  show raw.where(block: false): box.with(
-    fill: _luma-background,
-    inset: (x: 2pt, y: 0pt),
-    outset: (y: 2pt),
-    radius: 1pt,
-  )
-    
+  show raw.where(block: false): box.with(fill: _luma-background, inset: (x: 2pt, y: 0pt), outset: (y: 2pt), radius: 1pt)
+
   // Allow page breaks for raw figures
   show figure.where(kind: raw): set block(breakable: true)
 
@@ -352,7 +308,7 @@
         dy: -12mm,
         clearance: 0em,
         // Put it in a box to be resized
-        box(height:2.0cm, logo)
+        box(height: 2.0cm, logo),
       )
     }
   }
@@ -360,109 +316,148 @@
   /////////////////////////////////////////////////
   // Let's make the template now
   /////////////////////////////////////////////////
+  let title_page_report() = {
+    // Title page.
+    insert-logo(logo)
 
-  // Title page.
-  insert-logo(logo)
-  
-  let title-block = [
-    #course-supervisor\
-    #semester #academic-year
-  ]
-  let title-block-content = title-block
+    let title-block = [
+      #course-supervisor\
+      #semester #academic-year
+    ]
+    let title-block-content = title-block
 
-  place(
-    top + left,
-    dy: -2em,
-    text(1em)[
+    place(top + left, dy: -2em, text(1em)[
       #text(weight: 700, course-name)\
       #text(title-block-content)
-    ]
-  )
+    ])
 
-  v(10fr, weak: true)
+    v(10fr, weak: true)
 
-  // Puts a default cover image
-  if cover-image != none {
-    show figure.caption: emph
-    figure(
-      box(cover-image, height: cover-image-height),
-      caption: cover-image-caption,
-      numbering: none,
-      kind: cover-image-kind,
-      supplement: cover-image-supplement
-    )
-  }
+    // Puts a default cover image
+    if cover-image != none {
+      show figure.caption: emph
+      figure(
+        box(cover-image, height: cover-image-height),
+        caption: cover-image-caption,
+        numbering: none,
+        kind: cover-image-kind,
+        supplement: cover-image-supplement,
+      )
+    }
 
-  v(10fr, weak: true)
+    v(10fr, weak: true)
 
-  // Main title
-  set par(leading: 0.2em)
-  text(font: sans-font, 2em, weight: 700, smallcaps(title))
-  set par(leading: 0.65em)
-  
-  // Subtitle
-  v(1em, weak: true)
-  text(font: sans-font, 1.2em, sub-title)
-  line(length: 100%)
-  
-  v(4em)
+    // Main title
+    set par(leading: 0.2em)
+    text(font: sans-font, 2em, weight: 700, smallcaps(title))
+    set par(leading: 0.65em)
 
-  // Author information on the title page
-  pad(
-    top: 1em,
-    right: 20%,
-    grid(
+    // Subtitle
+    v(1em, weak: true)
+    text(font: sans-font, 1.2em, sub-title)
+    line(length: 100%)
+
+    v(4em)
+
+    // Author information on the title page
+    pad(top: 1em, right: 20%, grid(
       columns: 3,
       column-gutter: 3em,
       gutter: 2em,
       ..authors.map(author => align(start, text(1.1em, strong(author)))),
-    ),
-  )
-  
-  // The date
-  text(1.1em, 
-    custom-date-format(date, i18n("date-format"), internal-language)
-  )
+    ))
 
-  v(2.4fr)
-  pagebreak()
-  
+    // The date
+    text(1.1em, custom-date-format(date, i18n("date-format"), internal-language))
+
+    v(2.4fr)
+    pagebreak()
+  }
+
+  let title_page_thesis() = {
+    // Title page.
+    insert-logo(logo)
+
+    let title-block = [
+      #course-supervisor\
+      #semester #academic-year
+    ]
+    
+    let title-block-content = title-block
+
+    place(top + left, dy: -2em, text(1em)[
+      #text(weight: 700, course-name)\
+      #text(title-block-content)
+    ])
+
+    v(10fr, weak: true)
+
+    // Puts a default cover image
+    if cover-image != none {
+      show figure.caption: emph
+      figure(
+        box(cover-image, height: cover-image-height),
+        caption: cover-image-caption,
+        numbering: none,
+        kind: cover-image-kind,
+        supplement: cover-image-supplement,
+      )
+    }
+
+    v(10fr, weak: true)
+
+    // Main title
+    set par(leading: 0.2em)
+    text(font: sans-font, 2em, weight: 700, smallcaps(title))
+    set par(leading: 0.65em)
+
+    // Subtitle
+    v(1em, weak: true)
+    text(font: sans-font, 1.2em, sub-title)
+    line(length: 100%)
+
+    v(4em)
+
+    // Author information on the title page
+    pad(top: 1em, right: 20%, grid(
+      columns: 3,
+      column-gutter: 3em,
+      gutter: 2em,
+      ..authors.map(author => align(start, text(1.1em, strong(author)))),
+    ))
+
+    // The date
+    text(1.1em, custom-date-format(date, i18n("date-format"), internal-language))
+
+    v(2.4fr)
+    pagebreak()
+  }
+
+  if (not is-thesis) {
+    title_page_report()
+  } else {
+    title_page_thesis()
+  }
+
   // --- Table of Contents ---
 
-  let make-outline = make-outline.with(
-    font: body-font
-  )
-  
+  let make-outline = make-outline.with(font: body-font)
+
   if tables != none {
     if tables.at("contents", default: false) {
-      make-outline(
-        i18n("toc-title"),
-        depth: 2
-      )
+      make-outline(i18n("toc-title"), depth: 2)
     }
     if tables.at("figures", default: false) {
-      make-outline(
-        i18n("figure-table-title"),
-        target: figure.where(kind: image)
-      )
+      make-outline(i18n("figure-table-title"), target: figure.where(kind: image))
     }
     if tables.at("tables", default: false) {
-      make-outline(
-        i18n("table-table-title"),
-        target: figure.where(kind: table)
-      )
+      make-outline(i18n("table-table-title"), target: figure.where(kind: table))
     }
     if tables.at("listings", default: false) {
-      make-outline(
-        i18n("listing-table-title"),
-        target: figure.where(kind: raw)
-      )
+      make-outline(i18n("listing-table-title"), target: figure.where(kind: raw))
     }
     if tables.at("equations", default: false) {
-      make-outline(
-        i18n("equation-table-title"),
-        target: math.equation.where(block:true)
-      )
+      make-outline(i18n("equation-table-title"), target: math.equation.where(block: true))
     }
   }
 

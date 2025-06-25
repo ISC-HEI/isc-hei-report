@@ -76,7 +76,7 @@ The *Acknowledgements* section of a bachelor thesis is where you express gratitu
  
 Keep this section concise and sincere. It is typically placed after the abstract and before the main content of your thesis.
 
-// Generate the Table of Contents
+// // // Generate the Table of Contents
 #table_of_contents(doc_language, depth:1)
 
 = Writing a thesis 
@@ -101,6 +101,8 @@ The general structure of a bachelor thesis typically includes the following sect
 This structure may vary depending on the field of study, but these elements are commonly found in most bachelor theses. They are compulsory for the _ISC Bachelor thesis_.
 
 = Introduction
+Have fun #todo[writing your thesis!] and good luck with it !
+
 #lorem(1000)
 
 = Methodology
@@ -156,7 +158,6 @@ This structure may vary depending on the field of study, but these elements are 
 // // Table of listings 
 // #pagebreak()
 
-= List of Figures 
 #table_of_figures(doc_language)
 
 // Including code 

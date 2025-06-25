@@ -6,17 +6,27 @@ Since v0.2.0, the build process is based on [`justbuild`](https://github.com/jus
 ## Preparing env
 Run `script/setup`
 
-:warning: If running on Mac, you might have to adapt the shell used in `scripts/package`
+:warning: If running on Mac, you might have to adapt the shell used in `scripts/package` (uncomment the second line).
 
 # Updating the template and deploying to Typst universe
 To build, test and deploy new releases I'm using [Just](https://github.com/casey/just). On Ubuntu, I'm using the `snapd` version of `just`.
 
 ## Working on the template
-To develop new features in the template, I symblink the working directory to the preview directory using 
+To develop new features in the template, a symblink the working directory to the preview directory can be created using :
 
 ```bash
 just install-symblink
 ```
+
+> [!TIP]
+> The idea of the `just` command is to create a symlink to the location Typst looks for templates locally. For instance in a Linux environment it would be:
+>
+> ```shell
+> mkdir ~/.local/share/typst/packages/local/PACKAGE.NAME
+> ln -s REPO_FOLDER \
+> ~/.local/share/typst/packages/local/PACKAGE.NAME/PACKAGE.VERSION
+> ```
+>
 
 ## Testing local deployment
 When sufficiently confident that it seems to work, it's time to test a `preview` version as created by `typst`.

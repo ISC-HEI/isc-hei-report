@@ -2,8 +2,9 @@ isc_template_report.pdf
 template/report.pdf
 test
 template/acronyms.pdf
-
 template/fonts/modern-isc-fonts
+
+lib
 
 # Ignore macOS system files
 .DS_Store

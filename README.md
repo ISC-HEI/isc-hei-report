@@ -51,7 +51,7 @@ Even nicer, the following command compiles the report every time the file is mod
 typst watch report.typ
 ```
 
-Another nice possibility is of course to use a VScod[e | ium] via the `Typst LSP` plugin which enables direct compilation.
+Another nice possibility is of course to use VScod(e | ium) via the `Typst LSP` plugin which enables direct compilation.
 
 # Future changes
 
