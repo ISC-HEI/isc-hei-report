@@ -1,6 +1,6 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-#let doc_language = "fr"
+#let doc_language = "en"
 
 #show: project.with( 
   title: "Life, the Universe and Everything", 
@@ -45,10 +45,13 @@
 #table_of_contents(depth:1)
 
 = Writing a thesis 
+
 // Enable headers and footers from this point on
 #set_header_footer(true)
 
 Writing a report is an exercise that involves both *content and form*. In this document, we aim to simplify the formatting aspect without making any assumptions about the content, specifically in the context of the ISC program#footnote[Here is how to add a footnote https://isc.hevs.ch].
+
+== The content of a thesis
 
 The general structure of a bachelor thesis typically includes the following sections:
 
@@ -83,15 +86,18 @@ Have fun #todo[writing your thesis!] and good luck with it !
 #lorem(800)
 
 = Results 
-#lorem(1000)
+#lorem(950)
 
 = Discussion
 #lorem(1000)
 
 = Conclusion
-#lorem(1000)
+#lorem(1256)
 
 #bibliography("bibliography.bib", full: true, style: "ieee")
+
+// #bibliography("bibliography.bib", full: true, style: "ieee", title: heavy_title("Bibliography", mult: 1, top: 1em, bottom: 1em))
+
 
 //////////////
 // Appendices
@@ -101,7 +107,15 @@ Have fun #todo[writing your thesis!] and good luck with it !
 #pagebreak()
 
 // Table of acronyms, NOT COMPULSORY
-#print-index(title: [#i18n(doc_language, "acronym-table-title")], sorted: "up", delimiter: " : ", row-gutter: 0.7em, outlined: false)
+#print-index(
+  title: heavy_title(i18n(doc_language, "acronym-table-title"), mult:1, top:1em, bottom: 1em),
+  sorted: "up",
+  delimiter: " : ",
+  row-gutter: 0.7em,
+  outlined: false,  
+)
+
+#pagebreak()
 
 // Table of listings 
 #table_of_figures()
@@ -117,6 +131,20 @@ Have fun #todo[writing your thesis!] and good luck with it !
       #raw(code_sample, lang: "scala")
     ],
   caption: "Code included from the file example.scala"
+)
+
+#figure( 
+    code()[
+      #raw(read("code/sort.py"), lang: "python")
+    ],
+  caption: "Second code included from the file example.scala"
+)
+
+#figure( 
+    code()[
+      #raw(code_sample, lang: "scala")
+    ],
+  caption: "Second code included from the file example.scala"
 )
 
 

@@ -5,13 +5,13 @@
 
 // Global settings
 #let space-after-heading = 0.5em
-#let chapter-font-size = 1.5em
+#let chapter-font-size = 1.4em
 #let global_keywords = inc.global_keywords
 
 //////////////////////////
 // User callable functions
 // //////////////////////////
-#let heavy_title(title, mult: 2, bottom: 2pt, top: 4em) = {
+#let heavy_title(title, mult: 1.5, bottom: 2pt, top: 4em) = {
   set text(size: chapter-font-size * mult, weight: 800)
   // pagebreak(to: "odd", weak: false)
   block(fill: none, inset: (x: 0pt, bottom: bottom, top: top), below: space-after-heading * mult, {
@@ -62,13 +62,13 @@
 #let _make-outline(font: auto, title, ..args) = {
   {
     show heading:none
-    heading(bookmarked: true, numbering: none, outlined: false)[Table of contents]
-    // TODO c'est lidée pour bookmarker la table des matières mais il faut disable le reste des show rules
+    heading(bookmarked: true, numbering: none, outlined: false)[Table of contents]    
   }
 
   let title = if font == auto { title } else {
     text(font: font, title)
   }
+  
   outline(title: {
     v(5em)
     text(size: 1.5em, weight: 700, title)
@@ -80,12 +80,11 @@
 // Generates the special appendix page
 #let appendix_page() = {
   context{
-    heading(
-      numbering: none,
-      outlined: true,
-      bookmarked: true,
-      text(i18n(inc.global_language.get(), "appendix-title"), fill: white),
-    )
+    {
+      show heading: none
+      heading(numbering:none)[#i18n(inc.global_language.get(), "appendix-title")]
+      
+    }
 
     // The appendix page
     place(center + horizon, [
@@ -246,15 +245,13 @@
   }
 
   show heading: it => {
-    // In a thesis
-    // Put chapters begin on odd pages
+    // In a thesis, put chapters begin on odd pages
     // Add the header in a block to make space around it
-    if it.level == 1 and is-thesis and split-chapters {
-      set text(font: sans-font, size: chapter-font-size, weight: 800)
+    if it.level == 1 and is-thesis and split-chapters {      
       pagebreak(to: "odd", weak: false)
       block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 1em), below: space-after-heading * 2, if (it.numbering != none) {
         // If the heading has a numbering, display it
-        i18n("chapter-title") + " " + counter(heading).display() + " " + it.body
+        text(i18n("chapter-title") + " " + counter(heading).display() + " " + it.body, size: chapter-font-size, weight: 800)        
       } else {
         // Otherwise just display the body
         it
