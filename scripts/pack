@@ -1,25 +1,28 @@
-#!/usr/bin/bash
-
-# #!/opt/homebrew/bin/bash
+#!/bin/bash
 set -eu
 
 # adapted from https://github.com/johannes-wolf/cetz/blob/35c0868378cea5ad323cc0d9c2f76de8ed9ba5bd/scripts/package
 # licensed under Apache License 2.0
 
-. "$(dirname "${BASH_SOURCE[0]}")/setup"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)/.." # macOS 
 
-if (( $# < 1 )) || [[ "${1:-}" == "help" ]]; then
-  echo "package TARGET"
-  echo ""
-  echo "Packages all relevant files into a directory named '<name>/<version>'"
-  echo "at TARGET. If TARGET is set to @local or @preview, the local Typst package"
-  echo "directory will be used so that the package gets installed for local use."
-  echo "The name and version are read from 'typst.toml' in the project root."
-  echo ""
-  echo "Local package prefix: $DATA_DIR/typst/package/local"
-  echo "Local preview package prefix: $DATA_DIR/typst/package/preview"
+TEMPLATE="$2"
+
+if [[ -z "$TEMPLATE" ]]; then
+  TEMPLATE="bachelor-thesis"
+fi
+
+if [[ ! -d "$ROOT/templates/$TEMPLATE" ]]; then
+  echo "Template '$TEMPLATE' does not exist in '$ROOT/templates'."
   exit 1
 fi
+
+echo "Processing template $TEMPLATE"
+
+# copy the current template typst.toml to the root directory
+cp -a "$ROOT/templates/$TEMPLATE/typst.toml" "$ROOT"
+
+. "$(dirname "${BASH_SOURCE[0]}")/setup" ${2}
 
 TARGET="$(resolve-target "${1:?Missing target path, @local or @preview}")"
 echo "Install dir: $TARGET"
@@ -73,11 +76,25 @@ TMP="$(mktemp -d)"
 
 for f in "${files[@]}"; do
   mkdir -p "$TMP/$(dirname "$f")" 2>/dev/null
-  cp -r "$ROOT/$f" "$TMP/$f"
+  cp -r "$ROOT/$f" "$TMP/$f"  
 done
+
+cp $ROOT/src/*.pdf "$ROOT/examples/"
+
+if [[ "$TEMPLATE" == "bachelor_thesis" ]]; then
+	echo "Removing report.typ from template $TEMPLATE"
+	rm -f "$TMP/src/report.typ"
+fi
+
+if [[ "$TEMPLATE" == "report" ]]; then
+	# remove the typst.toml in the template directory
+	echo "Removing bachelor_thesis from template $TEMPLATE"
+	rm -f "$TMP/src/bachelor_thesis.typ"
+fi
 
 TARGET="${TARGET:?}/${PKG_PREFIX:?}/${VERSION:?}"
 echo "Packaged to: $TARGET"
+
 if rm -r "${TARGET:?}" 2>/dev/null; then
   echo "Overwriting existing version."
 fi
@@ -86,3 +103,5 @@ mkdir -p "$TARGET"
 # include hidden files by setting dotglob
 shopt -s dotglob
 mv "$TMP"/* "$TARGET"
+
+rm -r "$ROOT/typst.toml"

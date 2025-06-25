@@ -13,8 +13,16 @@
         "listing-table-title": "Table des listings",
         "table-table-title": "Table des tableaux",
         "equation-table-title": "Table des équations",
-        "date-format": "DD Month YYYY"
-    },
+        "bachelor-thesis-title": "Mémoire de Bachelor",
+        "date-format": "DD Month YYYY",
+        "thesis-submitted" : "Mémoire soumis pour le programme de bachelor",
+        "thesis-study-course" : "Programme d'études",
+        "hes-so" : "Haute école spécialisée de Suisse occidentale",
+        "faculty" : "Faculté Ingénierie et Architecture",
+        "supervising-examiner": "Superviseur",
+        "supervising-second-examiner": "Co-superviseur",
+        "submitted-on": "Soumis le "
+    },    
     "en": {
         "toc-title": "Table of Contents",
         "bib-title": "Bibliography",
@@ -29,7 +37,15 @@
         "listing-table-title": "List of Listings",
         "table-table-title": "List of Tables",
         "equation-table-title": "List of Equations",
-        "date-format": "Month DD, YYYY"
+        "bachelor-thesis-title": "Bachelor Thesis",
+        "date-format": "Month DD, YYYY",
+        "thesis-submitted" : "Thesis submitted to the Bachelor degree programme",
+        "thesis-study-course" : "Study Program",
+        "hes-so" : "University of Applied Sciences and Arts Western Switzerland",
+        "faculty" : "Faculty of Engineering and Architecture",
+        "supervising-examiner": "Supervisor",
+        "supervising-second-examiner": "Co-supervisor",
+        "submitted-on": "Submitted on"
     },
     "de": {
         "toc-title": "Inhaltsverzeichnis",

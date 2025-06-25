@@ -4,14 +4,9 @@
 // Missing features :
 // - page and locations (above, under) references for figures not available yet
 
-// Fancy pretty print with line numbers and stuff
-#import "@preview/codelst:2.0.2": sourcecode
+#import "lib/includes.typ" as inc
 
-// Nice color boxes
-#import "@preview/showybox:2.0.3": showybox
-
-// Custom date format
-#import "@preview/datify:0.1.4": day-name, month-name, custom-date-format
+#let global_keywords = state("kw", ())
 
 // Indicate that something still needs to be done
 #let todo(body, fill-color: yellow.lighten(50%)) = {
@@ -83,7 +78,7 @@
 #let _luma-background = luma(250)
 
 // Replace the original function by ours
-#let codelst-sourcecode = sourcecode
+#let codelst-sourcecode = inc.sourcecode
 #let code = codelst-sourcecode.with(
   frame: block.with(fill: _luma-background, stroke: 0.5pt + luma(80%), radius: 3pt, inset: (x: 6pt, y: 7pt)),
   numbering: "1",
@@ -104,9 +99,12 @@
   is-thesis: false,
   split-chapters: true,
   thesis-supervisor: [Thesis supervisor],
-  thesis-co-supervisor: [Thesis co-supervisor],
+  thesis-co-supervisor: none,
   thesis-expert: "[Thesis expert]",
-  faculty: [Faculty name],
+  keywords: (),
+  major: (),
+  school: [School name],
+  programme: [Informatique et Systèmes de Communication],
   // If its a report
   course-name: [Course name],
   course-supervisor: [Course supervisor],
@@ -121,16 +119,18 @@
   date: none,
   logo: none,
   tables: (contents: false, figures: false, tables: false, listings: false, equations: false),
-  version: "0.2.0",
+  version: "",
   language: "fr",
   extra-i18n: none,
   code-theme: "bluloco-light",
   body,
 ) = {
+  global_keywords.update(keywords)
+
   let i18n = i18n.with(extra-i18n: extra-i18n, language)
 
   // Set the document's basic properties.
-  set document(author: authors, title: title, date: date)
+  set document(author: authors, title: title, date: date, keywords: keywords)
 
   // Document language for hyphenation and other things
   let internal-language = language
@@ -148,7 +148,7 @@
 
   // Set other fonts
   // show math.equation: set text(font: math-font) // For math equations
-  let selected-theme = "template/themes/" + code-theme + ".tmTheme"
+  let selected-theme = "src/themes/" + code-theme + ".tmTheme"
   set raw(theme: selected-theme)
   show raw: set text(font: raw-font) // For code
 
@@ -200,7 +200,21 @@
   }
 
   // Tag the header like = Chapter title <unnumbered> to remove the numbering
-  show heading.where(label: <unnumbered>): set heading(numbering: none, outlined: false, bookmarked: true)
+  // show heading.where(label: <single_page>): set heading(numbering: none, outlined: false, bookmarked: true)
+
+  show heading.where(label: <single_page>): it => {
+    set heading(numbering: none, outlined: false)
+    set text(font: sans-font, size: chapter-font-size, weight: 800)
+    pagebreak(to: "odd", weak: false)
+    block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 5em), below: space-after-heading * 2, if (it.numbering != none) {
+      // If the heading has a numbering, display it
+      it.body
+    } else {
+      // Otherwise just display the body
+      it
+      v(1fr)
+    })
+  }
 
   let authors-str = ()
 
@@ -231,12 +245,12 @@
   // Set header and footers
   set page(
     // For pages other than the first one
-    header: context if counter(page).get().first() > 1 {
+    header: context if counter(page).get().first() > 2 {
       header-content
     },
     header-ascent: 40%,
     // For pages other than the first one
-    footer: context if counter(page).get().first() > 1 [
+    footer: context if counter(page).get().first() > 2 [
       #move(dy: 5pt, line(length: 100%, stroke: 0.5pt))
       #footer-content
     ],
@@ -300,143 +314,67 @@
   /////////////////////////////////////////////////
   // Our own specific commands
   /////////////////////////////////////////////////
-  let insert-logo(logo) = {
-    if logo != none {
-      place(
-        top + right,
-        dx: 6mm,
-        dy: -12mm,
-        clearance: 0em,
-        // Put it in a box to be resized
-        box(height: 2.0cm, logo),
-      )
-    }
-  }
 
   /////////////////////////////////////////////////
   // Let's make the template now
   /////////////////////////////////////////////////
-  let title_page_report() = {
-    // Title page.
-    insert-logo(logo)
-
-    let title-block = [
-      #course-supervisor\
-      #semester #academic-year
-    ]
-    let title-block-content = title-block
-
-    place(top + left, dy: -2em, text(1em)[
-      #text(weight: 700, course-name)\
-      #text(title-block-content)
-    ])
-
-    v(10fr, weak: true)
-
-    // Puts a default cover image
-    if cover-image != none {
-      show figure.caption: emph
-      figure(
-        box(cover-image, height: cover-image-height),
-        caption: cover-image-caption,
-        numbering: none,
-        kind: cover-image-kind,
-        supplement: cover-image-supplement,
-      )
-    }
-
-    v(10fr, weak: true)
-
-    // Main title
-    set par(leading: 0.2em)
-    text(font: sans-font, 2em, weight: 700, smallcaps(title))
-    set par(leading: 0.65em)
-
-    // Subtitle
-    v(1em, weak: true)
-    text(font: sans-font, 1.2em, sub-title)
-    line(length: 100%)
-
-    v(4em)
-
-    // Author information on the title page
-    pad(top: 1em, right: 20%, grid(
-      columns: 3,
-      column-gutter: 3em,
-      gutter: 2em,
-      ..authors.map(author => align(start, text(1.1em, strong(author)))),
-    ))
-
-    // The date
-    text(1.1em, custom-date-format(date, i18n("date-format"), internal-language))
-
-    v(2.4fr)
-    pagebreak()
-  }
-
-  let title_page_thesis() = {
-    // Title page.
-    insert-logo(logo)
-
-    let title-block = [
-      #course-supervisor\
-      #semester #academic-year
-    ]
-    
-    let title-block-content = title-block
-
-    place(top + left, dy: -2em, text(1em)[
-      #text(weight: 700, course-name)\
-      #text(title-block-content)
-    ])
-
-    v(10fr, weak: true)
-
-    // Puts a default cover image
-    if cover-image != none {
-      show figure.caption: emph
-      figure(
-        box(cover-image, height: cover-image-height),
-        caption: cover-image-caption,
-        numbering: none,
-        kind: cover-image-kind,
-        supplement: cover-image-supplement,
-      )
-    }
-
-    v(10fr, weak: true)
-
-    // Main title
-    set par(leading: 0.2em)
-    text(font: sans-font, 2em, weight: 700, smallcaps(title))
-    set par(leading: 0.65em)
-
-    // Subtitle
-    v(1em, weak: true)
-    text(font: sans-font, 1.2em, sub-title)
-    line(length: 100%)
-
-    v(4em)
-
-    // Author information on the title page
-    pad(top: 1em, right: 20%, grid(
-      columns: 3,
-      column-gutter: 3em,
-      gutter: 2em,
-      ..authors.map(author => align(start, text(1.1em, strong(author)))),
-    ))
-
-    // The date
-    text(1.1em, custom-date-format(date, i18n("date-format"), internal-language))
-
-    v(2.4fr)
-    pagebreak()
-  }
 
   if (not is-thesis) {
-    title_page_report()
+    import "lib/pages/cover_report.typ": cover_page
+
+    let report_cover = cover_page(
+      course-supervisor: course-supervisor,
+      course-name: course-name,
+      font: sans-font,
+      title: title,
+      sub-title: sub-title,
+      semester: semester,
+      academic-year: academic-year,
+      cover-image: cover-image,
+      cover-image-height: cover-image-height,
+      cover-image-caption: cover-image-caption,
+      cover-image-kind: cover-image-kind,
+      cover-image-supplement: cover-image-supplement,
+      authors: authors,
+      date: date,
+      logo: logo,
+      language: internal-language,
+    )
+
+    report_cover
   } else {
-    title_page_thesis()
+    import "lib/pages/cover_bachelor.typ": cover_page
+
+    let supervisors = ()
+
+    if (thesis-co-supervisor == none) {
+      supervisors = (thesis-supervisor,)
+    } else {
+      supervisors = (thesis-supervisor, thesis-co-supervisor)
+    }
+
+    let report_cover = cover_page(
+      supervisors: supervisors,
+      font: sans-font,
+      title: title,
+      sub-title: sub-title,
+      semester: semester,
+      academic-year: academic-year,
+      school: school,
+      programme: programme,
+      major: major,
+      cover-image: cover-image,
+      cover-image-height: cover-image-height,
+      cover-image-caption: cover-image-caption,
+      cover-image-kind: cover-image-kind,
+      cover-image-supplement: cover-image-supplement,
+      authors: authors-str,
+      submission-date: date,
+      logo: logo,
+      language: internal-language,
+    )
+
+    report_cover
   }
 
   // --- Table of Contents ---

@@ -18,29 +18,34 @@ default:
 # update *args:
 # 	typst-test update {{ args }} -->
 
-# package the library into the specified destination folder
-package target:
-  ./scripts/package "{{target}}"
-
-# install the library with the "@local" prefix
-install: (package "@local")
-
-# install the library with the "@preview" prefix (for pre-release testing)
-install-preview: (package "@preview")
-
 [private]
-symblink target:
-  ./scripts/dev_link "{{target}}"
+symblink target theme:
+  ./scripts/dev_link "{{target}}" "{{theme}}"  
 
-# create symblink for dev
-install-symblink: (symblink "@preview")
+# create symblink for dev report
+# install-symblink: (symblink "@preview")
+
+# create symblink for dev report
+install-symblink-report: (symblink "@preview" "report")
+
+# create symblink for dev bachelor thesis
+install-symblink-bthesis: (symblink "@preview" "bachelor-thesis")
 
 [private]
 remove target:
-  ./scripts/uninstall "{{target}}"
+  ./scripts/uninstall "{{target}}" "bachelor-thesis"
+  ./scripts/uninstall "{{target}}" "report"
 
 # uninstalls the library from the "@local" prefix
-uninstall: (remove "@local")
+# uninstall: (remove "@local")
 
 # uninstalls the library from the "@preview" prefix (for pre-release testing)
-uninstall-preview: (remove "@preview")
+uninstall: (remove "@preview")
+
+# packs the library into the specified destination folders (report and bachelor)
+pack_distro target:
+  ./scripts/pack "{{target}}" "bachelor-thesis"
+  ./scripts/pack "{{target}}" "report"
+
+# packs report and bachelor into two directories, for previewing and local testing
+pack_distro_preview : (pack_distro "@preview")

@@ -1,7 +1,7 @@
-#import "@preview/isc-hei-report:0.5.0" : *
+#import "@preview/isc-hei-report:0.3.1" : *
 
 #let doc_language = "fr" // Or en/de
-
+ 
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
   sub-title: [Avec une mise en page `Typst`],
@@ -31,7 +31,7 @@
   logo: image("figs/isc_logo.svg"),
   date: datetime(year: 2025, month: 6, day: 24), // or datetime.today()
   language: doc_language, // Or en/de if required
-  version: [Using template 0.3.0],
+  version: [Using template 0.3.1],
  
   code-theme: "bluloco-light",
 )
@@ -41,7 +41,6 @@
 #include "acronyms.typ"
 
 // Let's get started
-
 = Introduction
 Écrire un rapport est un exercice autant *de fond que de forme*. Dans ce contexte, nous proposons dans ce document de quoi simplifier la rédaction de la forme sans avoir -- à priori -- d'avis sur le fond, ceci dans le contexte de la filière ISC#footnote[Voici d'ailleurs comment mettre une note de bas de page https://isc.hevs.ch].
 
@@ -105,7 +104,7 @@ On peut si on le souhaite également avoir des blocs de code plus long si néces
 
 Il est tout à fait possible de mettre du code qui provient d'un fichier comme ci-dessous :
 
-#let code_sample = read("sample.scala")
+#let code_sample = read("code/sample.scala")
 #figure(
     code()[
       #raw(code_sample, lang: "scala")
@@ -136,7 +135,7 @@ On peut également avoir des notations plus complexes :
 
 $ sum_(n=1)^(infinity) 2^(-n) = 1 "ou encore" integral_(x = 0)^3 x^2 dif x $
 
-#showybox(
+#inc.showybox(
   title: "Stokes' theorem",
   frame: (
     border-color: blue,
@@ -262,7 +261,7 @@ $ S = sqrt(S_x^2+S_y^2) = sqrt(109^2+185^2) =214.47 $
 #pagebreak()
 
 = #i18n(doc_language, "appendix-code-name")
-#let code_sample = read("sample.scala")
+#let code_sample = read("code/sample.scala")
 #figure(
     code()[
       #raw(code_sample, lang: "scala")

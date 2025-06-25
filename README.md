@@ -11,15 +11,29 @@
 
 This is an official template for students reports for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. An example of the generated output can be [accessed here](https://github.com/ISC-HEI/isc-hei-report/blob/master/template/report.pdf?raw=true).
 
-## Using the template
+## Using the template, on the Web
 
-In the `Typst` web application, start with the `isc-hei-report` and voilà ! Using the CLI, you can initialize the project with the command :
+In the `Typst` web application, start with the `isc-hei-report` and voilà ! 
+
+## Using the template in your shell
+First start by installing `Typst` on your machine. You can then initialize the project with the command :
 
 ```bash
-typst init @preview/isc-hei-report:0.2.0
+typst init @preview/isc-hei-report
 ```
 
 This template will initialize an sample report with sensible default values.
+
+For the latest template for a bachelor thesis, use: 
+
+```bash
+typst init @preview/isc-hei-bthesis
+```
+
+or if you need a specific version, use:
+
+```bash
+typst init @preview/isc-hei-bthesis:0.5.0
 
 ## Installing fonts locally
 

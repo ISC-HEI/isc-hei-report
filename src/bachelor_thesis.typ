@@ -1,44 +1,38 @@
-#import "@preview/isc-hei-report:0.5.0" : *
+#import "@preview/isc-hei-bthesis:0.5.0" : *
 
-#let doc_language = "en" // Or en/de
+#let doc_language = "en" // Or en/de 
 
 #show: project.with( 
-  title: "ISC Bachelor Thesis Template", 
-  sub-title: [Typeset with `Typst`],
-
-    // If its a thesis 
+  title: "Life, the Universe and Everything", 
+    
   is-thesis: true,   
   split-chapters: true,
-  thesis-supervisor: [Thesis supervisor], 
-  thesis-co-supervisor: [Thesis co-supervisor],
+  
+  thesis-supervisor: [Prof. Dr John Von Neumann], 
+  thesis-co-supervisor: [Lady Ada Lovelace], // Optional
   thesis-expert: [Thesis expert],
-  faculty: [Faculty name],
+  
+  school: [Haute École d'Ingénierie de Sion], // Or HES-SO Valais-Wallis
+  programme: [Informatique et Systèmes de communication],
 
-  cover-image: image("figs/cover_image_placeholder.png"),
-  cover-image-height: 8cm, // Default value = 10cm
-  cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
+  // Some keywords related to your thesis
+  keywords: ("computer science", "data engineering", "machine learning"),
+  major : "Data engineering", // "Software engineering", "Embedded systems", "Security", "something else"
 
-  authors: "James Gosling",
+  authors: "James Gosling", 
 
-  logo: image("figs/isc_logo.svg"), 
   date: datetime(year: 2025, month: 6, day: 24), // or datetime.today() 
   language: doc_language, // Or en/de if required
-  version: [Using template 0.3.0],  
+  version: none, // or for instance "1.0", for the version of your thesis],  
   code-theme: "bluloco-light",
 ) 
-  
+   
 //// If using acronyms 
 #import "@preview/acrostiche:0.5.2": *     
 #include "acronyms.typ"
 
-// The template provides several useful functions such as: 
-// - `i18n(doc_language, "key")` to get the translated text for the given key, see i18n.json for the list of keys
-// - `toc(depth, doc_language)` to generate the Table of Contents in the specified language
-// - `todo(text)` to highlight TODO items in the document
-// - `table_of_figures(depth, doc_language)` to generate a table of figures
-
 // Let's get started         
-= Abstract <unnumbered>  
+= Abstract <single_page>
 The abstract of a bachelor thesis should provide a concise summary of the entire work. It typically includes:
 
 - The context and motivation for the research.
@@ -51,7 +45,13 @@ The abstract should be self-contained, clear, and usually does not exceed 250–
 
 The abstract *must* be written in both French and English.
 
-= Résumé <unnumbered>  
+#lorem(150)
+
+#v(1fr)
+
+*Keywords* : **#context global_keywords.get().join(", ")**
+
+= Résumé <single_page>
 Le résumé d’un mémoire de bachelor doit fournir un aperçu concis de l’ensemble du travail. Il inclut généralement :
 
 - Le contexte et la motivation de la recherche.
@@ -64,7 +64,13 @@ Le résumé doit être autonome, clair et ne pas dépasser habituellement 250 à
 
 Le résumé doit être rédigé en français *et* en anglais. 
 
-= Acknowledgements <unnumbered>
+#lorem(150)
+
+#v(1fr)
+
+*Keywords* : #context global_keywords.get().join(", ")
+
+= Acknowledgements <single_page>
 
 The *Acknowledgements* section of a bachelor thesis is where you express gratitude to those who supported you during your research and writing process. It is an *OPTIONAL* section. It may include:
 

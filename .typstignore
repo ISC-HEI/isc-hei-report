@@ -11,6 +11,9 @@
 tests
 example
 scripts
+templates
 Justfile
+**/*.pdf
+
 # PDF manuals should be included so that they can be linked, but not their sources
 docs/*

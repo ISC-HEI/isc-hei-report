@@ -4,6 +4,8 @@
 # adapted from https://github.com/johannes-wolf/cetz/blob/35c0868378cea5ad323cc0d9c2f76de8ed9ba5bd/scripts/package
 # licensed under Apache License 2.0
 
+TEMPLATE="$1"
+
 # Local package directories per platform
 if [[ "$OSTYPE" == "linux"* ]]; then
   DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"
@@ -22,8 +24,8 @@ function read-toml() {
 }
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)/.." # macOS has no realpath
-PKG_PREFIX="$(read-toml "$ROOT/typst.toml" "name")"
-VERSION="$(read-toml "$ROOT/typst.toml" "version")"
+PKG_PREFIX="$(read-toml "$ROOT/templates/$TEMPLATE/typst.toml" "name")"
+VERSION="$(read-toml "$ROOT/templates/$TEMPLATE/typst.toml" "version")"
 
 function resolve-target() {
   local target="$1"
