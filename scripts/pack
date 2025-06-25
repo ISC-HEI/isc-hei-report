@@ -90,6 +90,7 @@ if [[ "$TEMPLATE" == "report" ]]; then
 	# remove the typst.toml in the template directory
 	echo "Removing bachelor_thesis from template $TEMPLATE"
 	rm -f "$TMP/src/bachelor_thesis.typ"
+	rm -rf "$TMP/src/pages"
 fi
 
 TARGET="${TARGET:?}/${PKG_PREFIX:?}/${VERSION:?}"

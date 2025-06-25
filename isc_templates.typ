@@ -6,7 +6,26 @@
 
 #import "lib/includes.typ" as inc
 
-#let global_keywords = state("kw", ())
+#let space-after-heading = 0.5em
+#let chapter-font-size = 1.5em
+#let global_keywords = inc.global_keywords
+
+#let heavy_title(title) = {
+  set text(size: chapter-font-size * 2, weight: 800)
+  // pagebreak(to: "odd", weak: false)
+  block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 4em), below: space-after-heading * 2, {
+    title
+  })
+}
+
+#let set_header_footer(enabled) = {
+  context inc.header_footers_enabled.update(enabled)
+}
+
+#let cleardoublepage() = {
+  pagebreak(to: "even")
+  pagebreak()
+}
 
 // Indicate that something still needs to be done
 #let todo(body, fill-color: yellow.lighten(50%)) = {
@@ -79,6 +98,7 @@
 
 // Replace the original function by ours
 #let codelst-sourcecode = inc.sourcecode
+
 #let code = codelst-sourcecode.with(
   frame: block.with(fill: _luma-background, stroke: 0.5pt + luma(80%), radius: 3pt, inset: (x: 6pt, y: 7pt)),
   numbering: "1",
@@ -125,7 +145,7 @@
   code-theme: "bluloco-light",
   body,
 ) = {
-  global_keywords.update(keywords)
+  inc.global_keywords.update(keywords)
 
   let i18n = i18n.with(extra-i18n: extra-i18n, language)
 
@@ -162,7 +182,6 @@
   /////////////////////////////////////////////////
   //  Basic pagination and typesetting
   /////////////////////////////////////////////////
-
   set rect(width: 100%, height: 100%, inset: 4pt)
 
   // Thesis specific settings
@@ -177,8 +196,13 @@
     paper: "a4",
   ) if(not is-thesis)
 
-  let space-after-heading = 0.5em
-  let chapter-font-size = 1.5em
+  if(not is-thesis) {
+    // For reports, we want to put the header and footer on all pages
+    set_header_footer(true)
+  } else {
+    // For theses, we want to put the header and footer only on the first page
+    set_header_footer(false)
+  }
 
   show heading: it => {
     // In a thesis
@@ -199,22 +223,20 @@
     }
   }
 
-  // Tag the header like = Chapter title <unnumbered> to remove the numbering
-  // show heading.where(label: <single_page>): set heading(numbering: none, outlined: false, bookmarked: true)
-
-  show heading.where(label: <single_page>): it => {
-    set heading(numbering: none, outlined: false)
-    set text(font: sans-font, size: chapter-font-size, weight: 800)
-    pagebreak(to: "odd", weak: false)
-    block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 5em), below: space-after-heading * 2, if (it.numbering != none) {
-      // If the heading has a numbering, display it
-      it.body
-    } else {
-      // Otherwise just display the body
-      it
-      v(1fr)
-    })
-  }
+  // show heading.where(label: <single_page>): it => {
+  //   it.numbering = none
+  //   set heading(numbering: none, outlined: false)
+  //   set text(font: sans-font, size: chapter-font-size, weight: 800)
+  //   pagebreak(to: "odd", weak: false)
+  //   block(fill: none, inset: (x: 0pt, bottom: 2pt, top: 5em), below: space-after-heading * 2, if (it.numbering != none) {
+  //     // If the heading has a numbering, display it
+  //     it.body
+  //   } else {
+  //     // Otherwise just display the body
+  //     it
+  //     v(1fr)
+  //   })
+  // }
 
   let authors-str = ()
 
@@ -237,23 +259,35 @@
   ]
 
   let footer-content = context text(0.75em)[
-    #emph(title)
-    #h(1fr)
-    #counter(page).display("1/1", both: true)
+    #{
+      emph(title)
+      h(1fr)
+      counter(page).display("1/1", both: true)
+    }
   ]
 
   // Set header and footers
   set page(
     // For pages other than the first one
-    header: context if counter(page).get().first() > 2 {
-      header-content
+    header: context if counter(page).get().first() > 1 {
+      if inc.header_footers_enabled.get() {        
+        header-content  
+      }
+      else {
+        none
+      }
+      
     },
     header-ascent: 40%,
     // For pages other than the first one
-    footer: context if counter(page).get().first() > 2 [
-      #move(dy: 5pt, line(length: 100%, stroke: 0.5pt))
-      #footer-content
-    ],
+    footer: context if counter(page).get().first() > 1 {
+      if inc.header_footers_enabled.get() {
+        move(dy: 5pt, line(length: 100%, stroke: 0.5pt))
+        footer-content
+      } else {
+        none
+      }      
+    },
   )
 
   // Links coloring

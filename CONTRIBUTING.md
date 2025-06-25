@@ -46,7 +46,7 @@ just uninstall-preview pack_distro_preview
 then test the template as needed by creating a local sample
 
 ```bash
-typst init @preview/isc-hei-report:0.3.0
+typst init @preview/isc-hei-report:0.3.1
 ```
 
 Then go the directory, try to compile with `typst watch report.typ`.

@@ -60,26 +60,24 @@
     text(i18n("faculty"), size: 12pt),
     v(2mm),
     text(school, size: 12pt),
-  )))) 
+  ))))
 
   // Second cover page
-  pagebreak()
+  isc.cleardoublepage()
 
-  // Set the document's basic properties.
   set page(margin: (left: 31.5mm, right: 32mm, top: 55mm, bottom: 50mm), numbering: none, number-align: center)
-
-  // Title etc.
+  
   stack(
     // Author
     align(center, text(authors, size: 18pt)),
     v(23mm),
     // Title
-    align(center, par(leading: 13pt, text(title, size: 22pt))),
+    align(center, par(leading: 13pt, text(title, size: 22pt, weight: 600))),
     v(22mm),
   )
 
   v(1fr)
-   
+
   stack(
     // Content
     stack(
@@ -106,13 +104,11 @@
     },
     // Submission date
     if submission-date != none {
-      stack(
-        v(6mm),
-        line(start: (0pt, 0pt), length: 25pt, stroke: 1mm),
-        v(6mm),
-        text(i18n("submitted-on") + ": " + inc.custom-date-format(submission-date, i18n("date-format"), language), size:10pt),
-      )
+      stack(v(6mm), line(start: (0pt, 0pt), length: 25pt, stroke: 1mm), v(6mm), text(
+        i18n("submitted-on") + ": " + inc.custom-date-format(submission-date, i18n("date-format"), language),
+        size: 10pt,
+      ))
     },
   )
-}
+  
 }

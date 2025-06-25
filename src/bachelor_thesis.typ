@@ -1,92 +1,53 @@
 #import "@preview/isc-hei-bthesis:0.5.0" : *
 
-#let doc_language = "en" // Or en/de 
+#let doc_language = "en"
 
 #show: project.with( 
   title: "Life, the Universe and Everything", 
     
   is-thesis: true,   
   split-chapters: true,
-  
+
   thesis-supervisor: [Prof. Dr John Von Neumann], 
   thesis-co-supervisor: [Lady Ada Lovelace], // Optional
   thesis-expert: [Thesis expert],
   
-  school: [Haute École d'Ingénierie de Sion], // Or HES-SO Valais-Wallis
+  school: [Haute École d'Ingénierie de Sion], 
   programme: [Informatique et Systèmes de communication],
 
   // Some keywords related to your thesis
-  keywords: ("computer science", "data engineering", "machine learning"),
+  keywords: ("engineering", "data", "machine learning", "meteorology"), // or global_keywords.get() if defined in includes.typ
   major : "Data engineering", // "Software engineering", "Embedded systems", "Security", "something else"
 
   authors: "James Gosling", 
 
   date: datetime(year: 2025, month: 6, day: 24), // or datetime.today() 
-  language: doc_language, // Or en/de if required
+  language: doc_language, // en or fr
   version: none, // or for instance "1.0", for the version of your thesis],  
   code-theme: "bluloco-light",
 ) 
-   
-//// If using acronyms 
-#import "@preview/acrostiche:0.5.2": *     
-#include "acronyms.typ"
 
-// Let's get started         
-= Abstract <single_page>
-The abstract of a bachelor thesis should provide a concise summary of the entire work. It typically includes:
+// // If using acronyms 
+// #import "@preview/acrostiche:0.5.2": *     
+// #include "acronyms.typ"
 
-- The context and motivation for the research.
-- The main objective or research question.
-- A brief description of the methodology or approach used.
-- The key results or findings.
-- The main conclusion or implications of the work.
+// Let's get started folks !
 
-The abstract should be self-contained, clear, and usually does not exceed 250–300 words. It allows readers to quickly understand the purpose and outcomes of the thesis without reading the full document.
+#cleardoublepage()
+#include "pages/abstract.typ"
 
-The abstract *must* be written in both French and English.
+#cleardoublepage()
+#include "pages/résumé.typ"
 
-#lorem(150)
+#cleardoublepage()
+#include "pages/acknowledgements.typ"
 
-#v(1fr)
-
-*Keywords* : **#context global_keywords.get().join(", ")**
-
-= Résumé <single_page>
-Le résumé d’un mémoire de bachelor doit fournir un aperçu concis de l’ensemble du travail. Il inclut généralement :
-
-- Le contexte et la motivation de la recherche.
-- L’objectif principal ou la question de recherche.
-- Une brève description de la méthodologie ou de l’approche utilisée.
-- Les principaux résultats ou découvertes.
-- La conclusion principale ou les implications du travail.
-
-Le résumé doit être autonome, clair et ne pas dépasser habituellement 250 à 300 mots. Il permet aux lecteurs de comprendre rapidement le but et les résultats du mémoire sans lire l’intégralité du document. 
-
-Le résumé doit être rédigé en français *et* en anglais. 
-
-#lorem(150)
-
-#v(1fr)
-
-*Keywords* : #context global_keywords.get().join(", ")
-
-= Acknowledgements <single_page>
-
-The *Acknowledgements* section of a bachelor thesis is where you express gratitude to those who supported you during your research and writing process. It is an *OPTIONAL* section. It may include:
-
-- Academic supervisors or advisors who provided guidance. 
-- Professors or instructors who offered feedback or resources.
-- Family and friends for emotional or practical support.
-- Institutions or organizations that provided funding, facilities, or data.
-- Anyone else who contributed significantly to your work. 
- 
-Keep this section concise and sincere. It is typically placed after the abstract and before the main content of your thesis.
-
-// // // Generate the Table of Contents
+// Generate the Table of Contents
 #table_of_contents(doc_language, depth:1)
 
 = Writing a thesis 
- 
+#set_header_footer(true)
+
 Writing a report is an exercise that involves both *content and form*. In this document, we aim to simplify the formatting aspect without making any assumptions about the content, specifically in the context of the ISC program#footnote[Here is how to add a footnote https://isc.hevs.ch].
 
 The general structure of a bachelor thesis typically includes the following sections:
@@ -128,26 +89,22 @@ Have fun #todo[writing your thesis!] and good luck with it !
 #bibliography("bibliography.bib", full: true, style: "ieee")
 
 // Include the appendix in the TOC but without numeration
-#set heading(numbering: none, outlined : true)
-
-//TODO investigate this
-#let cleardoublepage() = {
-  pagebreak(to: "even")  
-  pagebreak()
-}
+#set heading(numbering: none, outlined : true, bookmarked: true)
 
 #cleardoublepage()
 
 // The appendix page
 #place(center + horizon,
    [
-     #set text(size:25pt)
-     #i18n(doc_language, "appendix-title")
+    #{
+     set text(size: chapter-font-size*2, weight: 800)
+     i18n(doc_language, "appendix-title")
+    }
    ]
 ) 
 
 // // From now on, do not number the sections and remove from general outline
-// #set heading(numbering: none, outlined : true)
+#set heading(numbering: none, outlined : true)
 
 #pagebreak()
   

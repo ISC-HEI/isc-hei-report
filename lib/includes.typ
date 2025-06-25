@@ -6,3 +6,6 @@
 
 // Custom date format
 #import "@preview/datify:0.1.4": day-name, month-name, custom-date-format
+
+#let global_keywords = state("kw", ())
+#let header_footers_enabled = state("header_footers_enabled", false)
