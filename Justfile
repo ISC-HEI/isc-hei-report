@@ -43,9 +43,14 @@ remove target:
 uninstall: (remove "@preview")
 
 # packs the library into the specified destination folders (report and bachelor)
-pack_distro target:
+pack_distro target:  
   ./scripts/pack "{{target}}" "bachelor-thesis"
   ./scripts/pack "{{target}}" "report"
 
 # packs report and bachelor into two directories, for previewing and local testing
 pack_distro_preview : (pack_distro "@preview")
+
+# creates the thumbnails from the examples
+generate_thumbs:
+  convert -density 150 'examples/bachelor_thesis.pdf' -flatten bachelor_thesis_thumb.png
+  convert -density 150 'examples/report.pdf' -flatten report_thumb.png

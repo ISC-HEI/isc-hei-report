@@ -14,4 +14,4 @@ disciplines = ["computer-science", "engineering"]
 [template]
 path = "src"
 entrypoint = "bachelor_thesis.typ"
-thumbnail = "thumbnail.png"
+thumbnail = "bachelor_thesis_thumb.png"
