@@ -81,7 +81,7 @@ done
 
 cp $ROOT/src/*.pdf "$ROOT/examples/"
 
-if [[ "$TEMPLATE" == "bachelor_thesis" ]]; then
+if [[ "$TEMPLATE" == "bachelor-thesis" ]]; then
 	echo "Removing report.typ from template $TEMPLATE"
 	rm -f "$TMP/src/report.typ"
 	rm -f "$TMP/report_thumb.png"
