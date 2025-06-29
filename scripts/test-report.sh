@@ -17,7 +17,7 @@ else
 fi
 
 cd tmp
-typst init @preview/isc-hei-report:0.3.1
+typst init @preview/isc-hei-report:0.5.2
 cd isc-hei-report
 typst compile report.typ
 cd ..

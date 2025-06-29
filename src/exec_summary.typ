@@ -1,3 +1,5 @@
+// Adapted from the BFH year book template https://www.bfh.ch/dam/jcr:e512ae31-a3ed-4b65-b589-870383d794b0/abschlussarbeiten-bsc-informatik.pdf
+
 #import "@preview/isc-hei-exec-summary:0.5.2" : *
 
 #let doc_language = "en" // Valid values are en, fr

@@ -83,8 +83,13 @@ cp $ROOT/src/*.pdf "$ROOT/examples/"
 
 if [[ "$TEMPLATE" == "exec-summary" ]]; then
 	echo "Removing useless files from template $TEMPLATE"
-	rm -f "$TMP/src/report.typ"
+	rm -rf "$TMP/src/pages"
+	rm -rf "$TMP/src/code"
+	rm -f "$TMP/src/report.typ"	
+	rm -f "$TMP/src/bibliography.bib"
+	rm -f "$TMP/src/acronyms.typ"	
 	rm -f "$TMP/src/bachelor_thesis.typ"
+	rm -f "$TMP/src/figs/cover_image_placeholder.png"	
 	rm -f "$TMP/report_thumb.png"
 	rm -f "$TMP/bachelor_thesis_thumb.png"
 fi
