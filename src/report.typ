@@ -1,23 +1,27 @@
-#import "@preview/isc-hei-report:0.3.1" : *
+#import "@preview/isc-hei-report:0.5.2" : *
 
 #let doc_language = "fr" // Valid values are en, fr
 
 #show: project.with(
   title: "Rapport de projet pour la filière ISC",
   sub-title: [Avec une mise en page `Typst`],
+  authors: ("D. Knuth", "L. Torvalds", "M. Odersky",),  
+  date: datetime(year: 2025, month: 6, day: 24), // or datetime.today()
+  language: doc_language, // Please change the value above if required
+  
   course-name: "101.1 Programmation impérative",
   course-supervisor: "Prof. Dr P.-A. Mudry",
   semester: "Semestre de printemps",
   academic-year: "2025-2026",
-  cover-image: image("figs/cover_image_placeholder.png"),
-  cover-image-height: 8cm, // Default value = 10cm
-  cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
-  authors: ("D. Knuth", "L. Torvalds", "M. Odersky",),  
+  version: [Using template 0.5.2],
+  
+  cover-image: image("figs/cover_image_placeholder.png"), // Change this to your cover image
+  cover-image-height: 8cm,
+  cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
+  
   logo: image("figs/isc_logo.svg"),
-  date: datetime(year: 2025, month: 6, day: 24), // or datetime.today()
-  language: doc_language, // Please change the value above
-  version: [Using template 0.3.1],
-  code-theme: "bluloco-light",
+  
+  code-theme: "bluloco-light", // See directory themes/ for available themes
 )
 
 //// If using acronyms

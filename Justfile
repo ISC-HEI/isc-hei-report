@@ -31,10 +31,14 @@ install-symblink-report: (symblink "@preview" "report")
 # create symblink for dev bachelor thesis
 install-symblink-bthesis: (symblink "@preview" "bachelor-thesis")
 
+# create symblink for executive summary
+install-symblink-exec-summary: (symblink "@preview" "exec-summary")
+
 [private]
 remove target:
   ./scripts/uninstall "{{target}}" "bachelor-thesis"
   ./scripts/uninstall "{{target}}" "report"
+  ./scripts/uninstall "{{target}}" "executive-summary"
 
 # uninstalls the library from the "@local" prefix
 # uninstall: (remove "@local")

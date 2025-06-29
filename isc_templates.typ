@@ -1,5 +1,6 @@
 // Template for ISC bachelor degree programme at the School of engineering in Sion
-// Since 2024, pmudry with contributions from @LordBaryhobal, @MadeInShineA
+// Since 2024, @pmudry with contributions from @LordBaryhobal, @MadeInShineA
+// Bachelor thesis template first page inspired from Lasse Rosenow work on https://typst.app/universe/package/haw-hamburg-master-thesis
 
 #import "lib/includes.typ" as inc
 
@@ -35,6 +36,16 @@
 #let todo(body, fill-color: yellow.lighten(50%)) = {
   set text(black)
   box(baseline: 25%, fill: fill-color, inset: 3pt, [*TODO* #body])
+}
+
+// Generate a lorem ipsum with paragraphs
+#let lorem-pars(n-words, each: 5) = {
+  let n = int(n-words / (each * 30))  
+  let sentences = lorem(n * (each * 30)).split(". ")
+
+  range(n)
+    .map(i => sentences.slice(i * each, count: each).join(". ") + [.])
+    .join(parbreak())
 }
 
 //
@@ -169,7 +180,7 @@
   title: [Report title],
   sub-title: [Report sub-title],
   academic-year: [2024-2025],
-  // If its a thesis
+  // If it's a thesis
   is-thesis: false,
   split-chapters: true,
   thesis-supervisor: [Thesis supervisor],
@@ -179,13 +190,19 @@
   major: (),
   school: [School name],
   programme: [Informatique et Systèmes de Communication],
-  // If its a report
+  // If it's executive summary
+  is-executive-summary: false,
+  summary: none,
+  picture: none,
+  permanent-email: "john@doe.com",
+  bind-left: true,
+  // If it's a report
   course-name: [Course name],
   course-supervisor: [Course supervisor],
   semester: [Semester],
   cover-image: none,
   cover-image-height: 10cm,
-  cover-image-caption: [A KNN graph -- Inspired by _Marcus Volg_],
+  cover-image-caption: [KNN graph -- Inspired by _Marcus Volg_],
   cover-image-kind: auto,
   cover-image-supplement: auto,
   // A list of authors, separated by commas
@@ -244,11 +261,17 @@
     paper: "a4",
   ) if(is-thesis)
 
+  // Executive summary specific settings
+  set page(
+    margin: (inside: 1.5cm, outside: 1.5cm, bottom: 2.1cm, top: 1.5cm), // Binding inside
+    paper: "a4",
+  ) if(is-executive-summary)
+
   // Report specific settings
   set page(
     margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
     paper: "a4",
-  ) if(not is-thesis)
+  ) if(not is-executive-summary and not is-thesis)
 
   if (not is-thesis) {
     // For reports, we want to put the header and footer on all pages
@@ -332,6 +355,7 @@
   // Sections numbers
   set heading(numbering: "1.1.1 –") if (is-thesis)
   set heading(numbering: "1.1.1 –") if (not is-thesis)
+  set heading(numbering: none) if (is-executive-summary)
 
   /////////////////////////////////////////////////
   // Handle specific captions styling
@@ -384,7 +408,7 @@
   /////////////////////////////////////////////////
   // Cover pages
   /////////////////////////////////////////////////
-  if (not is-thesis) {
+  if (not is-thesis and not is-executive-summary) {
     import "lib/pages/cover_report.typ": cover_page
 
     let report_cover = cover_page(
@@ -407,7 +431,7 @@
     )
 
     report_cover
-  } else {
+  } else if is-thesis {
     import "lib/pages/cover_bachelor.typ": cover_page
 
     let supervisors = ()
@@ -428,16 +452,41 @@
       academic-year: academic-year,
       school: school,
       programme: programme,
-      major: major,
-      cover-image: cover-image,
-      cover-image-height: cover-image-height,
-      cover-image-caption: cover-image-caption,
-      cover-image-kind: cover-image-kind,
-      cover-image-supplement: cover-image-supplement,
+      major: major,      
       authors: authors-str,
       submission-date: date,
       logo: logo,
       language: language,
+    )
+
+    report_cover
+  } else if is-executive-summary {
+    import "lib/pages/cover_exec_summary.typ": cover_page
+
+    let supervisors = ()
+
+    if (thesis-co-supervisor == none) {
+      supervisors = (thesis-supervisor,)
+    } else {
+      supervisors = (thesis-supervisor, thesis-co-supervisor)
+    }
+
+    let report_cover = cover_page(
+      title: title,
+      authors: authors-str,
+      summary: summary,
+      picture: picture,
+      permanent-email: "none@none.com",
+      academic-year: academic-year,
+      supervisors: supervisors,
+      expert: thesis-expert,
+      school: school,
+      programme: programme,
+      major: major,
+      language: language,      
+      bind-left: true,            
+      font: sans-font,      
+      logo: logo,
     )
 
     report_cover

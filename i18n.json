@@ -19,12 +19,13 @@
         "acknowledgements": "Remerciements",
         "thesis-submitted" : "Mémoire soumis pour le programme de bachelor",
         "thesis-study-course" : "Programme d'études",
+        "programme-title" : "Filière",
         "hes-so" : "Haute école spécialisée de Suisse occidentale",
         "faculty" : "Faculté Ingénierie et Architecture",
         "supervising-examiner": "Superviseur·e",
         "supervising-second-examiner": "Co-superviseur·e",
         "supervising-expert": "Expert·e",
-        "submitted-on": "Travail soumis soumis le "
+        "submitted-on": "Travail soumis le"
     },    
     "en": {
         "toc-title": "Table of Contents",
@@ -46,6 +47,7 @@
         "acknowledgements": "Acknowledgements",
         "thesis-submitted" : "Thesis submitted to the Bachelor degree programme",
         "thesis-study-course" : "Study Program",
+        "programme-title" : "Degree programme",
         "hes-so" : "University of Applied Sciences and Arts Western Switzerland",
         "faculty" : "Faculty of Engineering and Architecture",
         "supervising-examiner": "Supervisor",

@@ -1,12 +1,17 @@
 # [unreleased](https://github.com/<author>/<my-package>/releases/tag/<the-tag>)
 
 ## Added
+- Executive summary template
+- Lorem-ipsum paragraphs to have a better representation of final output
 
 ## Removed
 
 ## Changed
+- Minor changes in template declaration comments
+- Updated repos URL
+- Title page 2 for `b-thesis` has now correct colons for `fr` and `en`, corrected typo in `fr` thanks to M. Ribeiro
 
-## Migration Guide from v0.1.X
+## Migration Guide from v0.3.X
 - nothing special
 
 ---

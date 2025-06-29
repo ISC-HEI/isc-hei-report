@@ -36,13 +36,14 @@
     }
   }
 
-  // Title page.
+  // Title page
   insert-logo(logo)
 
   let title-block = [
     #course-supervisor\
     #semester #academic-year
   ]
+
   let title-block-content = title-block
 
   place(top + left, dy: -2em, text(1em)[

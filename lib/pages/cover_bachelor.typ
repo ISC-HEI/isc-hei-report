@@ -14,11 +14,6 @@
   school: "",
   programme: "",
   major: "",
-  cover-image: "",
-  cover-image-height: "",
-  cover-image-caption: "",
-  cover-image-kind: "",
-  cover-image-supplement: "",
   authors: "",
   submission-date: "",
   logo: none,
@@ -46,10 +41,6 @@
     v(5mm),
     line(start: (0pt, 0pt), length: 2.5cm, stroke: .7mm),
     v(5mm),
-    // // Faculty
-    // text(school, size: 14pt, weight: "bold"),
-    // v(2mm),
-    // Programme
     text(programme, size: 14pt),
   ))
 
@@ -91,28 +82,31 @@
     v(6mm),
     line(start: (0pt, 0pt), length: 25pt, stroke: 1mm),
     v(6mm),
-    // Supervision
-    if supervisors.len() > 0 {
+    
+    let colon = if language == "fr" { " : " } else { ": " },
+
+    if supervisors.len() > 0 {      
       if type(supervisors) != array {
-        text(i18n("supervising-examiner") + ": " + text(upper(supervisors), weight: "bold"), size: 10pt)
+        text(i18n("supervising-examiner") + colon + text(upper(supervisors), weight: "bold"), size: 10pt)
       } else {
-        text(i18n("supervising-examiner") + ": " + text(upper(supervisors.first()), weight: "bold"), size: 10pt)
+        text(i18n("supervising-examiner") + colon + text(upper(supervisors.first()), weight: "bold"), size: 10pt)
 
         if supervisors.len() > 1 {
           linebreak()
-          text(i18n("supervising-second-examiner") + ": " + text(upper(supervisors.at(1)), weight: "bold"), size: 10pt)
+          text(i18n("supervising-second-examiner") + colon + text(upper(supervisors.at(1)), weight: "bold"), size: 10pt)
         }
       }
     },
+
     if expert != none {    
       linebreak()
-      text(i18n("supervising-expert") + ": " + text(upper(expert), weight: "bold"), size: 10pt)
+      text(i18n("supervising-expert") + colon + text(upper(expert), weight: "bold"), size: 10pt)
     },
-    // Submission date
+
     if submission-date != none {
       stack(v(6mm), line(start: (0pt, 0pt), length: 25pt, stroke: 1mm), v(6mm), text(
-        i18n("submitted-on") + ": " + inc.custom-date-format(submission-date, i18n("date-format"), language),
-        size: 10pt,
+      i18n("submitted-on") + colon + inc.custom-date-format(submission-date, i18n("date-format"), language),
+      size: 10pt,
       ))
     },
   )
