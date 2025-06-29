@@ -65,6 +65,17 @@ For convenience, `scripts/test-report.sh` and `scripts/test-thesis.sh` enable to
 - Test using `typst-package-check` from https://github.com/typst/package-check, using `typst-package-check check @preview/isc-hei-bthesis:0.5.0` from the `packages` directory *inside* of the cloned repos.
 - From github, create PR as usual. A template creates automatically the PR text with update etc... If changes are required by CI/CD, push to local repository. It updates the PR automatically.
 
+## Forking issues
+
+If the forked repository is still "ahead" of the forked branch, make this : 
+
+```bash
+git fetch upstream
+git checkout main
+git reset --hard upstream/main
+git push origin main --force
+```
+
 ## Image quantization
 To reduce the size of images, which is nice for reducing the template size on the Universe.
 
