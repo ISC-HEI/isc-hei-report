@@ -79,7 +79,7 @@ DataFlowX delivers significant benefits by enabling organizations to harness rea
   ```
 ], caption: "A code snippet")
 
-Everything *must* fit on one page when rendered !
+#align(center, block(text([Everything *must* fit on one page when rendered !]), fill : yellow, inset:4pt))
 
 // Optionally, if you need a figure spanning multiple columns, you can use this.
 #place(

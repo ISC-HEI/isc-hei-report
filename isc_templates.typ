@@ -35,7 +35,7 @@
 // Indicate that something still needs to be done
 #let todo(body, fill-color: yellow.lighten(50%)) = {
   set text(black)
-  box(baseline: 25%, fill: fill-color, inset: 3pt, [*TODO* #body])
+  box(baseline: 25%, fill: fill-color, inset: 4pt, [*TODO* #body])
 }
 
 // Generate a lorem ipsum with paragraphs
