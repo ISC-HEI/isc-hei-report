@@ -1,12 +1,12 @@
 <p align="right">
-  <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" align="right" alt="ISC Logo" height="60"/>
+  <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" align="right" alt="ISC Logo" height="50"/>
 </p>
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/ISC-HEI/isc-hei-report)
 ![GitHub Release](https://img.shields.io/github/v/release/ISC-HEI/isc-hei-report?include_prereleases)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen")
 
-# Document templates for ISC students :scroll:
+# Document templates for ISC students
 
 This is the official templates for reports, bachelors thesis and project executive summary for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. It is made to help the students focus on content, using `Tyst` as the typesetting software.
 
