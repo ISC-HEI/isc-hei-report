@@ -14,7 +14,52 @@ The primary objective of DataFlowX is to provide organizations with a robust and
 
 The platform leverages distributed processing and intelligent scheduling to optimize performance and resource utilization. Additionally, DataFlowX is designed to seamlessly integrate with modern business intelligence tools, enabling faster and more accurate insights. Ultimately, the project seeks to empower businesses to make data-driven decisions efficiently and confidently in dynamic environments.
 
-#figure(image("figs/isc_logo.svg", fit: "contain", height: 2.5cm), caption: none)
+// An example a figure using the `cetz` package to draw a
+#import "@preview/cetz:0.4.0": canvas, draw
+#import "@preview/cetz-plot:0.1.2": plot
+#import draw: line, content, circle, rect
+
+#let ex_fig = canvas(length: 2cm, {
+  import draw: *
+  let phi = (1 + calc.sqrt(5)) / 2
+
+  ortho({
+    hide({
+      line(
+        (-phi, -1, 0), (-phi, 1, 0), (phi, 1, 0), (phi, -1, 0), close: true, name: "xy",
+      )
+      line(
+        (-1, 0, -phi), (1, 0, -phi), (1, 0, phi), (-1, 0, phi), close: true, name: "xz",
+      )
+      line(
+        (0, -phi, -1), (0, -phi, 1), (0, phi, 1), (0, phi, -1), close: true, name: "yz",
+      )
+    })
+
+    intersections("a", "yz", "xy")
+    intersections("b", "xz", "yz")
+    intersections("c", "xy", "xz")
+
+    set-style(stroke: (thickness: 0.5pt, cap: "round", join: "round"))
+    line((0, 0, 0), "c.1", (phi, 1, 0), (phi, -1, 0), "c.3")
+    line("c.0", (-phi, 1, 0), "a.2")
+    line((0, 0, 0), "b.1", (1, 0, phi), (-1, 0, phi), "b.3")
+    line("b.0", (1, 0, -phi), "c.2")
+    line((0, 0, 0), "a.1", (0, phi, 1), (0, phi, -1), "a.3")
+    line("a.0", (0, -phi, 1), "b.2")
+
+    anchor("A", (0, phi, 1))
+    content("A", [$A$], anchor: "north", padding: .1)
+    anchor("B", (-1, 0, phi))
+    content("B", [$B$], anchor: "south", padding: .1)
+    anchor("C", (1, 0, phi))
+    content("C", [$C$], anchor: "south", padding: .1)
+    line("A", "B", stroke: (dash: "dashed"))
+    line("A", "C", stroke: (dash: "dashed"))
+  })
+})
+
+#align(center, scale-to-width(50%, ex_fig))
 
 == Explanation
 The development of DataFlowX followed an agile methodology, emphasizing iterative progress and continuous feedback. The project began with requirements gathering and architectural design, focusing on scalability and integration capabilities. Core modules for data ingestion, transformation, and validation were implemented using distributed processing frameworks. Automated testing and code reviews ensured reliability and maintainability throughout development. 
@@ -28,13 +73,12 @@ Performance benchmarks and user acceptance testing validated the system’s effe
 == Conclusion / Benefits 
 DataFlowX delivers significant benefits by enabling organizations to harness real-time analytics on large, heterogeneous datasets with ease. Its automated data ingestion, transformation, and validation processes reduce manual effort and minimize errors, ensuring high data quality. The platform’s distributed architecture and intelligent scheduling optimize resource usage and scalability, supporting growing business needs. By streamlining complex data workflows and providing robust performance, DataFlowX empowers businesses to respond quickly to changing environments, maintain a competitive edge, and make informed, data-driven decisions with confidence and efficiency.
 
-#figure(code()[
+#figure(code(numbering: none)[
 ```scala
-  def foo(val a : Any) : Int = {
-    a match :
-      case a: Int  => 12
-      case _ => 42
-  }
+  def lambda(val x : Any) : Int =
+    x match :
+      case f: Int => f
+      case _ => 42 // The answer  
   ```
 ], caption: "A code snippet")
 

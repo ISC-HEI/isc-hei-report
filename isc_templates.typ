@@ -48,6 +48,20 @@
     .join(parbreak())
 }
 
+// Cetz
+#let scale-to-width(width, body) = layout(page-size => {
+  let size = measure(body, ..page-size)
+  let target-width = if type(width) == ratio {
+    page-size.width * width
+  } else if type(width) == relative {
+    page-size.width * width.ratio + width.length
+  } else {
+    width
+  }
+  let multiplier = target-width.to-absolute() / size.width
+  scale(reflow: true, multiplier * 100%, body)
+})
+
 //
 // Multiple languages support
 // Thanks @LordBaryhobal for the original idea
