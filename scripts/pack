@@ -81,17 +81,31 @@ done
 
 cp $ROOT/src/*.pdf "$ROOT/examples/"
 
-if [[ "$TEMPLATE" == "bachelor-thesis" ]]; then
-	echo "Removing report.typ from template $TEMPLATE"
+if [[ "$TEMPLATE" == "exec-summary" ]]; then
+	echo "Removing useless files from template $TEMPLATE"
 	rm -f "$TMP/src/report.typ"
+	rm -f "$TMP/src/bachelor_thesis.typ"
 	rm -f "$TMP/report_thumb.png"
+	rm -f "$TMP/bachelor_thesis_thumb.png"
+fi
+
+if [[ "$TEMPLATE" == "bachelor-thesis" ]]; then
+	echo "Removing report.typ from template $TEMPLATE"	
+	rm -f "$TMP/src/exec_summary.typ"
+	rm -f "$TMP/src/report.typ"
+	rm -f "$TMP/src/figs/stormy_peters.jpg"
+	rm -f "$TMP/report_thumb.png"
+	rm -f "$TMP/exec_summary.png"
 fi
 
 if [[ "$TEMPLATE" == "report" ]]; then
 	# remove the typst.toml in the template directory
 	echo "Removing bachelor_thesis from template $TEMPLATE"
 	rm -f "$TMP/src/bachelor_thesis.typ"
+	rm -f "$TMP/src/exec_summary.typ"
+	rm -f "$TMP/src/figs/stormy_peters.jpg"
 	rm -f "$TMP/bachelor_thesis_thumb.png"
+	rm -f "$TMP/exec_summary.png"
 	rm -rf "$TMP/src/pages"
 fi
 

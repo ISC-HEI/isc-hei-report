@@ -10,8 +10,7 @@ To build, test and deploy new releases I'm using [just](https://github.com/casey
 
 Both can be installed with:
 ```bash
-sudo apt install just
-sudo apt install imagemagick
+sudo apt install just imagemagick pngquant
 ```
 
 # Development process
@@ -70,5 +69,5 @@ For convenience, `scripts/test-report.sh` and `scripts/test-thesis.sh` enable to
 To reduce the size of images, which is nice for reducing the template size on the Universe.
 
 ```bash
-pngquant *.png --ext .png --force
+pngquant --quality 10-80 *.png --ext .png --force
 ```

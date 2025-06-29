@@ -502,7 +502,7 @@
       programme: programme,
       major: major,
       language: language,      
-      bind-left: true,            
+      bind-left: bind-left,
       font: sans-font,      
       logo: logo,
     )

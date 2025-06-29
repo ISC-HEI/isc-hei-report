@@ -22,16 +22,15 @@
   font: none,
   logo: none,
 ) = {
+
   let i18n = isc.i18n.with(extra-i18n: none, language)
+  let hei_color = color.rgb("#d41367") // HEI color
 
   // Make the caption for the executive summary 
   set figure(numbering: none, supplement: none)
   show figure.caption: set text(8pt) // Smaller font size
   show figure.caption: emph // Use italics
   set figure.caption(separator: " - ") // With a nice separator  
-
-  // School logo
-  // place(top + right, dx: -8mm, dy: 10mm, image("../assets/hei_logo.svg", width: 180pt))
 
   let colon = if language == "fr" { " : " } else { ": " }
   set text(font: font, size: 8.5pt)
@@ -66,6 +65,7 @@
     v(1.3em), 
     line(start: (0pt, 0pt), length: 25pt, stroke: 1mm),     
     ),
+    v(.5em)
   )
 
   if (summary.len() == 0) {
@@ -76,7 +76,9 @@
     panic("The summary must be less than 500 characters long.")
   }
 
-  text(summary, fill: color.rgb("#d41367"), size: 14pt)  
+  text(summary, fill: hei_color, size: 14pt)  
+
+  v(.5em)
 
   // set rect(
   //   inset: 5pt,
@@ -92,49 +94,59 @@
   )
 
   // The main content of the executive summary
+  let student-content = rect[#columns(2, gutter: 9pt, content)]
+  let dir = if bind-left { right } else { left }
+  
+  let w = 30mm
+  let h = w * 9 / 6.5
+
+  show heading: set text(size: 10pt, weight: "bold", fill: hei_color)
+
+  let student-picture = [
+    #{
+      // Make local rule for student photograph
+      set image(
+        fit: "cover",
+        width: 100%,
+        height: 100%
+      )
+
+      grid.cell(      
+        colspan: 1,
+        stack(     
+          spacing: 0.5em, 
+          box(
+            clip: true,
+            stroke: stroke(paint: color.luma(40%), thickness: .2pt, cap: "round"),
+            radius: 1pt,
+            picture,
+            width: w,
+            height: h
+          ),        
+          align(dir, text(authors, size: 7pt, fill: hei_color)),
+          // align(right)[#text(permanent-email, size: 6pt)],
+          )
+      )
+    }
+  ]
+  
+  // How do we layout the content, depending on the presence of a picture and binding
+  let layout = if(picture != none and bind-left) {(5fr, 1fr)}
+               else if (picture != none and not bind-left) {(1fr, 5fr)}
+               else {(1fr)}  
+
+  let content = if(bind-left){(student-content, student-picture)} else{(student-picture, student-content)}
+
   block(
     height: 1fr,
     grid(
-      columns: if(picture != none){ (6fr, 1fr) } else {(1fr)}, // If no picture, use one column
+      columns: layout, // If no picture, use one column
       rows: (auto),
-      gutter:10pt,    
-      rect[#columns(2, gutter: 9pt, content)], // Put the user content    
-
-      // The picture and author information
-      [
-        #{
-          // Make local rule for image
-          set image(
-            fit: "cover",
-            width: 100%,
-            height: 100%
-            // width: 35mm,
-            // height: 45mm,
-            // width: 100%,
-            // height: auto
-          )
-
-          grid.cell(      
-            colspan: 1,
-            stack(     
-              spacing: 0.5em, 
-              box(
-                clip: true,
-                stroke: stroke(paint: color.luma(40%), thickness: .2pt, cap: "round"),
-                radius: 4pt,
-                picture,
-                width: 27mm, // Ensure 7:9 aspect ratio
-                height: 34.71mm
-              ),        
-              align(right)[#text(authors, size: 7pt)],
-              // align(right)[#text(permanent-email, size: 7pt)],
-              )
-          )
-        }
-      ]
+      gutter:15pt,
+      ..content
     ) 
-  ) 
-
+  )
+  
   if(video-url != none) {  
     // QR code generation
     import "@preview/tiaoma:0.3.0"
