@@ -211,7 +211,8 @@
   student-picture: none,
   permanent-email: "john@doe.com",
   video-url: none,
-  bind-left: true,
+  bind: none,
+  footer: none,
   // If it's a report
   course-name: [Course name],
   course-supervisor: [Course supervisor],
@@ -275,18 +276,12 @@
   set page(
     margin: (inside: 2.5cm, outside: 1.5cm, bottom: 2.1cm, top: 2cm), // Binding inside
     paper: "a4",
-  ) if(is-thesis)
-
-  // Executive summary specific settings
-  set page(
-    margin: (inside: 1.5cm, outside: 1cm, bottom: 1.3cm, top: 1.3cm), // Binding inside
-    paper: "a4",
-  ) if(is-executive-summary)
+  ) if(is-thesis)  
 
   // Report specific settings
   set page(
     margin: (inside: 2.5cm, outside: 2cm, y: 2.1cm), // Binding inside
-    paper: "a4",
+    paper: "a4",    
   ) if(not is-executive-summary and not is-thesis)
 
   if (not is-thesis) {
@@ -371,7 +366,6 @@
   // Sections numbers
   set heading(numbering: "1.1.1 –") if (is-thesis)
   set heading(numbering: "1.1.1 –") if (not is-thesis)
-  set heading(numbering: none) if (is-executive-summary)
 
   /////////////////////////////////////////////////
   // Handle specific captions styling
@@ -502,9 +496,9 @@
       programme: programme,
       major: major,
       language: language,      
-      bind-left: bind-left,
-      font: sans-font,      
-      logo: logo,
+      bind: bind,
+      footer: footer,
+      font: sans-font,
     )
 
     report_cover

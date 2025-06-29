@@ -1,5 +1,3 @@
-// Sert à générer le résumé pour le year book comme sur https://www.bfh.ch/dam/jcr:e512ae31-a3ed-4b65-b589-870383d794b0/abschlussarbeiten-bsc-informatik.pdf
-
 #import "@preview/isc-hei-exec-summary:0.5.2" : *
 
 #let doc_language = "en" // Valid values are en, fr
@@ -119,5 +117,6 @@ Everything *must* fit on one page when rendered !
   keywords: ("engineering", "data", "machine learning", "meteorology"),
   major : "Data engineering", // "Software engineering", "Networks and systems", "Embedded systems", "Computer security", "Data engineering""
 
-  bind-left: false, // Bind the left side of the page
+  bind: right, // Bind the left side of the page
+  footer: "Executive summary", // align(right, text(0.9em)[This is some content for the footer])
 ) 

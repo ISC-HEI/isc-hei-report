@@ -93,7 +93,7 @@ if [[ "$TEMPLATE" == "bachelor-thesis" ]]; then
 	echo "Removing report.typ from template $TEMPLATE"	
 	rm -f "$TMP/src/exec_summary.typ"
 	rm -f "$TMP/src/report.typ"
-	rm -f "$TMP/src/figs/stormy_peters.jpg"
+	rm -f "$TMP/src/figs/random_image.png"
 	rm -f "$TMP/report_thumb.png"
 	rm -f "$TMP/exec_summary.png"
 fi
@@ -103,7 +103,7 @@ if [[ "$TEMPLATE" == "report" ]]; then
 	echo "Removing bachelor_thesis from template $TEMPLATE"
 	rm -f "$TMP/src/bachelor_thesis.typ"
 	rm -f "$TMP/src/exec_summary.typ"
-	rm -f "$TMP/src/figs/stormy_peters.jpg"
+	rm -f "$TMP/src/figs/random_image.png"
 	rm -f "$TMP/bachelor_thesis_thumb.png"
 	rm -f "$TMP/exec_summary.png"
 	rm -rf "$TMP/src/pages"

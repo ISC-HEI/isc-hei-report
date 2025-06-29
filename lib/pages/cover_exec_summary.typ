@@ -18,16 +18,34 @@
   programme: "Informatique et Systèmes de communication (ISC)",
   keywords: ("engineering", "data", "machine learning", "meteorology"), // Some keywords related to your thesis
   major: "Data engineering", // "Software engineering", "Networks and systems", "Embedded systems", "Computer security", "Data engineering""
-  bind-left: true, // Bind the left side of the page
-  font: none,
-  logo: none,
+  bind: none, // Bind the left side of the page
+  footer: none,
+  font: none,  
 ) = {
 
   let i18n = isc.i18n.with(extra-i18n: none, language)
   let hei_color = color.rgb("#d41367") // HEI color
 
+  if(bind == none){
+    bind = left
+  }
+
+  let marg = if(bind == left) {
+      (left: 1.5cm, right: 1cm, bottom: 1.3cm, top: 1.3cm)}
+    else{
+      (left: 1cm, right: 1.5cm, bottom: 1.3cm, top: 1.3cm)}    
+
+  // Executive summary specific settings
+  set page(
+    margin: marg, // Binding inside
+    paper: "a4",
+    footer: footer
+  )
+
   // Make the caption for the executive summary 
   set figure(numbering: none, supplement: none)
+  set heading(numbering: none)
+  
   show figure.caption: set text(8pt) // Smaller font size
   show figure.caption: emph // Use italics
   set figure.caption(separator: " - ") // With a nice separator  
@@ -94,8 +112,7 @@
   )
 
   // The main content of the executive summary
-  let student-content = rect[#columns(2, gutter: 9pt, content)]
-  let dir = if bind-left { right } else { left }
+  let student-content = rect[#columns(2, gutter: 9pt, content)]  
   
   let w = 30mm
   let h = w * 9 / 6.5
@@ -123,7 +140,7 @@
             width: w,
             height: h
           ),        
-          align(dir, text(authors, size: 7pt, fill: hei_color)),
+          align(bind, text(authors, size: 7pt, fill: hei_color)),
           // align(right)[#text(permanent-email, size: 6pt)],
           )
       )
@@ -131,11 +148,11 @@
   ]
   
   // How do we layout the content, depending on the presence of a picture and binding
-  let layout = if(picture != none and bind-left) {(5fr, 1fr)}
-               else if (picture != none and not bind-left) {(1fr, 5fr)}
+  let layout = if(picture != none and bind == left) {(5fr, 1fr)}
+               else if (picture != none and bind == right) {(1fr, 5fr)}
                else {(1fr)}  
 
-  let content = if(bind-left){(student-content, student-picture)} else{(student-picture, student-content)}
+  let content = if(bind == left){(student-content, student-picture)} else{(student-picture, student-content)}
 
   block(
     height: 1fr,
@@ -173,4 +190,6 @@
       )
     )
   }
+
+
 }
