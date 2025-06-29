@@ -7,7 +7,7 @@
   <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" width="50%"/>        
 </p>
 
-# ISC templates :scroll:
+# Document templates for ISC students :scroll:
 
 This is the official templates for reports, bachelors thesis and project executive summary for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. 
 
