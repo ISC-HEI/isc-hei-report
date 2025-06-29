@@ -9,16 +9,17 @@
 
 # ISC templates :scroll:
 
-This is the official templates for reports and bachelors thesis for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. 
+This is the official templates for reports, bachelors thesis and project executive summary for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. 
 
-An example of a generated report can be [accessed here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/report.pdf?raw=true).
-An example of a generated bachelor theis can be [accessed here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/bachelor_thesis.pdf?raw=true).
+- An example of a generated report can be [seen here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/report.pdf?raw=true).
+- An example of a generated bachelor thesis can be [seen here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/bachelor_thesis.pdf?raw=true).
+- An example of a generated executive summary can be [seen here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/bachelor_thesis.pdf?raw=true).
 
 ## Using the template, on the Web
 
 In the `Typst` web application, start with the `isc-hei-report` and voilà ! 
 
-## Using the template in your shell
+## Using one of templates in your shell
 First start by installing `Typst` on your machine. You can then initialize the project with the command :
 
 ```bash
@@ -37,6 +38,12 @@ or if you need a specific version, use:
 
 ```bash
 typst init @preview/isc-hei-bthesis:0.5.0
+```
+
+For the latest template of the executive summary, use: 
+
+```bash
+typst init @preview/isc-hei-exec-summary
 ```
 
 ## Installing fonts locally
@@ -70,18 +77,6 @@ typst watch report.typ
 ```
 
 Another nice possibility is of course to use VScod(e | ium) via the `Typst LSP` plugin which enables direct compilation.
-
-# Future changes
-
-In the future, several things _might_ be updated, such as :
-
-- [x] Cleaning-up of user experience when writing a thesis or a report
-- [x] Master thesis version of this template
-- [x] Glossary inclusion
-- [x] Themes for code
-- [x] Appendix
-- [x] Acronyms inclusion
-- [x] Basic support for including code files
 
 # Questions and help
 
