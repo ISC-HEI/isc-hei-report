@@ -193,8 +193,10 @@
   // If it's executive summary
   is-executive-summary: false,
   summary: none,
-  picture: none,
+  content: none,
+  student-picture: none,
   permanent-email: "john@doe.com",
+  video-url: none,
   bind-left: true,
   // If it's a report
   course-name: [Course name],
@@ -263,7 +265,7 @@
 
   // Executive summary specific settings
   set page(
-    margin: (inside: 1.5cm, outside: 1.5cm, bottom: 2.1cm, top: 1.5cm), // Binding inside
+    margin: (inside: 1.5cm, outside: 1cm, bottom: 1.3cm, top: 1.3cm), // Binding inside
     paper: "a4",
   ) if(is-executive-summary)
 
@@ -475,8 +477,10 @@
       title: title,
       authors: authors-str,
       summary: summary,
-      picture: picture,
-      permanent-email: "none@none.com",
+      content: content,
+      picture: student-picture,
+      permanent-email: permanent-email,
+      video-url: video-url,
       academic-year: academic-year,
       supervisors: supervisors,
       expert: thesis-expert,

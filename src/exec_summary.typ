@@ -2,16 +2,66 @@
 
 #import "@preview/isc-hei-exec-summary:0.5.2" : *
 
-#let doc_language = "fr" // Valid values are en, fr
+#let doc_language = "en" // Valid values are en, fr
 
+#let summary = "DataFlowX is a scalable data engineering platform for real-time analytics on large, heterogeneous datasets. DataFlowX automates data ingestion, transformation, and validation using distributed processing and intelligent scheduling. The system ensures data quality, accelerates insights, and supports seamless integration with modern business intelligence tools."
+
+#let content = [
+
+// This is where you put the content of your executive summary
+== Objectives
+The primary objective of DataFlowX is to provide organizations with a robust and scalable platform for real-time analytics on large, diverse datasets. By automating the processes of data ingestion, transformation, and validation, DataFlowX aims to streamline data workflows and ensure high quality. 
+
+The platform leverages distributed processing and intelligent scheduling to optimize performance and resource utilization. Additionally, DataFlowX is designed to seamlessly integrate with modern business intelligence tools, enabling faster and more accurate insights. Ultimately, the project seeks to empower businesses to make data-driven decisions efficiently and confidently in dynamic environments.
+
+#figure(image("figs/isc_logo.svg", fit: "contain", height: 2.5cm), caption: none)
+
+== Explanation
+The development of DataFlowX followed an agile methodology, emphasizing iterative progress and continuous feedback. The project began with requirements gathering and architectural design, focusing on scalability and integration capabilities. Core modules for data ingestion, transformation, and validation were implemented using distributed processing frameworks. Automated testing and code reviews ensured reliability and maintainability throughout development. 
+
+Regular meetings with stakeholders guided feature prioritization and refinements. Integration with business intelligence tools was achieved via standardized APIs. Performance benchmarks and user acceptance testing validated the system’s effectiveness. Documentation and training materials were prepared to facilitate deployment and user onboarding, ensuring a smooth transition to production.
+
+#colbreak() // As Typst does not support auto column balancing, this must be put to break the columns evenly. Move it to a location that makes the columns even.
+
+Performance benchmarks and user acceptance testing validated the system’s effectiveness. Documentation and training materials were prepared to facilitate deployment and user onboarding, ensuring a smooth transition to production.
+
+== Conclusion / Benefits 
+DataFlowX delivers significant benefits by enabling organizations to harness real-time analytics on large, heterogeneous datasets with ease. Its automated data ingestion, transformation, and validation processes reduce manual effort and minimize errors, ensuring high data quality. The platform’s distributed architecture and intelligent scheduling optimize resource usage and scalability, supporting growing business needs. By streamlining complex data workflows and providing robust performance, DataFlowX empowers businesses to respond quickly to changing environments, maintain a competitive edge, and make informed, data-driven decisions with confidence and efficiency.
+
+#figure(code()[
+```scala
+  def foo(val a : Any) : Int = {
+    a match :
+      case a: Int  => 12
+      case _ => 42
+  }
+  ```
+], caption: "A code snippet")
+
+Everything *must* fit on one page when rendered !
+
+// Optionally, if you need a figure spanning multiple columns, you can use this.
+#place(
+ bottom,
+ scope: "parent",
+ float: true,
+ image("figs/pixelize.png", fit: "contain", height: 7cm, width: 100%),
+)
+
+// This is the end !
+]
+
+// TODO: please modify the following to suit your needs.
 #show: project.with(  
   title: "Life, the Universe and Everything", 
   language: doc_language, // Modify global if required, see above
   authors: "Stormy Peters", 
-  picture: "figs/stormy.faces23764.web.jpg", // [Optional], put none if not used
-  permanent-email: "john@doe.com", // [Optional], put none if not used
+  student-picture: image("figs/stormy_peters.jpg"), // [Optional], put none if not used
+  permanent-email: "john.doe@example.com", // [Optional], put none if not used
+  video-url: "https://isc.hevs.ch", // This is a link to the video of you project, if any
 
-  summary: "An authentication protocol for the new SwissPass version was developed that extends the FIDO2 protocol with an Attribute Provider. After authentication, the attributes of the SwissPass holder are available to Relying Parties. This relieves them of attribute management responsibilities and eliminates the tedious onboarding process. The result is a simplified authentication process that improves user privacy and friendliness while retaining the security features of FIDO2.",
+  summary: summary, // Not to be changed
+  content: content, // Not to be changed
 
   thesis-supervisor: "Prof. Dr John von Neumann", 
   thesis-co-supervisor: "Lady Ada Lovelace", // Optional, use none if not needed
@@ -29,82 +79,3 @@
 
   bind-left: true, // Bind the left side of the page
 ) 
-
-// Let's get started folks!
-
-// Regarder https://typst.app/universe/package/dashing-dept-news
-// https://jonaspleyer.github.io/peace-of-posters/showcase/
-// Moi à entrer
-
-// Left ou right
-
-// // Eux à entrer
-// Photo format 35x45 (rapport 7:9)
-// Email permanente
-// Numéro de téléphon
-// Nom de l'étudiant
-// Nom de l'expert
-// Nom de filière, vertiefung
-// Lien sur vidéo hostée chez ISC
-
-// 2 images max
-
-// #place(
-//   left, 
-//   dx: 0cm, 
-//   dy: 0cm,   
-//   clearance: 0em, 
-//   box(
-//     width: 80%,
-//     height: 8cm,
-//     columns(2, 
-//   [
-
-//   )
-//   )  
-// )
-
-#let text-body = {
-[
-== Objectives
-#lorem-pars(200)
-
-== Explanation
-#lorem-pars(200)
-
-== Conclusion / Benefits 
-#lorem-pars(200)
-
-Must fit on one page when rendered !
-
-]
-}
-
-#set rect(
-  inset: 4pt,
-  fill: rgb("e4e5ea"),
-  width: 100%,
-)
-
-#set text(size: 10pt)
-
-#block(
-  height: 1fr,
-  grid(
-    columns: (5fr, 1fr),
-    rows: (auto),
-    gutter: 5pt,
-    rect[#columns(2, text-body)],      
-    grid.cell(
-      colspan: 1,
-      image("figs/stormy.faces23764.web.jpg", height: auto),
-    ),
-  )
-)
-
-//TODO: 
-// 
-
-//#text-body
-
-// This is the end !
