@@ -90,11 +90,11 @@
     panic("You must provide a summary for the executive summary cover page.")
   }
 
-  if (summary.len() > 500) {
-    panic("The summary must be less than 500 characters long.")
+  if (summary.len() > 425) {
+    panic("The summary must be less than 425 characters long. Currently it is " + str(summary.len()) + " characters long.")
   }
 
-  text(summary, fill: hei_color, size: 14pt)  
+  block(align(horizon, text(summary, fill: hei_color, size: 14pt)), fill: none, height: 3cm)
 
   v(.5em)
 

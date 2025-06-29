@@ -2,6 +2,7 @@
 
 #let doc_language = "en" // Valid values are en, fr
 
+// Must be < 425 characters long.
 #let summary = "DataFlowX is a scalable data engineering platform for real-time analytics on large, heterogeneous datasets. DataFlowX automates data ingestion, transformation, and validation using distributed processing and intelligent scheduling. The system ensures data quality, accelerates insights, and supports seamless integration with modern business intelligence tools."
 
 #let content = [
