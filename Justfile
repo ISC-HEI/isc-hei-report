@@ -60,3 +60,4 @@ generate_thumbs:
   convert -density 150 'examples/bachelor_thesis.pdf[0]' -flatten bachelor_thesis_thumb.png
   convert -density 150 'examples/report.pdf[0]' -flatten report_thumb.png
   convert -density 150 'examples/exec_summary.pdf[0]' -flatten exec_summary.png
+  pngquant --quality 10-80 *.png --ext .png --force
