@@ -1,4 +1,4 @@
-#import "@preview/isc-hei-bthesis:0.5.0" : *
+#import "@preview/isc-hei-bthesis:0.5.2" : *
 
 // Get the proper title for acknowledgements if not written in English
 #heavy-title(context i18n(inc.global-language.get(), "acknowledgements"))

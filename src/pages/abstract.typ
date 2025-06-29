@@ -1,4 +1,4 @@
-#import "@preview/isc-hei-bthesis:0.5.0" : *
+#import "@preview/isc-hei-bthesis:0.5.2" : *
 
 #heavy-title("Abstract")
 
