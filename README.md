@@ -1,19 +1,21 @@
+<p align="right">
+  <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" align="right" alt="ISC Logo" height="60"/>
+</p>
+
 ![GitHub Repo stars](https://img.shields.io/github/stars/ISC-HEI/isc-hei-report)
 ![GitHub Release](https://img.shields.io/github/v/release/ISC-HEI/isc-hei-report?include_prereleases)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen")
-  
-<p align="center">
-  <a href="https://hevs.ch/isc">    
-  <img src="https://github.com/ISC-HEI/isc_logos/blob/4f8d335f7f4b99d3d83ee579ef334c201a15166a/ISC%20Logo%20inline%20v1.png?raw=true" width="50%"/>        
-</p>
 
 # Document templates for ISC students :scroll:
 
-This is the official templates for reports, bachelors thesis and project executive summary for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. 
+This is the official templates for reports, bachelors thesis and project executive summary for the [ISC degree programme](https://isc.hevs.ch/) at the School of engineering in Sion. It is made to help the students focus on content, using `Tyst` as the typesetting software.
 
-- An example of a generated report can be [seen here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/report.pdf?raw=true).
-- An example of a generated bachelor thesis can be [seen here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/bachelor_thesis.pdf?raw=true).
-- An example of a generated executive summary can be [seen here](https://github.com/ISC-HEI/isc-hei-report/blob/master/examples/bachelor_thesis.pdf?raw=true).
+
+<p align="center">
+  <a href="examples/bachelor_thesis.pdf?raw=true"><img src="bachelor_thesis_thumb.png" alt="Bachelor Thesis" height="300">
+  <a href="examples/exec_summary.pdf?raw=true"><img src="exec_summary.png" alt="Executive Summary" height="300">
+  <a href="examples/report.pdf?raw=true"><img src="report_thumb.png" alt="Report" height="300">
+</p>
 
 ## Using the template, on the Web
 
