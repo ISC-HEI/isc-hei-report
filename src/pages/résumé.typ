@@ -14,6 +14,7 @@ Le résumé doit être autonome, clair et ne pas dépasser habituellement 250 à
 
 Le résumé doit être rédigé en français *et* en anglais. 
 
+Veuillez également ajouter l'URL de votre git/github ici si le projet n'est pas confidential.
 
 #lorem(150)
 
