@@ -14,7 +14,7 @@ The abstract should be self-contained, clear, and usually does not exceed 250–
 
 The abstract *must* be written in both French and English.
 
-Please also insert your project git/github URL HERE.
+Please also insert your project git/github URL HERE if your project is not confidential.
 
 #lorem(150)
 
